@@ -1,7 +1,8 @@
 package tydzien3;
 
+import java.util.Comparator;
 
-public class ksiazkaTelefoniczna {
+public class ksiazkaTelefoniczna implements Comparable<ksiazkaTelefoniczna> {
 	private String imie;
 	private String nazwisko;
 	private int numer;
@@ -73,6 +74,26 @@ public class ksiazkaTelefoniczna {
 	{
 		this.numerDomu = nrDomu;
 	}
+	@Override
+	public int compareTo(ksiazkaTelefoniczna o) {
+		
+		if(this.numerDomu == o.numerDomu)
+		{
+			return 0;
+		}
+		else if( this.numerDomu > o.numerDomu)
+		{
+			return 1;
+		}
+		else return -1;
+//		
+		
+	}
+//	@Override
+//	public  int compare(ksiazkaTelefoniczna o1, ksiazkaTelefoniczna o2) {
+//		return o1.imie.compareToIgnoreCase(o2.imie);
+//		
+//	}
 	
 
 }
