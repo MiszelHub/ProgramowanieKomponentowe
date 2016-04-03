@@ -21,7 +21,7 @@ public class Testclass {
 		{
 			for(int j=0;j<array.length-i-1;j++)
 			{
-				if(array[j]<array[j+1])
+				if(array[j]>array[j+1])
 				{
 					int tmp=0;
 					tmp = array[j];
@@ -60,18 +60,27 @@ public class Testclass {
 		{
 			array1[i] = (int)(Math.random()*20);
 		}
-		//printArray(array1);
+		int[]array2 = new int[rozmiar];
+		array2 = array1.clone();
+		printArray(array1);
+		
 		Date przed = new Date();
 		Arrays.sort(array1);
 		Date po = new Date();
 		System.out.println();
+		printArray(array1);
+		System.out.println();
 		System.out.println("Czas operacji sortowania QuickSort "+((double)po.getTime() - (double)przed.getTime()) +"ms");
-		//printArray(array1);
+		
+		printArray(array2);
+		System.out.println();
 		Date przed1 = new Date();
-		bubbleSort(array1);
+		bubbleSort(array2);
 		Date po1 = new Date();
+		printArray(array2);
+		System.out.println();
 		System.out.println("Czas operacji sortowania bubblesort "+((double)po1.getTime() - (double)przed1.getTime()) +"ms");
-		//printArray(array1);
+		
 	}
 
 }
