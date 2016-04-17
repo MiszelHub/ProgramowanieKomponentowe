@@ -1,16 +1,16 @@
 import java.io.*;
 
 
-public class DataRepository {
+public class MyFileWritter {
 
 	private String fileName;
 	private String fileContent;
 	private File file;
 	
-	public DataRepository(String filename)
+	public MyFileWritter(String filename)
 	{
 		this.fileName = filename;
-		this.file = new File(this.fileName);
+		this.file = new File(this.fileName+".txt");
 		
 	}
 	public String getFileName() {
@@ -47,7 +47,7 @@ public class DataRepository {
 	public String ReadFile()
 	{
 		
-		char buf[] = new char[(int) this.file.length()];   // bufor (tablica) na odczytane znaki
+		char buf[] = new char[(int) this.file.length()];  // bufor (tablica) na odczytane znaki
 		try {
 			FileReader strumienOdczytu = new FileReader(file);	// Konstrukcja i otwarcie strumienia odczytujacego
 			strumienOdczytu.read(buf, 0, (int) this.file.length());			// Odczytanie znakow od 0 do 7 ze strumienia do bufora  

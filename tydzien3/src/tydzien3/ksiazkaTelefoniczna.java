@@ -1,99 +1,48 @@
 package tydzien3;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.lang.Object;
 
-public class ksiazkaTelefoniczna implements Comparable<ksiazkaTelefoniczna> {
-	private String imie;
-	private String nazwisko;
-	private int numer;
-	private String miasto;
-	private String ulica;
-	private int numerDomu;
-	
-	
-	public ksiazkaTelefoniczna(String imie, String nazwisko, int numer,String miasto, String ulica, int numerDomu)
+public class KsiazkaTelefoniczna {
+
+	private Kontakt [] ksiazka = new Kontakt[10];
+	public KsiazkaTelefoniczna()
 	{
-		this.imie = imie;
-		this.nazwisko = nazwisko;
-		this.numer = numer;
-		this.miasto = miasto;
-		this.ulica = ulica;
-		this.numerDomu = numerDomu;
+			ksiazka[0] = new Kontakt("Jan", "Kowalski", 123123323, "Lodz", "Gdanska", 1);
+			ksiazka[1] = new Kontakt("Jan", "Kowalski", 223123323, "Lodz", "Gdanska", 2);
+			ksiazka[2] = new Kontakt("Jan", "Kowalski", 323123323, "Lodz", "Gdanska", 3);
+			ksiazka[3] = new Kontakt("Jan", "Kowalski", 233123323, "Lodz", "Gdanska", 7);
+			ksiazka[4] = new Kontakt("Jan", "Kowalski", 143123323, "Lodz", "Gdanska", 6);
+			ksiazka[5] = new Kontakt("Jan", "Kowalski", 263123323, "Lodz", "Gdanska", 4);
+			ksiazka[6] = new Kontakt("Jan", "Kowalski", 224123323, "Lodz", "Gdanska", 8);
+			ksiazka[7] = new Kontakt("Jan", "Kowalski", 124523323, "Lodz", "Gdanska", 11);
+			ksiazka[8] = new Kontakt("Jan", "Kowalski", 223343323, "Lodz", "Gdanska", 9);
+			ksiazka[9] = new Kontakt("Jan", "Kowalski", 222222323, "Lodz", "Gdanska", 12);
 	}
-	public String toString()
-	{
-		return " " + this.imie +" "+ this.nazwisko +" "+ this.numer +" "+ this.miasto +" "+ this.ulica +" "+ this.numerDomu +" ";
+	public Kontakt[] getKsiazka() {
+		return ksiazka;
 	}
-	public String getImie()
-	{
-		return this.imie;
-	}
-	public String getNazwisko()
-	{
-		return this.nazwisko;
-	}
-	public int getNumer()
-	{
-		return this.numer;
-	}
-	public String getMiasto()
-	{
-		return this.miasto;
-	}
-	public String getUlica()
-	{
-		return this.ulica;
-	}
-	public int getNrDomu()
-	{
-		return this.numerDomu;
-	}
-	
-	public void putImie(String imie)
-	{
-		this.imie = imie;
-	}
-	public void putNazwisko(String nazwisko)
-	{
-		this.nazwisko = nazwisko;
-		
-	}
-	public void putNumer(int numer)
-	{
-		this.numer = numer;
-	}
-	public void putMiasto(String miasto)
-	{
-		this.miasto = miasto;
-	}
-	public void putUlica(String ulica)
-	{
-		this.ulica = ulica;
-	}
-	public void putNrDomu(int nrDomu)
-	{
-		this.numerDomu = nrDomu;
+	public void setKsiazka(Kontakt[] ksiazka) {
+		this.ksiazka = ksiazka;
 	}
 	@Override
-	public int compareTo(ksiazkaTelefoniczna o) {
-		
-		if(this.numerDomu == o.numerDomu)
+	public String toString() {
+		StringBuilder stb = new StringBuilder();
+		for(int i=0; i< ksiazka.length; i++ )
 		{
-			return 0;
+			String  s = new String();
+			stb.append(ksiazka[i].toString()+"\n");
 		}
-		else if( this.numerDomu > o.numerDomu)
-		{
-			return 1;
-		}
-		else return -1;
-//		
-		
+		return stb.toString();
 	}
-//	@Override
-//	public  int compare(ksiazkaTelefoniczna o1, ksiazkaTelefoniczna o2) {
-//		return o1.imie.compareToIgnoreCase(o2.imie);
-//		
-//	}
+	public void sortArray()
+	{
+		Arrays.sort(ksiazka);
+	}
+	public void sortWithComparator(Comparator c)
+	{
+		Arrays.sort(ksiazka, c);
+	}
 	
-
 }
