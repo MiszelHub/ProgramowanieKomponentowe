@@ -1,13 +1,13 @@
 import java.io.*;
 
 
-public class MyFileWritter {
+public class MyFileWriter {
 
 	private String fileName;
 	private String fileContent;
 	private File file;
 	
-	public MyFileWritter(String filename)
+	public MyFileWriter(String filename)
 	{
 		this.fileName = filename;
 		this.file = new File(this.fileName+".txt");
@@ -51,7 +51,9 @@ public class MyFileWritter {
 		try {
 			FileReader strumienOdczytu = new FileReader(file);	// Konstrukcja i otwarcie strumienia odczytujacego
 			strumienOdczytu.read(buf, 0, (int) this.file.length());			// Odczytanie znakow od 0 do 7 ze strumienia do bufora  
+			strumienOdczytu.close();
 		}	
+		
 		
 		catch (FileNotFoundException io)												
 			{System.out.println(io.getMessage());}

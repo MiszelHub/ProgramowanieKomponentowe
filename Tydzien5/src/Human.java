@@ -12,6 +12,10 @@ public class Human implements Serializable {
 	private double weight;
 	
 	
+	public Human()
+	{
+		
+	}
 	public Human(String name, int age, double height, double weight) {
 		super();
 		this.name = name;
