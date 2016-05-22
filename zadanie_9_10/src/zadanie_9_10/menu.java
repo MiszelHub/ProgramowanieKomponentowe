@@ -76,18 +76,18 @@ public class menu implements ActionListener, ItemListener  {
 	        menu.add(cbMenuItem);
 
 	        //a submenu
-	        menu.addSeparator();
-	        submenu = new JMenu("A submenu");
-	        submenu.setMnemonic(KeyEvent.VK_S);
+//	        menu.addSeparator();
+//	        submenu = new JMenu("A submenu");
+//	        submenu.setMnemonic(KeyEvent.VK_S);
 
-	        menuItem = new JMenuItem("An item in the submenu");
-	        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-	                KeyEvent.VK_2, ActionEvent.ALT_MASK));
-	        submenu.add(menuItem);
-
-	        menuItem = new JMenuItem("Another item");
-	        submenu.add(menuItem);
-	        menu.add(submenu);
+//	        menuItem = new JMenuItem("An item in the submenu");
+//	        menuItem.setAccelerator(KeyStroke.getKeyStroke(
+//	                KeyEvent.VK_2, ActionEvent.ALT_MASK));
+//	        submenu.add(menuItem);
+//
+//	        menuItem = new JMenuItem("Another item");
+//	        submenu.add(menuItem);
+//	        menu.add(submenu);
 
 	        return menuBar;
 	    }
