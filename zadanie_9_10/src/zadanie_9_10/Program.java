@@ -20,8 +20,6 @@ public class Program  implements ActionListener{
 	    JMenuBar menuBar;
 	     JMenu menu;
 	     JMenuItem menuItem;
-	     JRadioButtonMenuItem rbMenuItem;
-	     JCheckBoxMenuItem cbMenuItem;
 	     ComboBox mycombobox;
 	     JFileChooser filechooser;
 public Program(){
@@ -48,7 +46,7 @@ public Program(){
 		        menuItem.addActionListener(this);
 		        menu.add(menuItem);
 
-		       // ImageIcon icon = createImageIcon("middle.gif");
+
 		        menuItem = new JMenuItem("Open any file");
 		        menuItem.addActionListener(this);
 		        menuItem.setMnemonic(KeyEvent.VK_B);
