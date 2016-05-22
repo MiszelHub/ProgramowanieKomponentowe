@@ -55,10 +55,8 @@ public class ComboBox extends JPanel
     protected void updateLabel(String name) {
         ImageIcon icon = createImageIcon(name + ".gif");
         picture.setIcon(icon);
-        picture.setToolTipText("A drawing of a " + name.toLowerCase());
-        if (icon != null) {
-            picture.setText(null);
-        } else {
+        
+        if (icon == null) {
             picture.setText("Image not found");
         }
     }
