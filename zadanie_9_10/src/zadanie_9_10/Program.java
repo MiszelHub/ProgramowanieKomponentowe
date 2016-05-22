@@ -51,7 +51,7 @@ public Program(){
 		        menuItem.addActionListener(this);
 		        menuItem.setMnemonic(KeyEvent.VK_B);
 		        menu.add(menuItem);
-//nie comituje sie
+
 
 		        return menuBar;
 		    }
