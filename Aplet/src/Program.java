@@ -1,16 +1,8 @@
 import java.applet.Applet;
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
+import java.awt.*;
+import java.awt.event.*;
 
-public class Program extends Applet implements ActionListener{
+public class Program extends Applet implements ActionListener, ItemListener{
 
 	Image img;
 	
@@ -48,24 +40,27 @@ public class Program extends Applet implements ActionListener{
 			
 				
 	}
-public void actionPerformed(ActionEvent evt) {
-		
-		if (evt.getSource() == przycisk1)
-			oknoTekstowe.setText("Welcome");
-		
-		if (evt.getSource() == przycisk2)
-			oknoTekstowe.setText(oknoTekstowe.getText()+" to JAVA !!!");
-		
+	
+	public void actionPerformed(ActionEvent evt) {
+			
+			if (evt.getSource() == przycisk1)
+				oknoTekstowe.setText("Welcome");
+			
+			if (evt.getSource() == przycisk2)
+				oknoTekstowe.setText(oknoTekstowe.getText()+" to JAVA !!!");
+			
 	}	// koniec funkcji actionPerformed
-	
-	
 	
 	// Deklaracje obiektow - zmiennych reprezentujacych przyciski i okno tekstowe
 	Button 	przycisk1, 
 			przycisk2; 
 	
 	TextField oknoTekstowe; 
-	
+	CheckboxGroup checkboxgroup1;
+	Checkbox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5;
+	TextField text1;
+	Choice choice1;
+
 	public void init(){
 		
 		oknoTekstowe = new TextField(20);	// inicjalizacja okienka tekstowego na 20 znakow 
@@ -80,7 +75,117 @@ public void actionPerformed(ActionEvent evt) {
 		add(przycisk2);						
 		przycisk2.addActionListener(this);	
 		
+//===================================checkboxy==============================		
+     
+//         checkbox1 = new Checkbox("1");
+//         add(checkbox1);
+//         checkbox1.addItemListener(this);
+//         
+//         checkbox2 = new Checkbox("2");
+//         add(checkbox2);
+//         checkbox2.addItemListener(this);
+//
+//         checkbox3 = new Checkbox("3");
+//         add(checkbox3);
+//         checkbox3.addItemListener(this);
+//
+//         checkbox4 = new Checkbox("4");
+//         add(checkbox4);
+//         checkbox4.addItemListener(this);
+//
+//         checkbox5 = new Checkbox("5");
+//         add(checkbox5);
+//         checkbox5.addItemListener(this);
+//
+//         text1 = new TextField(20);
+//         add(text1);
+		
+//===================================radialboxy==============================		
+		
+//		 checkboxgroup1 = new CheckboxGroup();
+//
+//         checkbox1 = new Checkbox("1", false, checkboxgroup1);
+//         add(checkbox1);
+//         checkbox1.addItemListener(this);
+//
+//         checkbox2 = new Checkbox("2", false, checkboxgroup1);
+//         add(checkbox2);
+//         checkbox2.addItemListener(this);
+//
+//         checkbox3 = new Checkbox("3", false, checkboxgroup1);
+//         add(checkbox3);
+//         checkbox3.addItemListener(this);
+//
+//         checkbox4 = new Checkbox("4", false, checkboxgroup1);
+//         add(checkbox4);
+//         checkbox4.addItemListener(this);
+//
+//         checkbox5 = new Checkbox("5", false, checkboxgroup1);
+//         add(checkbox5);
+//         checkbox5.addItemListener(this);
+//
+//         text1 = new TextField(20);
+//         add(text1);
+         
+         
+         text1 = new TextField(20);
+         add(text1);
+         choice1 = new Choice();
+         choice1.add("Pozycja 1");
+         choice1.add("Pozycja 2");
+         choice1.add("Pozycja 3");
+         choice1.add("Pozycja 4");
+         add(choice1); 
+         choice1.addItemListener(this);
+	
 	}	// koniec funkcji init
 	
+	public void itemStateChanged(ItemEvent e) {
+		
+//===================================checkboxy==============================	
+		
+//	    if(e.getItemSelectable() == checkbox1){
+//	            text1.setText("Check box 1 clicked!");
+//	    }
+//
+//	    if(e.getItemSelectable() == checkbox2){
+//	            text1.setText("Check box 2 clicked!");
+//	    }
+//
+//	    if(e.getItemSelectable() == checkbox3){
+//	            text1.setText("Check box 3 clicked!");
+//	    }
+//
+//	    if(e.getItemSelectable() == checkbox4){
+//	            text1.setText("Check box 4 clicked!");
+//	    }
+//
+//	    if(e.getItemSelectable() == checkbox5){
+//	            text1.setText("Check box 5 clicked!");
+//	    }
+		
+//===================================radialboxy==============================	
+		
+//        if(e.getItemSelectable() == checkbox1){
+//            text1.setText("Radio button 1 clicked!");
+//	    }
+//	    if(e.getItemSelectable() == checkbox2){
+//	            text1.setText("Radio button 2 clicked!");
+//	    }
+//	    if(e.getItemSelectable() == checkbox3){
+//	            text1.setText("Radio button 3 clicked!");
+//	    }
+//	    if(e.getItemSelectable() == checkbox4){
+//	            text1.setText("Radio button 4 clicked!");
+//	    }
+//	    if(e.getItemSelectable() == checkbox5){
+//	            text1.setText("Radio button 5 clicked!");
+//	    }
+	    
+	    
+	    if(e.getItemSelectable() == choice1){
+            text1.setText(((Choice)e.getItemSelectable()).getSelectedItem());
+	    }
+	}	// koniec funkcji itemStateChanged
 }		// koniec klasy Appletu
 
