@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class MainMenu extends JMenuBar{
 	private static final long serialVersionUID = -1252406631918788989L;
-	//-----------------------------------------------------------menu start
+
 	//Where the GUI is created:
 	JMenuBar menuBar;
 	JMenu menu, submenu;
@@ -32,16 +32,15 @@ public class MainMenu extends JMenuBar{
 		
 		//XML menu
 		menuItem = new JMenuItem("Eksportuj do XML",
-		                         KeyEvent.VK_T);
+		                         KeyEvent.VK_E);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		menuItem.getAccessibleContext().setAccessibleDescription(
-		        "This doesn't really do anything");
+								KeyEvent.VK_1, ActionEvent.ALT_MASK));
 		menu.add(menuItem);
 	
-		menuItem = new JMenuItem("Importuj z XML",
-		                         new ImageIcon("images/middle.gif"));
-		menuItem.setMnemonic(KeyEvent.VK_B);
+		menuItem = new JMenuItem("Importuj z XML", 
+								KeyEvent.VK_M);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+								KeyEvent.VK_2, ActionEvent.ALT_MASK));
 		menu.add(menuItem);
 		//End of XML menu
 		
@@ -49,63 +48,39 @@ public class MainMenu extends JMenuBar{
 		
 		//DataBase menu
 		menuItem = new JMenuItem("Eksportuj do bazy danych",
-                KeyEvent.VK_T);
+                				KeyEvent.VK_B);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		menuItem.getAccessibleContext().setAccessibleDescription(
-				"This doesn't really do anything");
+								KeyEvent.VK_3, ActionEvent.ALT_MASK));
 		menu.add(menuItem);
 		
 		menuItem = new JMenuItem("Importuj z bazy danych",
-		                new ImageIcon("images/middle.gif"));
-		menuItem.setMnemonic(KeyEvent.VK_B);
+								KeyEvent.VK_D);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_4, ActionEvent.ALT_MASK));
+		menu.add(menuItem);
+		
+		menuItem = new JMenuItem("Zamknij",
+								KeyEvent.VK_Z);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_X, ActionEvent.ALT_MASK));
 		menu.add(menuItem);
 		//End of DataBase menu
 	
-		//a group of radio button menu items
-		menu.addSeparator();
-		ButtonGroup group = new ButtonGroup();
-		rbMenuItem = new JRadioButtonMenuItem("A radio button menu item");
-		rbMenuItem.setSelected(true);
-		rbMenuItem.setMnemonic(KeyEvent.VK_R);
-		group.add(rbMenuItem);
-		menu.add(rbMenuItem);
-	
-		rbMenuItem = new JRadioButtonMenuItem("Another one");
-		rbMenuItem.setMnemonic(KeyEvent.VK_O);
-		group.add(rbMenuItem);
-		menu.add(rbMenuItem);
-	
-		//a group of check box menu items
-		menu.addSeparator();
-		cbMenuItem = new JCheckBoxMenuItem("A check box menu item");
-		cbMenuItem.setMnemonic(KeyEvent.VK_C);
-		menu.add(cbMenuItem);
-	
-		cbMenuItem = new JCheckBoxMenuItem("Another one");
-		cbMenuItem.setMnemonic(KeyEvent.VK_H);
-		menu.add(cbMenuItem);
-	
-		//a submenu
-		menu.addSeparator();
-		submenu = new JMenu("A submenu");
-		submenu.setMnemonic(KeyEvent.VK_S);
-	
-		menuItem = new JMenuItem("An item in the submenu");
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
-		submenu.add(menuItem);
-	
-		menuItem = new JMenuItem("Another item");
-		submenu.add(menuItem);
-		menu.add(submenu);
-	
 		//Build second menu in the menu bar.
-		menu = new JMenu("Another Menu");
-		menu.setMnemonic(KeyEvent.VK_N);
-		menu.getAccessibleContext().setAccessibleDescription(
-		        "This menu does nothing");
+		menu = new JMenu("Ustawienia");
+		menu.setMnemonic(KeyEvent.VK_U);
 		menuBar.add(menu);
-		//-----------------------------------------------------------menu end
-	}
+		
+		//przycisk do pokazywania buttona "dzisiaj" powracaj¹cego do obecnej daty
+		cbMenuItem = new JCheckBoxMenuItem("Poka¿/ukryj przycisk \"Dzisiaj\"");
+		cbMenuItem.setState(true);
+		menu.add(cbMenuItem);
+		
+		//Info o programie
+		menuItem = new JMenuItem("O programie",
+                				KeyEvent.VK_O);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+								KeyEvent.VK_5, ActionEvent.ALT_MASK));
+		menu.add(menuItem);
+	} //MainMenu constructor END
 }
