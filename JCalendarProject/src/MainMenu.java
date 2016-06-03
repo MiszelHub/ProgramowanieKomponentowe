@@ -1,4 +1,5 @@
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.*;
@@ -45,20 +46,7 @@ public class MainMenu extends JMenuBar{
 		//End of XML menu
 		
 		menu.addSeparator();
-		
-		//DataBase menu
-		menuItem = new JMenuItem("Eksportuj do bazy danych",
-                				KeyEvent.VK_B);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-								KeyEvent.VK_3, ActionEvent.ALT_MASK));
-		menu.add(menuItem);
-		
-		menuItem = new JMenuItem("Importuj z bazy danych",
-								KeyEvent.VK_D);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_4, ActionEvent.ALT_MASK));
-		menu.add(menuItem);
-		
+	
 		menuItem = new JMenuItem("Zamknij",
 								KeyEvent.VK_Z);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
@@ -74,6 +62,12 @@ public class MainMenu extends JMenuBar{
 		//przycisk do pokazywania buttona "dzisiaj" powracaj¹cego do obecnej daty
 		cbMenuItem = new JCheckBoxMenuItem("Poka¿/ukryj przycisk \"Dzisiaj\"");
 		cbMenuItem.setState(true);
+		cbMenuItem.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				View.calendar.setTodayButtonVisible(View.todayBtnVisible = !View.todayBtnVisible);				
+			}
+		});
 		menu.add(cbMenuItem);
 		
 		//Info o programie

@@ -14,6 +14,8 @@ public class View {
 	static JPanel contentPanel, buttonPanel, calendarPanel;
 	static Button btn, userEventBtn;
 	
+	static boolean todayBtnVisible = true;
+	
 	public static void init()
 	{
 		frame = new JFrame("Kalendarz");
@@ -73,7 +75,7 @@ public class View {
 		calendar = new JCalendar();
 		calendarPanel.add(calendar);
 		calendar.setBounds(20, 20, calendarPanel.getWidth()-50, calendarPanel.getHeight()-120);
-		calendar.setTodayButtonVisible(true);
+		calendar.setTodayButtonVisible(todayBtnVisible);
 		
 		calendar.setWeekOfYearVisible(true);
 		
