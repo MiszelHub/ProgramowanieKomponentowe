@@ -9,11 +9,6 @@ public class SQLConnection {
 
 	private java.sql.Connection dbConnection;
 
-//	public SQLConnection() throws ClassNotFoundException, SQLException {
-//
-//		Class.forName("com.mysql.jdbc.Driver");
-//		dbConnection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/?user=Michal?autoReconnect=true&useSSL=false","Michal","kl4mk4123");
-//	}
 	public SQLConnection(String jdbcConnectionString, String user, String password) throws ClassNotFoundException, SQLException {
 
 		Class.forName("com.mysql.jdbc.Driver");
