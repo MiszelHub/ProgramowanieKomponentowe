@@ -29,7 +29,9 @@ public class MainMenu extends JMenuBar{
 		menuBar.add(menu);
 	
 		//a group of JMenuItems
-		menuItem = new JMenuItem("A text-only menu item",
+		
+		//XML menu
+		menuItem = new JMenuItem("Eksportuj do XML",
 		                         KeyEvent.VK_T);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
 		        KeyEvent.VK_1, ActionEvent.ALT_MASK));
@@ -37,14 +39,28 @@ public class MainMenu extends JMenuBar{
 		        "This doesn't really do anything");
 		menu.add(menuItem);
 	
-		menuItem = new JMenuItem("Both text and icon",
+		menuItem = new JMenuItem("Importuj z XML",
 		                         new ImageIcon("images/middle.gif"));
 		menuItem.setMnemonic(KeyEvent.VK_B);
 		menu.add(menuItem);
-	
-		menuItem = new JMenuItem(new ImageIcon("images/middle.gif"));
-		menuItem.setMnemonic(KeyEvent.VK_D);
+		//End of XML menu
+		
+		menu.addSeparator();
+		
+		//DataBase menu
+		menuItem = new JMenuItem("Eksportuj do bazy danych",
+                KeyEvent.VK_T);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+				KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		menuItem.getAccessibleContext().setAccessibleDescription(
+				"This doesn't really do anything");
 		menu.add(menuItem);
+		
+		menuItem = new JMenuItem("Importuj z bazy danych",
+		                new ImageIcon("images/middle.gif"));
+		menuItem.setMnemonic(KeyEvent.VK_B);
+		menu.add(menuItem);
+		//End of DataBase menu
 	
 		//a group of radio button menu items
 		menu.addSeparator();
