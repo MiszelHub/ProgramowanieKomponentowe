@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_66" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="model.Birthday">
+    <void property="date">
+     <object class="java.text.SimpleDateFormat" id="SimpleDateFormat0">
+      <void property="2DigitYearStart">
+       <object class="java.util.Date">
+        <long>-1059529330832</long>
+       </object>
+      </void>
+      <void id="DateFormatSymbols0" property="dateFormatSymbols">
+       <void id="StringArray0" property="amPmStrings"/>
+       <void property="amPmStrings">
+        <object idref="StringArray0"/>
+       </void>
+       <void id="StringArray1" property="eras"/>
+       <void property="eras">
+        <object idref="StringArray1"/>
+       </void>
+       <void id="StringArray2" property="months"/>
+       <void property="months">
+        <object idref="StringArray2"/>
+       </void>
+       <void id="StringArray3" property="shortMonths"/>
+       <void property="shortMonths">
+        <object idref="StringArray3"/>
+       </void>
+       <void id="StringArray4" property="shortWeekdays"/>
+       <void property="shortWeekdays">
+        <object idref="StringArray4"/>
+       </void>
+       <void id="StringArray5" property="weekdays"/>
+       <void property="weekdays">
+        <object idref="StringArray5"/>
+       </void>
+       <void id="StringArrayArray0" property="zoneStrings"/>
+       <void property="zoneStrings">
+        <object idref="StringArrayArray0"/>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void property="description">
+     <string>rent</string>
+    </void>
+    <void property="duration">
+     <string>11</string>
+    </void>
+    <void property="howOld">
+     <int>11</int>
+    </void>
+    <void property="location">
+     <string>Lodz</string>
+    </void>
+    <void property="startTime">
+     <string>13:00:01</string>
+    </void>
+    <void property="title">
+     <string>Title</string>
+    </void>
+    <void property="whoseBirhday">
+     <string>Jan kowalski</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="model.Birthday">
+    <void property="date">
+     <object class="java.text.SimpleDateFormat" id="SimpleDateFormat1">
+      <void property="2DigitYearStart">
+       <object class="java.util.Date">
+        <long>-1059529330832</long>
+       </object>
+      </void>
+      <void id="DateFormatSymbols1" property="dateFormatSymbols">
+       <void id="StringArray6" property="amPmStrings"/>
+       <void property="amPmStrings">
+        <object idref="StringArray6"/>
+       </void>
+       <void id="StringArray7" property="eras"/>
+       <void property="eras">
+        <object idref="StringArray7"/>
+       </void>
+       <void id="StringArray8" property="months"/>
+       <void property="months">
+        <object idref="StringArray8"/>
+       </void>
+       <void id="StringArray9" property="shortMonths"/>
+       <void property="shortMonths">
+        <object idref="StringArray9"/>
+       </void>
+       <void id="StringArray10" property="shortWeekdays"/>
+       <void property="shortWeekdays">
+        <object idref="StringArray10"/>
+       </void>
+       <void id="StringArray11" property="weekdays"/>
+       <void property="weekdays">
+        <object idref="StringArray11"/>
+       </void>
+       <void id="StringArrayArray1" property="zoneStrings"/>
+       <void property="zoneStrings">
+        <object idref="StringArrayArray1"/>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void property="description">
+     <string>rent</string>
+    </void>
+    <void property="duration">
+     <string>11</string>
+    </void>
+    <void property="howOld">
+     <int>11</int>
+    </void>
+    <void property="location">
+     <string>Lodz</string>
+    </void>
+    <void property="startTime">
+     <string>13:00:01</string>
+    </void>
+    <void property="title">
+     <string>Title</string>
+    </void>
+    <void property="whoseBirhday">
+     <string>Jan ZAmojski</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="model.Birthday">
+    <void property="date">
+     <object class="java.text.SimpleDateFormat" id="SimpleDateFormat2">
+      <void property="2DigitYearStart">
+       <object class="java.util.Date">
+        <long>-1059529330832</long>
+       </object>
+      </void>
+      <void id="DateFormatSymbols2" property="dateFormatSymbols">
+       <void id="StringArray12" property="amPmStrings"/>
+       <void property="amPmStrings">
+        <object idref="StringArray12"/>
+       </void>
+       <void id="StringArray13" property="eras"/>
+       <void property="eras">
+        <object idref="StringArray13"/>
+       </void>
+       <void id="StringArray14" property="months"/>
+       <void property="months">
+        <object idref="StringArray14"/>
+       </void>
+       <void id="StringArray15" property="shortMonths"/>
+       <void property="shortMonths">
+        <object idref="StringArray15"/>
+       </void>
+       <void id="StringArray16" property="shortWeekdays"/>
+       <void property="shortWeekdays">
+        <object idref="StringArray16"/>
+       </void>
+       <void id="StringArray17" property="weekdays"/>
+       <void property="weekdays">
+        <object idref="StringArray17"/>
+       </void>
+       <void id="StringArrayArray2" property="zoneStrings"/>
+       <void property="zoneStrings">
+        <object idref="StringArrayArray2"/>
+       </void>
+      </void>
+     </object>
+    </void>
+    <void property="description">
+     <string>rent</string>
+    </void>
+    <void property="duration">
+     <string>11</string>
+    </void>
+    <void property="howOld">
+     <int>11</int>
+    </void>
+    <void property="location">
+     <string>Lodz</string>
+    </void>
+    <void property="startTime">
+     <string>13:00:01</string>
+    </void>
+    <void property="title">
+     <string>Title</string>
+    </void>
+    <void property="whoseBirhday">
+     <string>Jan Jakistam</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
