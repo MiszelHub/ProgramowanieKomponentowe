@@ -36,6 +36,13 @@ public class Birthday extends EventBase implements Serializable{
 	public void setHowOld(int howOld) {
 		this.howOld = howOld;
 	}
+	@Override
+	public String toString() {
+		return "Birthday [whoseBirhday=" + whoseBirhday + ", howOld=" + howOld
+				+ ", title=" + title + ", date=" + date + ", startTime="
+				+ startTime + ", duration=" + duration + ", location="
+				+ location + ", description=" + description + "]";
+	}
 	
 	
 	

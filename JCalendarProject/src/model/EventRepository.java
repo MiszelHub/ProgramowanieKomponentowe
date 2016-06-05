@@ -1,6 +1,5 @@
 package model;
 
-
 import java.util.ArrayList;
 
 public class EventRepository {
@@ -19,5 +18,9 @@ public class EventRepository {
 
 	public void setEventList(ArrayList<EventBase> eventList) {
 		this.eventList = eventList;
+	}
+	
+	public void addRecord(EventBase obj){
+		eventList.add(obj);
 	}
 }

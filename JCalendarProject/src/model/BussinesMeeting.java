@@ -27,6 +27,15 @@ public class BussinesMeeting extends EventBase{
 	public void setNameOfThePersonYouSetUpMeetingWith(String nameOfThePersonYouSetUpMeetingWith) {
 		this.nameOfThePersonYouSetUpMeetingWith = nameOfThePersonYouSetUpMeetingWith;
 	}
+	@Override
+	public String toString() {
+		return "BussinesMeeting [nameOfThePersonYouSetUpMeetingWith="
+				+ nameOfThePersonYouSetUpMeetingWith + ", title=" + title
+				+ ", date=" + date + ", startTime=" + startTime + ", duration="
+				+ duration + ", location=" + location + ", description="
+				+ description + "]";
+	}
+	
 	
 
 }
