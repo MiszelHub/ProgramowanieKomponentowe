@@ -107,10 +107,7 @@ public class View {
 		userEventBtn = new Button("Dodaj wydarzenie");
 		userEventBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(calendar.getLocale().toString());
-				calendar.getDayChooser().setForeground(Color.BLUE);
-				calendar.getDayChooser().setMonth(0); //zaczyna sie styczen od 0
-				calendar.getMonthChooser().setMonth(0);
+				AddEvent addEvent = new AddEvent();
 								
 			}
 		});

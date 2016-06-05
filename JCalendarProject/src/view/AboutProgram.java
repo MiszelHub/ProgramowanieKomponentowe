@@ -18,7 +18,7 @@ public class AboutProgram {
 	private String about = "Program stworzony przez\nKonrad Nojman\nMicha³ Andrzejczak";
 	
 	public AboutProgram(){
-		frame = new JFrame("Kalendarz");
+		frame = new JFrame("O programie");
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);

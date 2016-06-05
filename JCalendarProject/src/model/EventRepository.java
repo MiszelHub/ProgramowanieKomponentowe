@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.sun.media.jfxmediaimpl.MediaDisposer.Disposable;
 
+import controllers.XMLActions;
+
 public class EventRepository implements Disposable{
 	
 	private ArrayList<EventBase> eventList;
@@ -26,9 +28,8 @@ public class EventRepository implements Disposable{
 		eventList.add(obj);
 	}
 
-	@Override
 	public void dispose() {
-		ToXML.saveEventsToXML(this.eventList);
+		XMLActions.saveEventsToXML();
 		
 	}
 }
