@@ -18,7 +18,7 @@ public class MainMenu extends JMenuBar{
 		return menuBar;
 	}
 
-	MainMenu(){
+	MainMenu(final View view){
 		//Create the menu bar.
 		menuBar = new JMenuBar();
 	
@@ -65,7 +65,8 @@ public class MainMenu extends JMenuBar{
 		cbMenuItem.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				View.calendar.setTodayButtonVisible(View.todayBtnVisible = !View.todayBtnVisible);				
+				view.setTodayBtnVisible(!view.isTodayBtnVisible());
+				view.getCalendar().setTodayButtonVisible(view.isTodayBtnVisible());		
 			}
 		});
 		menu.add(cbMenuItem);

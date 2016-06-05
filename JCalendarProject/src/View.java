@@ -9,14 +9,79 @@ import com.toedter.calendar.JCalendar;
 
 
 public class View {
-	static JCalendar calendar;
-	static JFrame frame;
-	static JPanel contentPanel, buttonPanel, calendarPanel;
-	static Button btn, userEventBtn;
+	private JCalendar calendar;
+	private JFrame frame;
+	private JPanel contentPanel, buttonPanel, calendarPanel;
+	private Button btn, userEventBtn;
+	private boolean todayBtnVisible = true;
 	
-	static boolean todayBtnVisible = true;
+	public JCalendar getCalendar() {
+		return calendar;
+	}
+
+	public void setCalendar(JCalendar calendar) {
+		this.calendar = calendar;
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public JPanel getContentPanel() {
+		return contentPanel;
+	}
+
+	public void setContentPanel(JPanel contentPanel) {
+		this.contentPanel = contentPanel;
+	}
+
+	public JPanel getButtonPanel() {
+		return buttonPanel;
+	}
+
+	public void setButtonPanel(JPanel buttonPanel) {
+		this.buttonPanel = buttonPanel;
+	}
+
+	public JPanel getCalendarPanel() {
+		return calendarPanel;
+	}
+
+	public void setCalendarPanel(JPanel calendarPanel) {
+		this.calendarPanel = calendarPanel;
+	}
+
+	public Button getBtn() {
+		return btn;
+	}
+
+	public void setBtn(Button btn) {
+		this.btn = btn;
+	}
+
+	public Button getUserEventBtn() {
+		return userEventBtn;
+	}
+
+	public void setUserEventBtn(Button userEventBtn) {
+		this.userEventBtn = userEventBtn;
+	}
+
+	public boolean isTodayBtnVisible() {
+		return todayBtnVisible;
+	}
+
+	public void setTodayBtnVisible(boolean todayBtnVisible) {
+		this.todayBtnVisible = todayBtnVisible;
+	}
+
+
 	
-	public static void init()
+	public View()
 	{
 		frame = new JFrame("Kalendarz");
 		frame.addWindowListener(new WindowAdapter() {
@@ -26,7 +91,7 @@ public class View {
 		});
 		frame.setSize(500, 700);
 		frame.setVisible(true);
-		MainMenu mainMenu = new MainMenu();
+		MainMenu mainMenu = new MainMenu(this);
 		frame.setJMenuBar(mainMenu.getMenuBar());
 		
 		contentPanel = new JPanel(null);
