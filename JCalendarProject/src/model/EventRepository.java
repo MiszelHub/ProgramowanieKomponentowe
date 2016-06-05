@@ -2,7 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-public class EventRepository {
+import com.sun.media.jfxmediaimpl.MediaDisposer.Disposable;
+
+public class EventRepository implements Disposable{
 	
 	private ArrayList<EventBase> eventList;
 	
@@ -22,5 +24,11 @@ public class EventRepository {
 	
 	public void addRecord(EventBase obj){
 		eventList.add(obj);
+	}
+
+	@Override
+	public void dispose() {
+		ToXML.saveEventsToXML(this.eventList);
+		
 	}
 }
