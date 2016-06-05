@@ -2,6 +2,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 import controllers.*;
 
@@ -68,6 +69,12 @@ public class MainMenu extends JMenuBar{
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_X, ActionEvent.ALT_MASK));
 		menu.add(menuItem);
+		menuItem.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+					System.exit(0);
+			}
+		});
 		//End of DataBase menu
 	
 		//Build second menu in the menu bar.
@@ -93,5 +100,12 @@ public class MainMenu extends JMenuBar{
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
 								KeyEvent.VK_5, ActionEvent.ALT_MASK));
 		menu.add(menuItem);
+		menuItem.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				AboutProgram about = new AboutProgram();
+				
+			}
+		});
 	} //MainMenu constructor END
 }

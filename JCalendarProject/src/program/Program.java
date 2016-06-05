@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 
+import controllers.SQLConnection;
 import controllers.XMLActions;
 
 import view.View;
@@ -14,7 +15,6 @@ import view.View;
 import model.Birthday;
 import model.EventBase;
 import model.EventRepository;
-import model.SQLConnection;
 public class Program {
 	
 	private static EventRepository repo = new EventRepository();
@@ -35,7 +35,7 @@ public class Program {
 		}
 		c.connectToDataBase();
 		//VALUES ('2', 'Meeteng1', '2016-06-21 00:50:00', 'Lodz', 'renting a car', 'JaN Kowalski');
-		c.updateRecordInTable("bussinesmeetings", "2", "Meeteng2", "2016-06-21 00:50:01", "Lodz", "renting a car", "Jan Kowalski");
+		c.updateRecordInTable("bussinesmeetings", "2", "Meeteng3", "2016-06-21 00:50:01", "Lodz", "renting a car", "Jan Kowalski");
 		
 //		c.addEventToDatabaseTable("bussinesmeetings", "2", "Meeteng2", "2016-06-21 00:50:01", "Lodz", "renting a car", "Jan Kowalski");
 		
