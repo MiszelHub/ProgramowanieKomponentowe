@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.*;
 
@@ -10,6 +12,9 @@ import com.toedter.calendar.JCalendar;
 
 
 public class View {
+	
+	GregorianCalendar date = new GregorianCalendar();
+	
 	private JCalendar calendar;
 	private JFrame frame;
 	private JPanel contentPanel, buttonPanel, calendarPanel;
@@ -84,6 +89,7 @@ public class View {
 	
 	public View()
 	{
+		System.out.println(date.getTime().toString());
 		frame = new JFrame("Kalendarz");
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -107,7 +113,7 @@ public class View {
 		userEventBtn = new Button("Dodaj wydarzenie");
 		userEventBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AddEvent addEvent = new AddEvent();
+				AddEvent addEvent = new AddEvent(date);
 								
 			}
 		});
@@ -142,11 +148,28 @@ public class View {
 		
 		calendar.setWeekOfYearVisible(true);
 		
-		//Wypisuje dzieñ który zosta³ klikniêty 
-		calendar.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
-		    public void propertyChange(PropertyChangeEvent e) {
-				 System.out.println(e.getPropertyName()+ ": " + e.getNewValue());
-				
+//		//Wypisuje dzieñ który zosta³ klikniêty 
+//		calendar.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
+//		    public void propertyChange(PropertyChangeEvent e) {
+//		    	int day = calendar.getDayChooser().getDay();
+//		    	int month = calendar.getMonthChooser().getMonth()+1;
+//		    	int year = calendar.getYearChooser().getYear();
+////				System.out.println(e.getPropertyName()+ ": " + e.getNewValue());
+//		    	System.out.println(day+"."+month+"."+year);
+//				
+//			}
+//		});
+		calendar.addPropertyChangeListener(new PropertyChangeListener() {
+			
+			public void propertyChange(PropertyChangeEvent arg0) {
+				// TODO Auto-generated method stub
+			   	int day = calendar.getDayChooser().getDay();
+		    	int month = calendar.getMonthChooser().getMonth();
+		    	int year = calendar.getYearChooser().getYear();
+//				System.out.println(e.getPropertyName()+ ": " + e.getNewValue());
+		    	date.set(year, month, day);
+		    	System.out.println(date.getTime().toString());
+		    	
 			}
 		});
 	}
