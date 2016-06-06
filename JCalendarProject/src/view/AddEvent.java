@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ public class AddEvent {
 	private JFrame frame;
 	private JPanel contentPanel;
 	private Button exitBtn, addBtn, cancelBtn;
-	private JTextField txtField;
+	private JTextField nameField, localizationField;
 	private JLabel label;
 	private JTextArea descriptionTxt;
 	
@@ -73,53 +75,66 @@ public class AddEvent {
 		//koniec labeli z nazwami pól
 		
 		//nazwa wydarzenia
-		txtField = new JTextField();
-		txtField.setSize(200, 20);
-		txtField.setLocation(150, 20);
-		contentPanel.add(txtField);
+		nameField = new JTextField();
+		nameField.setSize(200, 20);
+		nameField.setLocation(150, 20);
+		contentPanel.add(nameField);
 		
 		//data
-		JDateChooser date = new JDateChooser(calendarDate.getTime());
+		final JDateChooser date = new JDateChooser(calendarDate.getTime());
 		date.setSize(200, 20);
 		date.setLocation(150, 60);
 		contentPanel.add(date);
 		
 		//godzina 
-		JSpinField hour = new JSpinField();
+		final JSpinField hour = new JSpinField();
 		hour.setMinimum(0);
 		hour.setMaximum(23);
+		hour.setValue(calendarDate.getTime().getHours());
 		hour.setSize(40, 20);
 		hour.setLocation(150, 100);
 		contentPanel.add(hour);
 		
-		JSpinField minutes = new JSpinField();
+		final JSpinField minutes = new JSpinField();
 		minutes.setMinimum(0);
 		minutes.setMaximum(59);
+		minutes.setValue(calendarDate.getTime().getMinutes());
 		minutes.setSize(40, 20);
 		minutes.setLocation(200, 100);
 		contentPanel.add(minutes);
 		
 		//lokalizacja
-		txtField = new JTextField();
-		txtField.setSize(200, 20);
-		txtField.setLocation(150, 140);
-		contentPanel.add(txtField);
+		localizationField = new JTextField();
+		localizationField.setSize(200, 20);
+		localizationField.setLocation(150, 140);
+		contentPanel.add(localizationField);
 		
-		txtField = new JTextField();		//o co chodzi o.O 2x musze dodac to samo zeby sie wyswietlilo pole... dafaq?!
-		txtField.setSize(200, 20);
-		txtField.setLocation(150, 140);
-		contentPanel.add(txtField);
+//		localizationField = new JTextField();		//o co chodzi o.O 2x musze dodac to samo zeby sie wyswietlilo pole... dafaq?!
+//		localizationField.setSize(200, 20);
+//		localizationField.setLocation(150, 140);
+//		contentPanel.add(localizationField);
 		
 		//opis
 		descriptionTxt = new JTextArea();
-		txtField.setSize(200, 60);
-		txtField.setLocation(150, 180);
-		contentPanel.add(txtField);
+		descriptionTxt.setSize(200, 60);
+		descriptionTxt.setLocation(150, 180);
+		contentPanel.add(descriptionTxt);
 
 		
+		addBtn = new Button("Zapisz");
+		addBtn.setBounds(140, 280, 60, 30);
+		contentPanel.add(addBtn);
+		addBtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(nameField.getText()+" "+localizationField.getText()+" "+
+						descriptionTxt.getText()+" "+date.getDate().toString()+" "+
+						hour.getValue()+":"+minutes.getValue());
+			}
+		});
 		
-		exitBtn = new Button("Zamknij");
-		exitBtn.setBounds(120, 250, 60, 30);
+		exitBtn = new Button("Anuluj");
+		exitBtn.setBounds(280, 280, 60, 30);
 		contentPanel.add(exitBtn);
 		exitBtn.addActionListener(new ActionListener() {
 			

@@ -7,8 +7,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import com.toedter.calendar.JCalendar;
+
+import controllers.ShowEventList;
 
 
 public class View {
@@ -17,8 +21,9 @@ public class View {
 	
 	private JCalendar calendar;
 	private JFrame frame;
-	private JPanel contentPanel, buttonPanel, calendarPanel;
-	private Button btn, userEventBtn;
+	private JPanel contentPanel, eventPanel, buttonPanel, calendarPanel;
+	private JButton btn, userEventBtn;
+	private JTextPane eventList;
 	private boolean todayBtnVisible = true;
 	
 	public JCalendar getCalendar() {
@@ -61,19 +66,19 @@ public class View {
 		this.calendarPanel = calendarPanel;
 	}
 
-	public Button getBtn() {
+	public JButton getBtn() {
 		return btn;
 	}
 
-	public void setBtn(Button btn) {
+	public void setBtn(JButton btn) {
 		this.btn = btn;
 	}
 
-	public Button getUserEventBtn() {
+	public JButton getUserEventBtn() {
 		return userEventBtn;
 	}
 
-	public void setUserEventBtn(Button userEventBtn) {
+	public void setUserEventBtn(JButton userEventBtn) {
 		this.userEventBtn = userEventBtn;
 	}
 
@@ -96,7 +101,7 @@ public class View {
 				System.exit(0);
 			}
 		});
-		frame.setSize(500, 700);
+		frame.setSize(800, 700);
 		frame.setVisible(true);
 		MainMenu mainMenu = new MainMenu(this);
 		frame.setJMenuBar(mainMenu.getMenuBar());
@@ -104,13 +109,25 @@ public class View {
 		contentPanel = new JPanel(null);
 		contentPanel.setBounds(0, 0, 500, 700);
 		frame.add(contentPanel);
-		
+
 		buttonPanel = new JPanel(null);
 		buttonPanel.setBounds(0, 0, 500, 50);
-		buttonPanel.setBackground(Color.cyan);
+//		buttonPanel.setBackground(Color.cyan);
 		contentPanel.add(buttonPanel);
 		
-		userEventBtn = new Button("Dodaj wydarzenie");
+		eventPanel = new JPanel();
+		eventPanel.setBounds(500, -1, 300, 701);
+//		eventPanel.setBackground(Color.MAGENTA);
+		eventPanel.setBorder(new LineBorder(Color.gray, 1));
+		contentPanel.add(eventPanel);
+		
+		eventList = new JTextPane();
+		eventList.setBounds(0, 0, 280, 690);
+		eventList.setText(ShowEventList.printEventList());
+		eventList.setEditable(false);
+		eventPanel.add(eventList);
+		
+		userEventBtn = new JButton("Dodaj wydarzenie");
 		userEventBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				AddEvent addEvent = new AddEvent(date);
@@ -122,7 +139,7 @@ public class View {
 		userEventBtn.setLocation(10, 15);
 
 		
-		btn = new Button("przycisk 1");
+		btn = new JButton("przycisk 1");
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(calendar.getLocale().toString());
@@ -134,11 +151,11 @@ public class View {
 		});
 		buttonPanel.add(btn);
 		btn.setSize(btn.getPreferredSize());
-		btn.setLocation(140, 15);
+		btn.setLocation(160, 15);
 				
 		calendarPanel = new JPanel(null);
 		calendarPanel.setBounds(0, 50, 500, 650);
-		calendarPanel.setBackground(Color.gray);
+//		calendarPanel.setBackground(Color.gray);
 		contentPanel.add(calendarPanel);
 		
 		calendar = new JCalendar();
