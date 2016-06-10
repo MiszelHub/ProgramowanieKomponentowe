@@ -15,7 +15,7 @@ public class Controller {
 	AddEvent addEventView = null;
 	SQLConnection sqlConnection;
 
-
+	
 	public Controller(EventRepository repo, View view, SQLConnection sqlConnection) {
 		super();
 		this.repo = repo;
@@ -66,16 +66,16 @@ public class Controller {
 
 	}
 
-
+	
 //	public void printEventList(){
 //		view.setEventList(repo.getEventList().toString());
 ////		return "Lista Eventów\n\n\n\nfjsgiejgio";
 //	}
-//
+//	
 //	public static void addEvent(){
 //		addEventToDatabaseTable
 //	}
-
+	
 
 }
 
@@ -102,22 +102,22 @@ class UserEventAction implements ActionListener {
 				super();
 				this.sqlConnection = sqlConnection;
 			}
-
+			
 			public void actionPerformed(ActionEvent arg0) {
 //				System.out.println(nameField.getText()+" "+localizationField.getText()+" "+
 //				descriptionTxt.getText()+" "+date.getDate().toString()+" "+
 //				hour.getValue()+":"+minutes.getValue());
 
-				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
-						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
+				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(), 
+						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00", 
 						addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
-				System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
-						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
-						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
-
+				System.out.println("bussinesmeetings" + addEvent.getNameField().toString() + 
+						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" + 
+						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString());
+				
 			}
 		}
-
+		
 		addEvent = new AddEvent(new GregorianCalendar());
 		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
 //		this.addEvent = addEvent;
@@ -131,7 +131,7 @@ class UserEventAction implements ActionListener {
 //	public void setAddEvent(AddEvent addEvent) {
 //		this.addEvent = addEvent;
 //	}
-//
+//	
 }
 
 

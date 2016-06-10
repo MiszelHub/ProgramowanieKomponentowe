@@ -183,38 +183,21 @@ public class AddEvent {
 		this.addBtn = addBtn;
 	}
 
-	public JTextField getNameField() {
-		return nameField;
+	public String getNameField() {
+		return nameField.getText();
 	}
 
-	public void setNameField(JTextField nameField) {
-		this.nameField = nameField;
+	public String getLocalizationField() {
+		return localizationField.getText();
 	}
 
-	public JTextField getLocalizationField() {
-		return localizationField;
+	public String getLabel() {
+		return label.getText();
 	}
 
-	public void setLocalizationField(JTextField localizationField) {
-		this.localizationField = localizationField;
+	public String getDescriptionTxt() {
+		return descriptionTxt.getText();
 	}
-
-	public JLabel getLabel() {
-		return label;
-	}
-
-	public void setLabel(JLabel label) {
-		this.label = label;
-	}
-
-	public JTextArea getDescriptionTxt() {
-		return descriptionTxt;
-	}
-
-	public void setDescriptionTxt(JTextArea descriptionTxt) {
-		this.descriptionTxt = descriptionTxt;
-	}
-
 	
 	public GregorianCalendar getCalendar() {
 		return calendar;
@@ -228,26 +211,13 @@ public class AddEvent {
 		return date.getDate().getYear()+"-"+date.getDate().getMonth()+"-"+date.getDate().getDay();
 	}
 
-	public void setDate(JDateChooser date) {
-		this.date = date;
+	public int getHour() {
+		return hour.getValue();
 	}
 
-	public JSpinField getHour() {
-		return hour;
+	public int getMinutes() {
+		return minutes.getValue();
+		
 	}
-
-	public void setHour(JSpinField hour) {
-		this.hour = hour;
-	}
-
-	public JSpinField getMinutes() {
-		return minutes;
-	}
-
-	public void setMinutes(JSpinField minutes) {
-		this.minutes = minutes;
-	}
-
-	
 	
 }

@@ -45,7 +45,7 @@ public class MainMenu extends JMenuBar{
 		menuItem.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				XMLActions.saveEventsToXML();
+//				XMLActions.saveEventsToXML();
 			}
 		});
 	
@@ -57,7 +57,7 @@ public class MainMenu extends JMenuBar{
 		menuItem.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				XMLActions.loadEventsFromXML();
+//				XMLActions.loadEventsFromXML();
 				System.out.println("load XML");
 			}
 		});
