@@ -2,11 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-import com.sun.media.jfxmediaimpl.MediaDisposer.Disposable;
 
-import controllers.XMLActions;
-
-public class EventRepository implements Disposable{
+public class EventRepository {
 
 	
 	private ArrayList<EventBase> eventList;
@@ -29,9 +26,13 @@ public class EventRepository implements Disposable{
 		eventList.add(obj);
 	}
 
-	public void dispose() {
-		XMLActions.saveEventsToXML();
+	public String toString()
+	{
+		StringBuilder stb = new StringBuilder();
 		
+		this.eventList.forEach(event->stb.append(event.toString()+"\n"));
+		
+		return stb.toString();
 	}
 
 }

@@ -1,6 +1,6 @@
 package controllers;
 import java.sql.*;
-
+import java.util.ArrayList;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -8,6 +8,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import model.BussinesMeeting;
 import model.EventBase;
+import model.EventRepository;
 
 public class SQLConnection {
 
@@ -176,8 +177,6 @@ public class SQLConnection {
 			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
 
 			}
-
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -191,6 +190,42 @@ public class SQLConnection {
 		}
 
 		return event;
+	}
+	
+	public void getAllEvents(EventRepository repo)
+	{
+		connectToDataBase();
+		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith FROM events.bussinesmeetings;";
+		Statement statement=null;
+		ResultSet rs= null;
+		
+		try {
+			statement = dbConnection.createStatement();
+			rs = statement.executeQuery(sqlQuerry);
+			while(rs.next()){
+
+			BussinesMeeting event= new BussinesMeeting();
+			event.setDate(rs.getString("date"));
+			event.setDescription(rs.getString("description"));
+			event.setLocation(rs.getString("location"));
+			event.setTitle(rs.getString("title"));
+			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+			
+			repo.addRecord(event);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs.close();
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 	}
 
 }

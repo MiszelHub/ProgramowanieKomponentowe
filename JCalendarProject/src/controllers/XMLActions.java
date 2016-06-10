@@ -31,7 +31,7 @@ public final class XMLActions {
 
 	private XMLActions(){};
 	
-	public static void saveEventsToXML()
+	public static void saveEventsToXML(EventRepository eventRepo)
 	{
 		try {
 			encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Events.xml")));
@@ -42,7 +42,7 @@ public final class XMLActions {
 			e.printStackTrace();
 		}
 	}
-	public static void loadEventsFromXML()
+	public static void loadEventsFromXML(EventRepository eventRepo)
 	{
 		try {
 			decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("Events.xml")));
