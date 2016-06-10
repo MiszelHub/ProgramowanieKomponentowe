@@ -22,7 +22,7 @@ public class View {
 	private JCalendar calendar;
 	private JFrame frame;
 	private JPanel contentPanel, eventPanel, buttonPanel, calendarPanel;
-	private JButton btn, userEventBtn;
+	private JButton btn, userEventBtn, filterBtn;
 	private JTextPane eventList;
 	private JScrollPane eventlistSlider;
 	private boolean todayBtnVisible = true;
@@ -111,13 +111,21 @@ public class View {
 	public void addUserEventActionListener(ActionListener listener){
 		userEventBtn.addActionListener(listener);
 	}
-	public void addEventListActionListener(AncestorListener listener){
-		eventList.addAncestorListener(listener);
+	
+//	public void addEventListActionListener(AncestorListener listener){
+//		eventList.addAncestorListener(listener);
+//	}
+	
+	public void addfilterEventsActionListener(ActionListener listener){
+		filterBtn.addActionListener(listener);
 	}
+	
 	public void showMessage(String message)
 	{
 		JOptionPane.showMessageDialog(new JFrame(), message, "Ups!", JOptionPane.ERROR_MESSAGE);
 	}
+	
+	
 	public View()
 	{
 		frame = new JFrame("Kalendarz");
@@ -126,7 +134,7 @@ public class View {
 				System.exit(0);
 			}
 		});
-		frame.setSize(1334, 700);
+		frame.setSize(1210, 700);
 		frame.setVisible(true);
 		MainMenu mainMenu = new MainMenu(this);
 		frame.setJMenuBar(mainMenu.getMenuBar());
@@ -141,20 +149,24 @@ public class View {
 //		buttonPanel.setBackground(Color.cyan);
 		contentPanel.add(buttonPanel);
 
-		eventPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		eventPanel.setBounds(500, -1, 950, 701);
+		eventPanel = new JPanel(new BorderLayout());
+		eventPanel.setBounds(500, -1, 700, 650);
 //		eventPanel.setBackground(Color.MAGENTA);
 		eventPanel.setBorder(new LineBorder(Color.gray, 1));
+		
 		contentPanel.add(eventPanel);
 
 
 		eventList = new JTextPane();
 
-		eventList.setSize(1, 1);
+//		eventList.setSize(700, 700);
+//		eventList.setBounds(750, 100, 10, 70);
 //		eventList.setText(Controller.printEventList());
 		eventList.setEditable(false);
 		eventlistSlider = new JScrollPane(eventList);
-	
+		eventlistSlider.setBounds(800, 100, 700, 700);
+		
+//		eventPanel.add(eventList);
 		eventPanel.add(eventlistSlider);
 
 
@@ -165,7 +177,7 @@ public class View {
 		userEventBtn.setLocation(10, 15);
 
 
-		btn = new JButton("przycisk 1");
+		btn = new JButton("Edytuj wydarzenie");
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(calendar.getLocale().toString());
@@ -175,9 +187,15 @@ public class View {
 
 			}
 		});
+	
 		buttonPanel.add(btn);
 		btn.setSize(btn.getPreferredSize());
 		btn.setLocation(160, 15);
+		
+		filterBtn = new JButton("Filtruj wydarzenia");
+		buttonPanel.add(filterBtn);
+		filterBtn.setSize(filterBtn.getPreferredSize());
+		filterBtn.setLocation(315, 15);
 
 		calendarPanel = new JPanel(null);
 		calendarPanel.setBounds(0, 50, 500, 650);
