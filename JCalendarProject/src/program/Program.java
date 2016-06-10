@@ -21,8 +21,8 @@ public class Program {
 		SQLConnection connection=null;
 		
 		try {
-			connection = new SQLConnection("jdbc:mysql://127.0.0.1:3306/?user=Michal?autoReconnect=true&useSSL=false","Michal","kl4mk4123");
-//			c = new SQLConnection("jdbc:mysql://127.0.0.1:3306/?user=Konrad?autoReconnect=true&useSSL=false","Konrad","sYmbi0za0ms");
+//			connection = new SQLConnection("jdbc:mysql://127.0.0.1:3306/?user=Michal?autoReconnect=true&useSSL=false","Michal","kl4mk4123");
+			connection = new SQLConnection("jdbc:mysql://127.0.0.1:3306/?user=Konrad?autoReconnect=true&useSSL=false","Konrad","sYmbi0za0ms");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -31,8 +31,8 @@ public class Program {
 		
 		EventRepository model = new EventRepository();
 		View view = new View();
-		//Controller controller = new Controller(model, view, connection);
-		connection.SelectEventWithId(2);
+		Controller controller = new Controller(model, view, connection);
+//		connection.SelectEventWithId(2);
 		
 		
 		//VALUES ('2', 'Meeteng1', '2016-06-21 00:50:00', 'Lodz', 'renting a car', 'JaN Kowalski');

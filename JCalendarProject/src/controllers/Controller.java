@@ -8,7 +8,7 @@ import view.AddEvent;
 import view.View;
 import model.EventRepository;
 
-public final class Controller {
+public class Controller {
 
 	EventRepository repo;
 	View view;
@@ -21,15 +21,15 @@ public final class Controller {
 		this.repo = repo;
 		this.view = view;
 		this.sqlConnection = sqlConnection;
-		UserEventAction usrEvtAction = new UserEventAction();
-		this.addEventView = usrEvtAction.getAddEvent();
+		UserEventAction usrEvtAction = new UserEventAction(view, sqlConnection);
+//		this.addEventView = usrEvtAction.getAddEvent();
 		this.view.addUserEventActionListener(usrEvtAction);
-		try{
-			this.addEventView.addAddBtnListener(new AddEventAction(sqlConnection, addEventView));
-		}
-		catch(NullPointerException e){
-			e.printStackTrace();
-		}
+//		try{
+//			this.addEventView.addAddBtnListener(new AddEventAction(sqlConnection));
+//		}
+//		catch(NullPointerException e){
+//			e.printStackTrace();
+//		}
 	}
 
 	public EventRepository getRepo() {
@@ -79,43 +79,57 @@ public final class Controller {
 
 class UserEventAction implements ActionListener {
 
-	AddEvent addEvent = null;
-	
-	public void actionPerformed(ActionEvent arg0) {
-		AddEvent addEvent = new AddEvent(new GregorianCalendar());
-		this.addEvent = addEvent;
-	}
-
-	public AddEvent getAddEvent() {
-		return addEvent;
-	}
-
-	public void setAddEvent(AddEvent addEvent) {
-		this.addEvent = addEvent;
-	}
-	
-}
-
-class AddEventAction implements ActionListener{
-
-	SQLConnection sqlConnection;
+//	AddEvent addEvent = new AddEvent(new GregorianCalendar());
 	AddEvent addEvent;
+	View view;
+	SQLConnection sqlConnection;
 
-	public AddEventAction(SQLConnection sqlConnection, AddEvent addEvent) {
+	public UserEventAction(View view, SQLConnection sqlConnection) {
 		super();
+		this.view = view;
 		this.sqlConnection = sqlConnection;
-		this.addEvent = addEvent;
 	}
-	
-	public void actionPerformed(ActionEvent arg0) {
-//		System.out.println(nameField.getText()+" "+localizationField.getText()+" "+
-//		descriptionTxt.getText()+" "+date.getDate().toString()+" "+
-//		hour.getValue()+":"+minutes.getValue());
 
-		sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(), addEvent.getDate().toString(), 
-				addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
-		System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() + addEvent.getDate().toString() + 
-				addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
+	public void actionPerformed(ActionEvent arg0) {
+		System.out.println("action performed");
+		class AddEventAction implements ActionListener{
+
+			SQLConnection sqlConnection;
+
+			public AddEventAction(SQLConnection sqlConnection) {
+				super();
+				this.sqlConnection = sqlConnection;
+			}
+			
+			public void actionPerformed(ActionEvent arg0) {
+//				System.out.println(nameField.getText()+" "+localizationField.getText()+" "+
+//				descriptionTxt.getText()+" "+date.getDate().toString()+" "+
+//				hour.getValue()+":"+minutes.getValue());
+
+				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(), 
+						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00", 
+						addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
+				System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() + 
+						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" + 
+						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
+				
+			}
+		}
 		
+		addEvent = new AddEvent(new GregorianCalendar());
+		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
+//		this.addEvent = addEvent;
 	}
+
+//
+//	public AddEvent getAddEvent() {
+//		return addEvent;
+//	}
+//
+//	public void setAddEvent(AddEvent addEvent) {
+//		this.addEvent = addEvent;
+//	}
+//	
 }
+
+

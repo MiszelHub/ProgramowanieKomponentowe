@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -31,6 +32,7 @@ public class AddEvent {
 	private JLabel label;
 	private JTextArea descriptionTxt;
 	private JDateChooser date = new JDateChooser(calendar.getTime());
+	JSpinField hour, minutes; 
 
 	public AddEvent(GregorianCalendar calendarDate){
 		frame = new JFrame("Dodaj wydarzenie");
@@ -82,13 +84,12 @@ public class AddEvent {
 		contentPanel.add(nameField);
 		
 		//data
-		
 		date.setSize(200, 20);
 		date.setLocation(150, 60);
 		contentPanel.add(date);
 		
 		//godzina 
-		final JSpinField hour = new JSpinField();
+		hour = new JSpinField();
 		hour.setMinimum(0);
 		hour.setMaximum(23);
 		hour.setValue(calendarDate.getTime().getHours());
@@ -96,7 +97,7 @@ public class AddEvent {
 		hour.setLocation(150, 100);
 		contentPanel.add(hour);
 		
-		final JSpinField minutes = new JSpinField();
+		minutes = new JSpinField();
 		minutes.setMinimum(0);
 		minutes.setMaximum(59);
 		minutes.setValue(calendarDate.getTime().getMinutes());
@@ -223,13 +224,30 @@ public class AddEvent {
 		this.calendar = calendar;
 	}
 
-	public JDateChooser getDate() {
-		return date;
+	public String getDate() {
+		return date.getDate().getYear()+"-"+date.getDate().getMonth()+"-"+date.getDate().getDay();
 	}
 
 	public void setDate(JDateChooser date) {
 		this.date = date;
 	}
 
+	public JSpinField getHour() {
+		return hour;
+	}
+
+	public void setHour(JSpinField hour) {
+		this.hour = hour;
+	}
+
+	public JSpinField getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(JSpinField minutes) {
+		this.minutes = minutes;
+	}
+
+	
 	
 }
