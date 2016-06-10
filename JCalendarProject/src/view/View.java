@@ -114,7 +114,10 @@ public class View {
 	public void addEventListActionListener(AncestorListener listener){
 		eventList.addAncestorListener(listener);
 	}
-
+	public void showMessage(String message)
+	{
+		JOptionPane.showMessageDialog(new JFrame(), message, "Ups!", JOptionPane.ERROR_MESSAGE);
+	}
 	public View()
 	{
 		frame = new JFrame("Kalendarz");

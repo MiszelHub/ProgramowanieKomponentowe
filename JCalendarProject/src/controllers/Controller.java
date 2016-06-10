@@ -1,9 +1,13 @@
 package controllers;
-
+import exceptions.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import exceptions.ColumnOutOfRangeException;
 import view.AddEvent;
 import view.View;
 import model.EventRepository;
@@ -15,7 +19,7 @@ public class Controller {
 	AddEvent addEventView = null;
 	SQLConnection sqlConnection;
 
-	
+
 	public Controller(EventRepository repo, View view, SQLConnection sqlConnection) {
 		super();
 		this.repo = repo;
@@ -23,7 +27,7 @@ public class Controller {
 		this.sqlConnection = sqlConnection;
 		UserEventAction usrEvtAction = new UserEventAction(view, sqlConnection);
 		this.view.addUserEventActionListener(usrEvtAction);
-		
+
 		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
 	}
@@ -61,6 +65,17 @@ public class Controller {
 
 	}
 
+
+//	public void printEventList(){
+//		view.setEventList(repo.getEventList().toString());
+////		return "Lista Event�w\n\n\n\nfjsgiejgio";
+//	}
+//
+//	public static void addEvent(){
+//		addEventToDatabaseTable
+//	}
+
+
 }
 
 class UserEventAction implements ActionListener {
@@ -76,8 +91,8 @@ class UserEventAction implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		
-		
+
+
 		class AddEventAction implements ActionListener{
 
 			SQLConnection sqlConnection;
@@ -86,30 +101,44 @@ class UserEventAction implements ActionListener {
 				super();
 				this.sqlConnection = sqlConnection;
 			}
-			
+
+			public void chcekIfFieldsAreValid() throws ColumnOutOfRangeException
+			{
+
+				if(addEvent.getNameField().length() > 45 || addEvent.getLocalizationField().length() > 45 || addEvent.getDescriptionTxt().length() > 45)
+					throw new ColumnOutOfRangeException();
+
+			}
 			public void actionPerformed(ActionEvent arg0) {
-				
-				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(), 
-						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00", 
+
+			try{
+				chcekIfFieldsAreValid();
+
+				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
+						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
 						addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
-				
+
 				System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
 						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
 						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
-				
+
 				view.getEventList().setText(sqlConnection.PrintEvents());
 				addEvent.getFrame().dispose();
-				
+			}catch(ColumnOutOfRangeException e){
+
+				view.showMessage(e.getMessage());
 			}
-			
+			}
+
+
 		}
-		
+
 		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTime(view.getCalendar().getDate());		
+		cal.setTime(view.getCalendar().getDate());
 		addEvent = new AddEvent(cal);
-		
+
 		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
-		
+
 	}
 
 }
