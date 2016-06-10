@@ -97,7 +97,8 @@ class UserEventAction implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("action performed");
+		
+		
 		class AddEventAction implements ActionListener{
 
 			SQLConnection sqlConnection;
@@ -111,7 +112,7 @@ class UserEventAction implements ActionListener {
 //				System.out.println(nameField.getText()+" "+localizationField.getText()+" "+
 //				descriptionTxt.getText()+" "+date.getDate().toString()+" "+
 //				hour.getValue()+":"+minutes.getValue());
-
+//				addEvent.setDate(view.getCalendar().getDate());
 				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(), 
 						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00", 
 						addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
@@ -120,11 +121,13 @@ class UserEventAction implements ActionListener {
 						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
 				
 				view.getEventList().setText(sqlConnection.PrintEvents());
-
+				addEvent.getFrame().dispose();
 			}
 		}
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(view.getCalendar().getDate());		
+		addEvent = new AddEvent(cal);
 		
-		addEvent = new AddEvent(new GregorianCalendar());
 		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
 //		this.addEvent = addEvent;
 	}

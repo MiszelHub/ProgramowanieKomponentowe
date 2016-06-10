@@ -84,6 +84,7 @@ public class AddEvent {
 		contentPanel.add(nameField);
 		
 		//data
+		date.setDate(calendarDate.getTime());
 		date.setSize(200, 20);
 		date.setLocation(150, 60);
 		contentPanel.add(date);
@@ -216,6 +217,10 @@ public class AddEvent {
 	    String dateFormatted = fmt.format(cal.getTime());				
 		return dateFormatted;
 //		return date.getDate().getYear()+"-"+date.getDate().getMonth()+"-"+date.getDate().getDay();
+	}
+	
+	public void setDate(Date date){
+		this.date.setDate(date);
 	}
 
 	public int getHour() {
