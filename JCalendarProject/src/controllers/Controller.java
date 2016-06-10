@@ -10,8 +10,9 @@ import java.util.zip.DataFormatException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
+
 import view.AddEvent;
-import view.FilterEvents;
 import view.View;
 import model.EventRepository;
 
@@ -33,8 +34,6 @@ public class Controller {
 
 		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
-		
-		this.view.addfilterEventsActionListener(new FilterEventsAction(view));
 	}
 
 	public EventRepository getRepo() {
@@ -119,30 +118,35 @@ class UserEventAction implements ActionListener {
 
 				 if (addEvent.getDate() == null || !addEvent.getDate().matches("\\d{4}-\\d{2}-\\d{2}"))
 						throw new DateFormatException();
+
 			}
 			public void actionPerformed(ActionEvent arg0) {
 
-				try{
-					chcekIfFieldsAreValid();
-					checkDataFormat();
-					sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
-							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
-							addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
-	
-					System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
-							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
-							addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
-	
-					view.getEventList().setText(sqlConnection.PrintEvents());
-					addEvent.getFrame().dispose();
-				}catch(ColumnOutOfRangeException e){
-	
-					view.showMessage(e.getMessage());
-	
-				}catch(DateFormatException e1){
-					view.showMessage(e1.getMessage());
-				}
+			try{
+				chcekIfFieldsAreValid();
+				checkDataFormat();
+				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
+						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
+						addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
+
+				System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
+						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
+						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
+
+				view.getEventList().setText(sqlConnection.PrintEvents());
+				addEvent.getFrame().dispose();
+			}catch(ColumnOutOfRangeException e){
+
+				view.showMessage(e.getMessage());
+
+			}catch(DateFormatException e1){
+				view.showMessage(e1.getMessage());
 			}
+		}
+
+
+
+
 		}
 
 		GregorianCalendar cal = new GregorianCalendar();
@@ -153,24 +157,6 @@ class UserEventAction implements ActionListener {
 
 	}
 
-}
-
-class FilterEventsAction implements ActionListener{
-	View view;
-	FilterEvents filterEvents;
-	
-	public FilterEventsAction(View view) {
-		super();
-		this.view = view;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		filterEvents = new FilterEvents(new GregorianCalendar());
-		
-	}
-	
-	
 }
 
 
