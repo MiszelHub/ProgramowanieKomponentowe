@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
 
+import javax.swing.event.AncestorListener;
+
 import view.AddEvent;
 import view.View;
 import model.EventRepository;
@@ -24,7 +26,9 @@ public class Controller {
 		UserEventAction usrEvtAction = new UserEventAction(view, sqlConnection);
 //		this.addEventView = usrEvtAction.getAddEvent();
 		this.view.addUserEventActionListener(usrEvtAction);
+		
 		XMLActions.setEventRepo(this.repo);
+		this.view.getEventList().setText(sqlConnection.PrintEvents());
 //		try{
 //			this.addEventView.addAddBtnListener(new AddEventAction(sqlConnection));
 //		}
@@ -69,7 +73,7 @@ public class Controller {
 	
 //	public void printEventList(){
 //		view.setEventList(repo.getEventList().toString());
-////		return "Lista Eventów\n\n\n\nfjsgiejgio";
+////		return "Lista Eventï¿½w\n\n\n\nfjsgiejgio";
 //	}
 //	
 //	public static void addEvent(){
@@ -111,10 +115,12 @@ class UserEventAction implements ActionListener {
 				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(), 
 						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00", 
 						addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
-				System.out.println("bussinesmeetings" + addEvent.getNameField().toString() + 
-						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" + 
-						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString());
+				System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
+						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
+						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
 				
+				view.getEventList().setText(sqlConnection.PrintEvents());
+
 			}
 		}
 		
@@ -133,5 +139,6 @@ class UserEventAction implements ActionListener {
 //	}
 //	
 }
+
 
 

@@ -191,14 +191,14 @@ public class SQLConnection {
 
 		return event;
 	}
-	
+
 	public void getAllEvents(EventRepository repo)
 	{
 		connectToDataBase();
 		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith FROM events.bussinesmeetings;";
 		Statement statement=null;
 		ResultSet rs= null;
-		
+
 		try {
 			statement = dbConnection.createStatement();
 			rs = statement.executeQuery(sqlQuerry);
@@ -210,7 +210,7 @@ public class SQLConnection {
 			event.setLocation(rs.getString("location"));
 			event.setTitle(rs.getString("title"));
 			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
-			
+
 			repo.addRecord(event);
 			}
 		} catch (SQLException e) {
@@ -225,7 +225,43 @@ public class SQLConnection {
 			e.printStackTrace();
 		}
 
-		
+
+	}
+	public String PrintEvents()
+	{
+		connectToDataBase();
+		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith FROM events.bussinesmeetings;";
+		Statement statement=null;
+		ResultSet rs= null;
+		StringBuilder stb = new StringBuilder();
+		try {
+			statement = dbConnection.createStatement();
+			rs = statement.executeQuery(sqlQuerry);
+			while(rs.next()){
+
+			BussinesMeeting event= new BussinesMeeting();
+			event.setDate(rs.getString("date"));
+			event.setDescription(rs.getString("description"));
+			event.setLocation(rs.getString("location"));
+			event.setTitle(rs.getString("title"));
+			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+
+			stb.append(event.toString()+"\n");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs.close();
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return stb.toString();
+
 	}
 
 }
