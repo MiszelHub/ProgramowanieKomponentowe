@@ -30,10 +30,10 @@ public class AddEvent {
 	private JPanel contentPanel;
 	private Button exitBtn, addBtn;
 	private JTextField nameField, localizationField;
-	private JLabel label, alarmlabel;
+	private JLabel label;
 	private JTextArea descriptionTxt;
 	private JDateChooser date = new JDateChooser(calendar.getTime()), alarmDate = new JDateChooser(calendar.getTime());
-	JSpinField hour, minutes, alarmHour,alarmMinutes;
+	JSpinField hour, minutes, alarmHour,alarmMinutes; 
 	JCheckBox alarmbox;
 
 	public AddEvent(GregorianCalendar calendarDate){
@@ -43,30 +43,30 @@ public class AddEvent {
 				frame.dispose();
 			}
 		});
-		frame.setSize(620, 470);
+		frame.setSize(620, 400);
 		frame.setVisible(true);
-
+		
 		contentPanel = new JPanel(null);
 		contentPanel.setBounds(0, 0, 500, 400);
 		frame.add(contentPanel);
-
+		
 		//labele z nazwami pól
-
+		
 		label = new JLabel("Nazwa wydarzenia:");
 		label.setSize(label.getPreferredSize());
 		label.setLocation(20, 20);
 		contentPanel.add(label);
-
+		
 		label = new JLabel("Data:");
 		label.setSize(label.getPreferredSize());
 		label.setLocation(20, 60);
 		contentPanel.add(label);
-
+		
 		label = new JLabel("Godzina:");
 		label.setSize(label.getPreferredSize());
 		label.setLocation(20, 100);
 		contentPanel.add(label);
-
+		
 		label = new JLabel("Lokalizacja:");
 		label.setSize(label.getPreferredSize());
 		label.setLocation(20, 140);
@@ -76,22 +76,22 @@ public class AddEvent {
 		label.setSize(label.getPreferredSize());
 		label.setLocation(20, 180);
 		contentPanel.add(label);
-
+		
 		//koniec labeli z nazwami pól
-
+		
 		//nazwa wydarzenia
 		nameField = new JTextField();
 		nameField.setSize(200, 20);
 		nameField.setLocation(150, 20);
 		contentPanel.add(nameField);
-
+		
 		//data
 		date.setDate(calendarDate.getTime());
 		date.setSize(200, 20);
 		date.setLocation(150, 60);
 		contentPanel.add(date);
-
-		//godzina
+		
+		//godzina 
 		hour = new JSpinField();
 		hour.setMinimum(0);
 		hour.setMaximum(23);
@@ -99,7 +99,7 @@ public class AddEvent {
 		hour.setSize(40, 20);
 		hour.setLocation(150, 100);
 		contentPanel.add(hour);
-
+		
 		minutes = new JSpinField();
 		minutes.setMinimum(0);
 		minutes.setMaximum(59);
@@ -107,88 +107,79 @@ public class AddEvent {
 		minutes.setSize(40, 20);
 		minutes.setLocation(200, 100);
 		contentPanel.add(minutes);
-
+		
 		//lokalizacja
 		localizationField = new JTextField();
 		localizationField.setSize(200, 20);
 		localizationField.setLocation(150, 140);
 		contentPanel.add(localizationField);
-
+		
 //		localizationField = new JTextField();		//o co chodzi o.O 2x musze dodac to samo zeby sie wyswietlilo pole... dafaq?!
 //		localizationField.setSize(200, 20);
 //		localizationField.setLocation(150, 140);
 //		contentPanel.add(localizationField);
-
+		
 		//opis
 		descriptionTxt = new JTextArea();
 		descriptionTxt.setSize(200, 60);
 		descriptionTxt.setLocation(150, 180);
 		contentPanel.add(descriptionTxt);
-
+		
 		alarmbox = new JCheckBox("Ustaw Alarm");
 		alarmbox.setSelected(false);
-		alarmbox.setSize(100, 30);
-		alarmbox.setLocation(10,320);
+		alarmbox.setSize(101, 101);
+		alarmbox.setLocation(400,30);
 		contentPanel.add(alarmbox);
-
+		
 		alarmDate.setSize(200, 20);
-		alarmDate.setLocation(130, 350);
+		alarmDate.setLocation(400, 100);
 		alarmDate.setEnabled(false);
 		contentPanel.add(alarmDate);
-
+		
 		alarmHour = new JSpinField();
 		alarmHour.setMinimum(0);
 		alarmHour.setMaximum(23);
 		alarmHour.setValue(calendarDate.getTime().getHours());
 		alarmHour.setSize(40, 20);
-		alarmHour.setLocation(130, 400);
+		alarmHour.setLocation(400, 150);
 		alarmHour.setEnabled(false);
 		contentPanel.add(alarmHour);
-
+		
 		alarmMinutes = new JSpinField();
 		alarmMinutes.setMinimum(0);
 		alarmMinutes.setMaximum(59);
 		alarmMinutes.setValue(calendarDate.getTime().getMinutes());
 		alarmMinutes.setSize(40, 20);
-		alarmMinutes.setLocation(180, 400);
+		alarmMinutes.setLocation(450, 150);
 		alarmMinutes.setEnabled(false);
 		contentPanel.add(alarmMinutes);
-
-		alarmlabel = new JLabel("Godzina");
-		alarmlabel.setSize(alarmlabel.getPreferredSize());
-		alarmlabel.setLocation(20, 400);
-		contentPanel.add(alarmlabel);
-
-
+		
+		
 		addBtn = new Button("Zapisz");
 		addBtn.setBounds(140, 280, 60, 30);
 		contentPanel.add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
-
+			
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(nameField.getText()+" "+localizationField.getText()+" "+
 						descriptionTxt.getText()+" "+date.getDate().toString()+" "+
 						hour.getValue()+":"+minutes.getValue());
 			}
 		});
-
+		
 		exitBtn = new Button("Anuluj");
 		exitBtn.setBounds(280, 280, 60, 30);
 		contentPanel.add(exitBtn);
 		exitBtn.addActionListener(new ActionListener() {
-
+			
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 			}
 		});
 	}
-
+	
 	public void addAddBtnListener(ActionListener listener){
 		addBtn.addActionListener(listener);
-	}
-
-	public void AddAlarmAcionListener(ActionListener listener){
-		this.alarmbox.addActionListener(listener);
 	}
 
 	//getters and setters
@@ -239,7 +230,7 @@ public class AddEvent {
 	public String getDescriptionTxt() {
 		return descriptionTxt.getText();
 	}
-
+	
 	public GregorianCalendar getCalendar() {
 		return calendar;
 	}
@@ -249,16 +240,16 @@ public class AddEvent {
 	}
 
 	public String getDate() {
-
+		
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(date.getDate());
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 	    fmt.setCalendar(cal);
-	    String dateFormatted = fmt.format(cal.getTime());
+	    String dateFormatted = fmt.format(cal.getTime());				
 		return dateFormatted;
 //		return date.getDate().getYear()+"-"+date.getDate().getMonth()+"-"+date.getDate().getDay();
 	}
-
+	
 	public void setDate(Date date){
 		this.date.setDate(date);
 	}
@@ -269,68 +260,7 @@ public class AddEvent {
 
 	public int getMinutes() {
 		return minutes.getValue();
-
+		
 	}
-
-	public JDateChooser getAlarmDate() {
-		return alarmDate;
-	}
-
-	public void setAlarmDate(JDateChooser alarmDate) {
-		this.alarmDate = alarmDate;
-	}
-
-	public JSpinField getAlarmHour() {
-		return alarmHour;
-	}
-
-	public void setAlarmHour(JSpinField alarmHour) {
-		this.alarmHour = alarmHour;
-	}
-
-	public JSpinField getAlarmMinutes() {
-		return alarmMinutes;
-	}
-
-	public void setAlarmMinutes(JSpinField alarmMinutes) {
-		this.alarmMinutes = alarmMinutes;
-	}
-
-	public JCheckBox getAlarmbox() {
-		return alarmbox;
-	}
-
-	public void setAlarmbox(JCheckBox alarmbox) {
-		this.alarmbox = alarmbox;
-	}
-
-	public void setNameField(JTextField nameField) {
-		this.nameField = nameField;
-	}
-
-	public void setLocalizationField(JTextField localizationField) {
-		this.localizationField = localizationField;
-	}
-
-	public void setLabel(JLabel label) {
-		this.label = label;
-	}
-
-	public void setDescriptionTxt(JTextArea descriptionTxt) {
-		this.descriptionTxt = descriptionTxt;
-	}
-
-	public void setDate(JDateChooser date) {
-		this.date = date;
-	}
-
-	public void setHour(JSpinField hour) {
-		this.hour = hour;
-	}
-
-	public void setMinutes(JSpinField minutes) {
-		this.minutes = minutes;
-	}
-
-
+	
 }

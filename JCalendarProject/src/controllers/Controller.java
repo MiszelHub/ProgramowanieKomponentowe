@@ -148,32 +148,12 @@ class UserEventAction implements ActionListener {
 
 
 		}
-		class TurnOnTheAlarm implements ActionListener{
-
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			
-			if(addEvent.getAlarmbox().isSelected()){	
-				addEvent.getAlarmDate().setEnabled(true);
-				addEvent.getAlarmHour().setEnabled(true);
-				addEvent.getAlarmMinutes().setEnabled(true);
-			}else{
-				addEvent.getAlarmDate().setEnabled(false);
-				addEvent.getAlarmHour().setEnabled(false);
-				addEvent.getAlarmMinutes().setEnabled(false);
-			}
-				
-			}
-			
-		}
 
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(view.getCalendar().getDate());
 		addEvent = new AddEvent(cal);
 
 		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
-		addEvent.AddAlarmAcionListener(new TurnOnTheAlarm());
 
 	}
 
