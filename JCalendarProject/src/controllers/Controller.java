@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
 
-import javax.swing.event.AncestorListener;
-
 import view.AddEvent;
 import view.View;
 import model.EventRepository;
@@ -24,17 +22,10 @@ public class Controller {
 		this.view = view;
 		this.sqlConnection = sqlConnection;
 		UserEventAction usrEvtAction = new UserEventAction(view, sqlConnection);
-//		this.addEventView = usrEvtAction.getAddEvent();
 		this.view.addUserEventActionListener(usrEvtAction);
 		
 		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
-//		try{
-//			this.addEventView.addAddBtnListener(new AddEventAction(sqlConnection));
-//		}
-//		catch(NullPointerException e){
-//			e.printStackTrace();
-//		}
 	}
 
 	public EventRepository getRepo() {
@@ -70,22 +61,10 @@ public class Controller {
 
 	}
 
-	
-//	public void printEventList(){
-//		view.setEventList(repo.getEventList().toString());
-////		return "Lista Event�w\n\n\n\nfjsgiejgio";
-//	}
-//	
-//	public static void addEvent(){
-//		addEventToDatabaseTable
-//	}
-	
-
 }
 
 class UserEventAction implements ActionListener {
 
-//	AddEvent addEvent = new AddEvent(new GregorianCalendar());
 	AddEvent addEvent;
 	View view;
 	SQLConnection sqlConnection;
@@ -109,38 +88,30 @@ class UserEventAction implements ActionListener {
 			}
 			
 			public void actionPerformed(ActionEvent arg0) {
-//				System.out.println(nameField.getText()+" "+localizationField.getText()+" "+
-//				descriptionTxt.getText()+" "+date.getDate().toString()+" "+
-//				hour.getValue()+":"+minutes.getValue());
-//				addEvent.setDate(view.getCalendar().getDate());
+				
 				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(), 
 						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00", 
 						addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
+				
 				System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
 						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
 						addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
 				
 				view.getEventList().setText(sqlConnection.PrintEvents());
 				addEvent.getFrame().dispose();
+				
 			}
+			
 		}
+		
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(view.getCalendar().getDate());		
 		addEvent = new AddEvent(cal);
 		
 		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
-//		this.addEvent = addEvent;
+		
 	}
 
-//
-//	public AddEvent getAddEvent() {
-//		return addEvent;
-//	}
-//
-//	public void setAddEvent(AddEvent addEvent) {
-//		this.addEvent = addEvent;
-//	}
-//	
 }
 
 
