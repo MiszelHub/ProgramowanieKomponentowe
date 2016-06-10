@@ -208,7 +208,14 @@ public class AddEvent {
 	}
 
 	public String getDate() {
-		return date.getDate().getYear()+"-"+date.getDate().getMonth()+"-"+date.getDate().getDay();
+		
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(date.getDate());
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+	    fmt.setCalendar(cal);
+	    String dateFormatted = fmt.format(cal.getTime());				
+		return dateFormatted;
+//		return date.getDate().getYear()+"-"+date.getDate().getMonth()+"-"+date.getDate().getDay();
 	}
 
 	public int getHour() {
