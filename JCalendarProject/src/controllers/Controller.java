@@ -2,12 +2,14 @@ package controllers;
 import exceptions.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.zip.DataFormatException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import exceptions.ColumnOutOfRangeException;
 import view.AddEvent;
 import view.View;
 import model.EventRepository;
@@ -109,11 +111,17 @@ class UserEventAction implements ActionListener {
 					throw new ColumnOutOfRangeException();
 
 			}
+			public void checkDataFormat() throws DateFormatException
+			{
+
+				 if (addEvent.getDate() == null || !addEvent.getDate().matches("\\d{4}-\\d{2}-\\d{2}"))
+						throw new DateFormatException();
+			}
 			public void actionPerformed(ActionEvent arg0) {
 
 			try{
 				chcekIfFieldsAreValid();
-
+				checkDataFormat();
 				sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
 						addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
 						addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
@@ -127,8 +135,13 @@ class UserEventAction implements ActionListener {
 			}catch(ColumnOutOfRangeException e){
 
 				view.showMessage(e.getMessage());
+
+			}catch(DateFormatException e1){
+				view.showMessage(e1.getMessage());
 			}
-			}
+		}
+
+
 
 
 		}
