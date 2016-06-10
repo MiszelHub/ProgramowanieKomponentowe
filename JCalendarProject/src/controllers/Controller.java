@@ -10,6 +10,8 @@ import java.util.zip.DataFormatException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
+
 import view.AddEvent;
 import view.View;
 import model.EventRepository;
@@ -116,6 +118,7 @@ class UserEventAction implements ActionListener {
 
 				 if (addEvent.getDate() == null || !addEvent.getDate().matches("\\d{4}-\\d{2}-\\d{2}"))
 						throw new DateFormatException();
+
 			}
 			public void actionPerformed(ActionEvent arg0) {
 

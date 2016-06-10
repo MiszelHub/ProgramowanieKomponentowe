@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,8 +32,9 @@ public class AddEvent {
 	private JTextField nameField, localizationField;
 	private JLabel label;
 	private JTextArea descriptionTxt;
-	private JDateChooser date = new JDateChooser(calendar.getTime());
-	JSpinField hour, minutes; 
+	private JDateChooser date = new JDateChooser(calendar.getTime()), alarmDate = new JDateChooser(calendar.getTime());
+	JSpinField hour, minutes, alarmHour,alarmMinutes; 
+	JCheckBox alarmbox;
 
 	public AddEvent(GregorianCalendar calendarDate){
 		frame = new JFrame("Dodaj wydarzenie");
@@ -41,7 +43,7 @@ public class AddEvent {
 				frame.dispose();
 			}
 		});
-		frame.setSize(500, 400);
+		frame.setSize(620, 400);
 		frame.setVisible(true);
 		
 		contentPanel = new JPanel(null);
@@ -122,7 +124,36 @@ public class AddEvent {
 		descriptionTxt.setSize(200, 60);
 		descriptionTxt.setLocation(150, 180);
 		contentPanel.add(descriptionTxt);
-
+		
+		alarmbox = new JCheckBox("Ustaw Alarm");
+		alarmbox.setSelected(false);
+		alarmbox.setSize(101, 101);
+		alarmbox.setLocation(400,30);
+		contentPanel.add(alarmbox);
+		
+		alarmDate.setSize(200, 20);
+		alarmDate.setLocation(400, 100);
+		alarmDate.setEnabled(false);
+		contentPanel.add(alarmDate);
+		
+		alarmHour = new JSpinField();
+		alarmHour.setMinimum(0);
+		alarmHour.setMaximum(23);
+		alarmHour.setValue(calendarDate.getTime().getHours());
+		alarmHour.setSize(40, 20);
+		alarmHour.setLocation(400, 150);
+		alarmHour.setEnabled(false);
+		contentPanel.add(alarmHour);
+		
+		alarmMinutes = new JSpinField();
+		alarmMinutes.setMinimum(0);
+		alarmMinutes.setMaximum(59);
+		alarmMinutes.setValue(calendarDate.getTime().getMinutes());
+		alarmMinutes.setSize(40, 20);
+		alarmMinutes.setLocation(450, 150);
+		alarmMinutes.setEnabled(false);
+		contentPanel.add(alarmMinutes);
+		
 		
 		addBtn = new Button("Zapisz");
 		addBtn.setBounds(140, 280, 60, 30);
