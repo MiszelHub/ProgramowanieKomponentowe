@@ -1,10 +1,13 @@
 package controllers;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+
+
+import model.BussinesMeeting;
+import model.EventBase;
 
 public class SQLConnection {
 
@@ -152,9 +155,42 @@ public class SQLConnection {
 		}
 
 	}
-	public void filterEventsOlderThenGivenDate(String date)
+	public EventBase SelectEventWithId(int id)
 	{
-		String sqlQuerry = "SELECT * FROM events.bussinesmeetings where bussinesmeetings.date > '"+date+"'";
+		connectToDataBase();
+		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith FROM events.bussinesmeetings where bussinesmeetings.id = "+id+";";
+		Statement statement=null;
+		ResultSet rs= null;
+		BussinesMeeting event= new BussinesMeeting();
+
+		try {
+			statement = dbConnection.createStatement();
+			rs = statement.executeQuery(sqlQuerry);
+			while(rs.next()){
+
+
+			event.setDate(rs.getString("date"));
+			event.setDescription(rs.getString("description"));
+			event.setLocation(rs.getString("location"));
+			event.setTitle(rs.getString("title"));
+			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+
+			}
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs.close();
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return event;
 	}
 
 }

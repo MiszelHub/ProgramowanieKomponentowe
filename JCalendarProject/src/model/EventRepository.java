@@ -7,6 +7,7 @@ import com.sun.media.jfxmediaimpl.MediaDisposer.Disposable;
 import controllers.XMLActions;
 
 public class EventRepository implements Disposable{
+
 	
 	private ArrayList<EventBase> eventList;
 	
@@ -32,4 +33,5 @@ public class EventRepository implements Disposable{
 		XMLActions.saveEventsToXML();
 		
 	}
+
 }

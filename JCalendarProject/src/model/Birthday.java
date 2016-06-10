@@ -17,9 +17,9 @@ public class Birthday extends EventBase implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Birthday(String title, SimpleDateFormat date, String startTime, String duration, String location,
+	public Birthday(String title, String date, String location,
 			String description,String whoseBirthday, int howOld) {
-		super(title, date, startTime, duration, location, description);
+		super(title, date, location, description);
 		this.whoseBirhday = whoseBirthday;
 		this.howOld = howOld;
 	}
@@ -40,7 +40,7 @@ public class Birthday extends EventBase implements Serializable{
 	public String toString() {
 		return "Birthday [whoseBirhday=" + whoseBirhday + ", howOld=" + howOld
 				+ ", title=" + title + ", date=" + date + ", startTime="
-				+ startTime + ", duration=" + duration + ", location="
+				+ ", location="
 				+ location + ", description=" + description + "]";
 	}
 	

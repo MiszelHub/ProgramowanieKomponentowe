@@ -7,18 +7,18 @@ import java.time.Duration;
 public class BussinesMeeting extends EventBase{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private String nameOfThePersonYouSetUpMeetingWith;
-	
+
 	public BussinesMeeting() {
 		super();
-		
+
 	}
-	public BussinesMeeting(String title, SimpleDateFormat date, String startTime, String duration, String location,
+	public BussinesMeeting(String title, String date,  String location,
 			String description, String nameOfThePersonYouSetUpMeetingWith) {
-		super(title, date, startTime, duration, location, description);
+		super(title, date, location, description);
 		this.setNameOfThePersonYouSetUpMeetingWith(nameOfThePersonYouSetUpMeetingWith);
 	}
 	public String getNameOfThePersonYouSetUpMeetingWith() {
@@ -29,13 +29,10 @@ public class BussinesMeeting extends EventBase{
 	}
 	@Override
 	public String toString() {
-		return "BussinesMeeting [nameOfThePersonYouSetUpMeetingWith="
-				+ nameOfThePersonYouSetUpMeetingWith + ", title=" + title
-				+ ", date=" + date + ", startTime=" + startTime + ", duration="
-				+ duration + ", location=" + location + ", description="
-				+ description + "]";
+
+		return super.toString() +"Person I meet "+ this.nameOfThePersonYouSetUpMeetingWith;
 	}
-	
-	
+
+
 
 }
