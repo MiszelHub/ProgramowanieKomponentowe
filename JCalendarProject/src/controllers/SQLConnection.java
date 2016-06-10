@@ -169,7 +169,7 @@ public class SQLConnection {
 			rs = statement.executeQuery(sqlQuerry);
 			while(rs.next()){
 
-
+			event.setId(rs.getInt("id"));
 			event.setDate(rs.getString("date"));
 			event.setDescription(rs.getString("description"));
 			event.setLocation(rs.getString("location"));
@@ -205,6 +205,7 @@ public class SQLConnection {
 			while(rs.next()){
 
 			BussinesMeeting event= new BussinesMeeting();
+			event.setId(rs.getInt("id"));
 			event.setDate(rs.getString("date"));
 			event.setDescription(rs.getString("description"));
 			event.setLocation(rs.getString("location"));
@@ -240,6 +241,7 @@ public class SQLConnection {
 			while(rs.next()){
 
 			BussinesMeeting event= new BussinesMeeting();
+			event.setId(rs.getInt("id"));
 			event.setDate(rs.getString("date"));
 			event.setDescription(rs.getString("description"));
 			event.setLocation(rs.getString("location"));

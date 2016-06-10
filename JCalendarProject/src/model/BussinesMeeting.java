@@ -16,9 +16,9 @@ public class BussinesMeeting extends EventBase{
 		super();
 
 	}
-	public BussinesMeeting(String title, String date,  String location,
+	public BussinesMeeting(int id,String title, String date,  String location,
 			String description, String nameOfThePersonYouSetUpMeetingWith) {
-		super(title, date, location, description);
+		super(id,title, date, location, description);
 		this.setNameOfThePersonYouSetUpMeetingWith(nameOfThePersonYouSetUpMeetingWith);
 	}
 	public String getNameOfThePersonYouSetUpMeetingWith() {

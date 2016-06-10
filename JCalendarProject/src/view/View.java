@@ -123,7 +123,7 @@ public class View {
 				System.exit(0);
 			}
 		});
-		frame.setSize(1324, 700);
+		frame.setSize(1334, 700);
 		frame.setVisible(true);
 		MainMenu mainMenu = new MainMenu(this);
 		frame.setJMenuBar(mainMenu.getMenuBar());
@@ -151,7 +151,7 @@ public class View {
 //		eventList.setText(Controller.printEventList());
 		eventList.setEditable(false);
 		eventlistSlider = new JScrollPane(eventList);
-
+	
 		eventPanel.add(eventlistSlider);
 
 

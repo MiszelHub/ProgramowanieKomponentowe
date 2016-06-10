@@ -14,6 +14,7 @@ public abstract class EventBase  implements Serializable{
 	 */
 	private static final long serialVersionUID = -3101472232830792537L;
 
+	protected int id;
 	protected String title;
 	protected String date;
 	protected String location;
@@ -21,14 +22,23 @@ public abstract class EventBase  implements Serializable{
 
 	public EventBase(){}
 
-	public EventBase(String title, String date, String location,
+	public EventBase(int id,String title, String date, String location,
 			String description) {
 		super();
+		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.location = location;
 		this.description = description;
 
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -66,9 +76,8 @@ public abstract class EventBase  implements Serializable{
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName()+"[title=" + title + ", date=" + date + ", startTime="
-				+", location="
-				+ location + ", description=" + description + "]";
+		return this.getClass().getSimpleName()+"[id="+id+" title=" + title + ", date=" + date + ", startTime="
+				+", location=" + location + ", description=" + description + "]";
 	};
 
 
