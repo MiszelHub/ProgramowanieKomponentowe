@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public abstract class EventBase  implements Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3101472232830792537L;
 
@@ -18,7 +18,7 @@ public abstract class EventBase  implements Serializable{
 	protected String date;
 	protected String location;
 	protected String description;
-	
+
 	public EventBase(){}
 
 	public EventBase(String title, String date, String location,
@@ -28,7 +28,7 @@ public abstract class EventBase  implements Serializable{
 		this.date = date;
 		this.location = location;
 		this.description = description;
-		
+
 	}
 
 	public String getTitle() {
@@ -70,8 +70,8 @@ public abstract class EventBase  implements Serializable{
 				+", location="
 				+ location + ", description=" + description + "]";
 	};
-	
-	
-	
+
+
+
 }
 
