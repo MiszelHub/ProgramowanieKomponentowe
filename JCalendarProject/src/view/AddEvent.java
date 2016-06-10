@@ -23,14 +23,15 @@ import com.toedter.calendar.JSpinnerDateEditor;
 import com.toedter.components.JSpinField;
 
 public class AddEvent {
-	
+	GregorianCalendar calendar = new GregorianCalendar();
 	private JFrame frame;
 	private JPanel contentPanel;
-	private Button exitBtn, addBtn, cancelBtn;
+	private Button exitBtn, addBtn;
 	private JTextField nameField, localizationField;
 	private JLabel label;
 	private JTextArea descriptionTxt;
-	
+	private JDateChooser date = new JDateChooser(calendar.getTime());
+
 	public AddEvent(GregorianCalendar calendarDate){
 		frame = new JFrame("Dodaj wydarzenie");
 		frame.addWindowListener(new WindowAdapter() {
@@ -81,7 +82,7 @@ public class AddEvent {
 		contentPanel.add(nameField);
 		
 		//data
-		final JDateChooser date = new JDateChooser(calendarDate.getTime());
+		
 		date.setSize(200, 20);
 		date.setLocation(150, 60);
 		contentPanel.add(date);
@@ -144,5 +145,91 @@ public class AddEvent {
 		});
 	}
 	
+	public void addAddBtnListener(ActionListener listener){
+		addBtn.addActionListener(listener);
+	}
+
+	//getters and setters
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+
+	public JPanel getContentPanel() {
+		return contentPanel;
+	}
+
+	public void setContentPanel(JPanel contentPanel) {
+		this.contentPanel = contentPanel;
+	}
+
+	public Button getExitBtn() {
+		return exitBtn;
+	}
+
+	public void setExitBtn(Button exitBtn) {
+		this.exitBtn = exitBtn;
+	}
+
+	public Button getAddBtn() {
+		return addBtn;
+	}
+
+	public void setAddBtn(Button addBtn) {
+		this.addBtn = addBtn;
+	}
+
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	public void setNameField(JTextField nameField) {
+		this.nameField = nameField;
+	}
+
+	public JTextField getLocalizationField() {
+		return localizationField;
+	}
+
+	public void setLocalizationField(JTextField localizationField) {
+		this.localizationField = localizationField;
+	}
+
+	public JLabel getLabel() {
+		return label;
+	}
+
+	public void setLabel(JLabel label) {
+		this.label = label;
+	}
+
+	public JTextArea getDescriptionTxt() {
+		return descriptionTxt;
+	}
+
+	public void setDescriptionTxt(JTextArea descriptionTxt) {
+		this.descriptionTxt = descriptionTxt;
+	}
+
+	
+	public GregorianCalendar getCalendar() {
+		return calendar;
+	}
+
+	public void setCalendar(GregorianCalendar calendar) {
+		this.calendar = calendar;
+	}
+
+	public JDateChooser getDate() {
+		return date;
+	}
+
+	public void setDate(JDateChooser date) {
+		this.date = date;
+	}
+
 	
 }

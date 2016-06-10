@@ -38,10 +38,10 @@ public class SQLConnection {
 		this.dbConnection = dbConnection;
 	}
 
-	public void addEventToDatabaseTable(String table,String id, String title, String date, String location, String description, String personImeetWith)
+	public void addEventToDatabaseTable(String table, String title, String date, String location, String description, String personImeetWith)
 	{
 		connectToDataBase();
-		String addQuerry = "INSERT INTO `events`.`"+table+"` (`id`, `title`, `date`, `location`, `description`, `personImeetwith`) VALUES (?,?,?,?,?,?);";
+		String addQuerry = "INSERT INTO `events`.`"+table+"` (`title`, `date`, `location`, `description`, `personImeetwith`) VALUES (?,?,?,?,?);";
 		java.sql.PreparedStatement statement=null;
 		try {
 			statement = dbConnection.prepareStatement(addQuerry);
@@ -50,12 +50,11 @@ public class SQLConnection {
 			e1.printStackTrace();
 		}
 		try {
-			statement.setString(1, id);
-			statement.setString(2, title);
-			statement.setString(3, date);
-			statement.setString(4, location);
-			statement.setString(5, description);
-			statement.setString(6, personImeetWith);
+			statement.setString(1, title);
+			statement.setString(2, date);
+			statement.setString(3, location);
+			statement.setString(4, description);
+			statement.setString(5, personImeetWith);
 			statement.addBatch();
 			statement.executeBatch();
 			statement.close();
