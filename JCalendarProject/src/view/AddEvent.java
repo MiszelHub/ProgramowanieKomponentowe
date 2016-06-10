@@ -128,7 +128,7 @@ public class AddEvent {
 		alarmbox = new JCheckBox("Ustaw Alarm");
 		alarmbox.setSelected(false);
 		alarmbox.setSize(100, 30);
-		alarmbox.setLocation(10,320);
+		alarmbox.setLocation(11,320);
 		contentPanel.add(alarmbox);
 
 		alarmDate.setSize(200, 20);
