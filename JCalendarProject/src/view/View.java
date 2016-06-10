@@ -24,7 +24,7 @@ public class View {
 	private JPanel contentPanel, eventPanel, buttonPanel, calendarPanel;
 	private JButton btn, userEventBtn;
 	private JTextPane eventList;
-	private JScrollBar eventlistSlider;
+	private JScrollPane eventlistSlider;
 	private boolean todayBtnVisible = true;
 
 	public JCalendar getCalendar() {
@@ -123,7 +123,7 @@ public class View {
 				System.exit(0);
 			}
 		});
-		frame.setSize(1024, 700);
+		frame.setSize(1324, 700);
 		frame.setVisible(true);
 		MainMenu mainMenu = new MainMenu(this);
 		frame.setJMenuBar(mainMenu.getMenuBar());
@@ -138,21 +138,21 @@ public class View {
 //		buttonPanel.setBackground(Color.cyan);
 		contentPanel.add(buttonPanel);
 
-		eventPanel = new JPanel();
+		eventPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		eventPanel.setBounds(500, -1, 950, 701);
 //		eventPanel.setBackground(Color.MAGENTA);
 		eventPanel.setBorder(new LineBorder(Color.gray, 1));
 		contentPanel.add(eventPanel);
 
-		eventlistSlider = new JScrollBar();
-	    eventlistSlider.setBounds(6,7,175,179);
+
 		eventList = new JTextPane();
-//		eventList.add(eventlistSlider);
+
 		eventList.setSize(1, 1);
 //		eventList.setText(Controller.printEventList());
 		eventList.setEditable(false);
+		eventlistSlider = new JScrollPane(eventList);
 
-		eventPanel.add(eventList);
+		eventPanel.add(eventlistSlider);
 
 
 
