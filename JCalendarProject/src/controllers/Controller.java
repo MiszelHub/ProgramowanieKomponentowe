@@ -30,6 +30,7 @@ public class Controller {
 		this.sqlConnection = sqlConnection;
 		UserEventAction usrEvtAction = new UserEventAction(view, sqlConnection);
 		this.view.addUserEventActionListener(usrEvtAction);
+		this.view.addEditEventActionListener(new EditEventAction(view, sqlConnection));
 
 		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
@@ -171,6 +172,101 @@ class UserEventAction implements ActionListener {
 		addEvent = new AddEvent(cal);
 		addEvent.AddAlarmAcionListener(new TurnOnTheAlarm());
 		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
+
+	
+	}
+
+}
+
+class EditEventAction implements ActionListener {
+
+	AddEvent addEvent;
+	View view;
+	SQLConnection sqlConnection;
+
+	public EditEventAction(View view, SQLConnection sqlConnection) {
+		super();
+		this.view = view;
+		this.sqlConnection = sqlConnection;
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+
+
+//		class AddEventAction implements ActionListener{
+//
+//			SQLConnection sqlConnection;
+//
+//			public AddEventAction(SQLConnection sqlConnection) {
+//				super();
+//				this.sqlConnection = sqlConnection;
+//			}
+//
+//			public void chcekIfFieldsAreValid() throws ColumnOutOfRangeException
+//			{
+//
+//				if(addEvent.getNameField().length() > 45 || addEvent.getLocalizationField().length() > 45 || addEvent.getDescriptionTxt().length() > 45)
+//					throw new ColumnOutOfRangeException();
+//
+//			}
+//			public void checkDataFormat() throws DateFormatException
+//			{
+//
+//				 if (addEvent.getDate() == null || !addEvent.getDate().matches("\\d{4}-\\d{2}-\\d{2}"))
+//						throw new DateFormatException();
+//			}
+//			public void actionPerformed(ActionEvent arg0) {
+//
+//				try{
+//					chcekIfFieldsAreValid();
+//					checkDataFormat();
+//					sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
+//							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
+//							addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
+//	
+//					System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
+//							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
+//							addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
+//	
+//					view.getEventList().setText(sqlConnection.PrintEvents());
+//					addEvent.getFrame().dispose();
+//				}catch(ColumnOutOfRangeException e){
+//	
+//					view.showMessage(e.getMessage());
+//	
+//				}catch(DateFormatException e1){
+//					view.showMessage(e1.getMessage());
+//				}
+//			}
+//		}
+	
+//		class TurnOnTheAlarm implements ActionListener{
+//
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//			
+//			if(addEvent.getAlarmbox().isSelected()){	
+//				addEvent.getAlarmDate().setEnabled(true);
+//				addEvent.getAlarmHour().setEnabled(true);
+//				addEvent.getAlarmMinutes().setEnabled(true);
+//			}else{
+//				addEvent.getAlarmDate().setEnabled(false);
+//				addEvent.getAlarmHour().setEnabled(false);
+//				addEvent.getAlarmMinutes().setEnabled(false);
+//			}
+//			}
+//		}
+				
+			
+		
+		
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(view.getCalendar().getDate());
+		addEvent = new AddEvent(cal);
+		addEvent.getFrame().setTitle("Edytuj wydarzenie");
+//		addEvent.AddAlarmAcionListener(new TurnOnTheAlarm());
+//		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
 
 	
 	}

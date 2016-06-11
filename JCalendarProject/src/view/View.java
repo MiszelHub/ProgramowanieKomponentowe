@@ -22,7 +22,7 @@ public class View {
 	private JCalendar calendar;
 	private JFrame frame;
 	private JPanel contentPanel, eventPanel, buttonPanel, calendarPanel;
-	private JButton btn, userEventBtn, filterBtn;
+	private JButton editEventbtn, userEventBtn, filterBtn;
 	private JTextPane eventList;
 	private JScrollPane eventlistSlider;
 	private boolean todayBtnVisible = true;
@@ -68,11 +68,11 @@ public class View {
 	}
 
 	public JButton getBtn() {
-		return btn;
+		return editEventbtn;
 	}
 
 	public void setBtn(JButton btn) {
-		this.btn = btn;
+		this.editEventbtn = btn;
 	}
 
 	public JButton getUserEventBtn() {
@@ -115,6 +115,10 @@ public class View {
 //	public void addEventListActionListener(AncestorListener listener){
 //		eventList.addAncestorListener(listener);
 //	}
+	
+	public void addEditEventActionListener(ActionListener listener){
+		editEventbtn.addActionListener(listener);
+	}
 	
 	public void addfilterEventsActionListener(ActionListener listener){
 		filterBtn.addActionListener(listener);
@@ -177,8 +181,8 @@ public class View {
 		userEventBtn.setLocation(10, 15);
 
 
-		btn = new JButton("Edytuj wydarzenie");
-		btn.addActionListener(new ActionListener() {
+		editEventbtn = new JButton("Edytuj wydarzenie");
+		editEventbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(calendar.getLocale().toString());
 				calendar.getDayChooser().setForeground(Color.BLUE);
@@ -188,9 +192,9 @@ public class View {
 			}
 		});
 	
-		buttonPanel.add(btn);
-		btn.setSize(btn.getPreferredSize());
-		btn.setLocation(160, 15);
+		buttonPanel.add(editEventbtn);
+		editEventbtn.setSize(editEventbtn.getPreferredSize());
+		editEventbtn.setLocation(160, 15);
 		
 		filterBtn = new JButton("Filtruj wydarzenia");
 		buttonPanel.add(filterBtn);
@@ -209,29 +213,5 @@ public class View {
 
 		calendar.setWeekOfYearVisible(true);
 
-//		//Wypisuje dzie� kt�ry zosta� klikni�ty
-//		calendar.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
-//		    public void propertyChange(PropertyChangeEvent e) {
-//		    	int day = calendar.getDayChooser().getDay();
-//		    	int month = calendar.getMonthChooser().getMonth()+1;
-//		    	int year = calendar.getYearChooser().getYear();
-////				System.out.println(e.getPropertyName()+ ": " + e.getNewValue());
-//		    	System.out.println(day+"."+month+"."+year);
-//
-//			}
-//		});
-//		calendar.addPropertyChangeListener(new PropertyChangeListener() {
-//
-//			public void propertyChange(PropertyChangeEvent arg0) {
-//				// TODO Auto-generated method stub
-//			   	int day = calendar.getDayChooser().getDay();
-//		    	int month = calendar.getMonthChooser().getMonth();
-//		    	int year = calendar.getYearChooser().getYear();
-////				System.out.println(e.getPropertyName()+ ": " + e.getNewValue());
-//		    	date.set(year, month, day);
-//		    	System.out.println(date.getTime().toString());
-//
-//			}
-//		});
 	}
 }
