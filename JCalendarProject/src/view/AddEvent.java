@@ -16,6 +16,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -33,8 +35,9 @@ public class AddEvent {
 	private JLabel label,alarmlabel;
 	private JTextArea descriptionTxt;
 	private JDateChooser date = new JDateChooser(calendar.getTime()), alarmDate = new JDateChooser(calendar.getTime());
-	JSpinField hour, minutes, alarmHour,alarmMinutes;
-	JCheckBox alarmbox;
+	private JSpinField hour, minutes, alarmHour,alarmMinutes;
+	private JCheckBox alarmbox;
+	private JScrollPane descriptionScroll;
 
 	public AddEvent(GregorianCalendar calendarDate){
 		frame = new JFrame("Dodaj wydarzenie");
@@ -43,7 +46,7 @@ public class AddEvent {
 				frame.dispose();
 			}
 		});
-		frame.setSize(620, 600);
+		frame.setSize(400, 450);
 		frame.setVisible(true);
 
 		contentPanel = new JPanel(null);
@@ -123,45 +126,43 @@ public class AddEvent {
 		descriptionTxt = new JTextArea();
 		descriptionTxt.setSize(200, 60);
 		descriptionTxt.setLocation(150, 180);
-		contentPanel.add(descriptionTxt);
+		descriptionScroll = new JScrollPane(descriptionTxt);
+		descriptionScroll.setBounds(150, 180, 200, 60);
+		contentPanel.add(descriptionScroll);
 
 		alarmbox = new JCheckBox("Ustaw Alarm");
 		alarmbox.setSelected(false);
 		alarmbox.setSize(100, 30);
-		alarmbox.setLocation(11,320);
+		alarmbox.setLocation(20,265);
 		contentPanel.add(alarmbox);
 
 		alarmDate.setSize(200, 20);
-		alarmDate.setLocation(130, 350);
+		alarmDate.setLocation(150, 270);
 		alarmDate.setEnabled(false);
+		alarmDate.setDate(date.getDate());
 		contentPanel.add(alarmDate);
 
 		alarmHour = new JSpinField();
 		alarmHour.setMinimum(0);
 		alarmHour.setMaximum(23);
-		alarmHour.setValue(calendarDate.getTime().getHours());
+		alarmHour.setValue(hour.getValue());
 		alarmHour.setSize(40, 20);
-		alarmHour.setLocation(130, 400);
+		alarmHour.setLocation(150, 300);
 		alarmHour.setEnabled(false);
 		contentPanel.add(alarmHour);
 
 		alarmMinutes = new JSpinField();
 		alarmMinutes.setMinimum(0);
 		alarmMinutes.setMaximum(59);
-		alarmMinutes.setValue(calendarDate.getTime().getMinutes());
+		alarmMinutes.setValue(minutes.getValue());
 		alarmMinutes.setSize(40, 20);
-		alarmMinutes.setLocation(180, 400);
+		alarmMinutes.setLocation(200, 300);
 		alarmMinutes.setEnabled(false);
 		contentPanel.add(alarmMinutes);
 
-		alarmlabel = new JLabel("Godzina");
-		alarmlabel.setSize(alarmlabel.getPreferredSize());
-		alarmlabel.setLocation(20, 400);
-		contentPanel.add(alarmlabel);;
-
 
 		addBtn = new Button("Zapisz");
-		addBtn.setBounds(140, 280, 60, 30);
+		addBtn.setBounds(140, 350, 60, 30);
 		contentPanel.add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
 
@@ -173,7 +174,7 @@ public class AddEvent {
 		});
 
 		exitBtn = new Button("Anuluj");
-		exitBtn.setBounds(280, 280, 60, 30);
+		exitBtn.setBounds(280, 350, 60, 30);
 		contentPanel.add(exitBtn);
 		exitBtn.addActionListener(new ActionListener() {
 
