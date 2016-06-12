@@ -4,16 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.zip.DataFormatException;
+import java.io.*;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.mysql.jdbc.UpdatableResultSet;
-import com.sun.corba.se.spi.orbutil.fsm.Action;
-import com.sun.xml.internal.fastinfoset.stax.events.EventBase;
 
 import view.AddEvent;
 import view.FilterEvents;
@@ -21,6 +23,7 @@ import view.UpdateEvent;
 import view.View;
 import model.AlarmSound;
 import model.BussinesMeeting;
+import model.EventBase;
 import model.EventRepository;
 
 public class Controller {
@@ -39,12 +42,17 @@ public class Controller {
 		UserEventAction usrEvtAction = new UserEventAction(view, sqlConnection);
 		this.view.addUserEventActionListener(usrEvtAction);
 		this.view.addEditEventActionListener(new EditEventAction(view, sqlConnection));
+		
+		
 
 		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
+		
+		this.view.getMainMenu().setExportXmlBtn(new ExportXmlAction(view, sqlConnection));
+		this.view.getMainMenu().setImportXmlBtn(new ImportXmlAction(view, sqlConnection, repo));
 
 		this.view.addfilterEventsActionListener(new FilterEventsAction(view,sqlConnection));
-		AlarmSound a = new AlarmSound("02 Bestia.wav");
+		AlarmSound a = new AlarmSound("ohayou.wav");
 		AlarmClock c = new AlarmClock(a,view,1000,sqlConnection);
 		c.checkForAlarm();
 	}
@@ -359,15 +367,98 @@ class FilterEventsAction implements ActionListener{
 						view.getEventList().setText(sqlconnection.filtereventsByLocationAndDate(filterEvents.getLocalizationContents(), filterEvents.getDate()));
 			}
 
-
 		}
 		
 		this.filterEvents.addFilterButtonListener(new FilterButtonClicked());
 
 	}
-	
-	
 
+}
+
+class ExportXmlAction implements ActionListener{
+	View view;
+	SQLConnection sqlConnection;
+
+	public ExportXmlAction(View view, SQLConnection sqlConnection) {
+		super();
+		this.view = view;
+		this.sqlConnection = sqlConnection;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+//		JFileChooser chooser = new JFileChooser();
+//	    FileNameExtensionFilter filter = new FileNameExtensionFilter("xml","xml");
+//	    chooser.setFileFilter(filter);
+//	    int returnVal = chooser.showSaveDialog(view.getFrame());
+//	    if(returnVal == JFileChooser.APPROVE_OPTION) {
+//	    	if(!chooser.getSelectedFile().exists()){
+//	    		
+//	    		File fileToSave = chooser.getSelectedFile();
+//	    		
+//
+//		    	try{
+//		    		
+//		    		BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave));
+//		    		ArrayList<EventBase> list = sqlConnection.getAllEvents().getEventList();
+//		    		for(EventBase ev : list){
+//		    			writer.write(ev.toString());
+//		    			System.out.println(ev.toString());
+//		    		}
+//		    		fileToSave.createNewFile();
+//		    		writer.close();
+//		    		
+//		    	}
+//		    	catch(IOException ee){
+//		    		ee.printStackTrace();
+//		    	}
+//	    	}
+//	    	
+//	    	
+//	    	
+//	       System.out.println("You chose to save this file: " +
+//	            chooser.getSelectedFile().getAbsolutePath());
+//	    }
+		XMLActions.setEventRepo(sqlConnection.getAllEvents());
+		XMLActions.saveEventsToXML();
+		
+	}
+	
+}
+
+class ImportXmlAction implements ActionListener{
+
+	View view;
+	SQLConnection sqlConnection;
+	EventRepository repo;
+
+	public ImportXmlAction(View view, SQLConnection sqlConnection, EventRepository repo) {
+		super();
+		this.sqlConnection = sqlConnection;
+		this.repo = repo;
+		this.view = view;
+	}
+		
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("przed=====================================");
+		ArrayList<EventBase> list = sqlConnection.getAllEvents().getEventList();
+		for(EventBase ev : list){
+			System.out.println(ev.toString());
+		}
+		XMLActions.loadEventsFromXML();
+		
+		list = repo.getEventList();
+		System.out.println("po====================================");
+		for(EventBase ev : list){
+			sqlConnection.addEventToDatabaseTable("bussinesmeetings", ev.getTitle().toString(),
+					ev.getDate().toString(),//+" "+ev.getHour()+":"+ev.getMinutes()+":00",
+					ev.getLocation().toString(), ev.getDescription().toString(), null,null);
+		}
+		view.getEventList().setText(sqlConnection.PrintEvents());
+		
+	}
+	
 }
 
 

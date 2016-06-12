@@ -15,7 +15,7 @@ public class MainMenu extends JMenuBar{
 	//Where the GUI is created:
 	JMenuBar menuBar;
 	JMenu menu, submenu;
-	JMenuItem menuItem;
+	JMenuItem exportXml, importXml, close, aboutProgram;
 	JRadioButtonMenuItem rbMenuItem;
 	JCheckBoxMenuItem cbMenuItem;
 	
@@ -37,24 +37,24 @@ public class MainMenu extends JMenuBar{
 		//a group of JMenuItems
 		
 		//XML menu
-		menuItem = new JMenuItem("Eksportuj do XML",
+		exportXml = new JMenuItem("Eksportuj do XML",
 		                         KeyEvent.VK_E);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		exportXml.setAccelerator(KeyStroke.getKeyStroke(
 								KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		menu.add(menuItem);
-		menuItem.addActionListener(new ActionListener() {
+		menu.add(exportXml);
+		exportXml.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 //				XMLActions.saveEventsToXML();
 			}
 		});
 	
-		menuItem = new JMenuItem("Importuj z XML", 
+		importXml = new JMenuItem("Importuj z XML", 
 								KeyEvent.VK_M);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		importXml.setAccelerator(KeyStroke.getKeyStroke(
 								KeyEvent.VK_2, ActionEvent.ALT_MASK));
-		menu.add(menuItem);
-		menuItem.addActionListener(new ActionListener() {
+		menu.add(importXml);
+		importXml.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 //				XMLActions.loadEventsFromXML();
@@ -65,12 +65,12 @@ public class MainMenu extends JMenuBar{
 		
 		menu.addSeparator();
 	
-		menuItem = new JMenuItem("Zamknij",
+		close = new JMenuItem("Zamknij",
 								KeyEvent.VK_Z);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		close.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_X, ActionEvent.ALT_MASK));
-		menu.add(menuItem);
-		menuItem.addActionListener(new ActionListener() {
+		menu.add(close);
+		close.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 					System.exit(0);
@@ -96,12 +96,12 @@ public class MainMenu extends JMenuBar{
 		menu.add(cbMenuItem);
 		
 		//Info o programie
-		menuItem = new JMenuItem("O programie",
+		aboutProgram = new JMenuItem("O programie",
                 				KeyEvent.VK_O);
-		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		aboutProgram.setAccelerator(KeyStroke.getKeyStroke(
 								KeyEvent.VK_5, ActionEvent.ALT_MASK));
-		menu.add(menuItem);
-		menuItem.addActionListener(new ActionListener() {
+		menu.add(aboutProgram);
+		aboutProgram.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				AboutProgram about = new AboutProgram();
@@ -109,4 +109,12 @@ public class MainMenu extends JMenuBar{
 			}
 		});
 	} //MainMenu constructor END
+	
+	public void setExportXmlBtn(ActionListener listener){
+		exportXml.addActionListener(listener);
+	}
+	
+	public void setImportXmlBtn(ActionListener listener){
+		importXml.addActionListener(listener);
+	}
 }

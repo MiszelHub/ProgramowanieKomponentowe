@@ -26,6 +26,7 @@ public class View {
 	private JTextPane eventList;
 	private JScrollPane eventlistSlider;
 	private boolean todayBtnVisible = true;
+	MainMenu mainMenu;
 
 	public JCalendar getCalendar() {
 		return calendar;
@@ -133,7 +134,42 @@ public class View {
 		JOptionPane.showMessageDialog(new JFrame(), message, "Upcomig Event!", JOptionPane.WARNING_MESSAGE);
 	}
 	
-	
+	public JButton getEditEventbtn() {
+		return editEventbtn;
+	}
+
+	public void setEditEventbtn(JButton editEventbtn) {
+		this.editEventbtn = editEventbtn;
+	}
+
+	public JButton getFilterBtn() {
+		return filterBtn;
+	}
+
+	public void setFilterBtn(JButton filterBtn) {
+		this.filterBtn = filterBtn;
+	}
+
+	public JScrollPane getEventlistSlider() {
+		return eventlistSlider;
+	}
+
+	public void setEventlistSlider(JScrollPane eventlistSlider) {
+		this.eventlistSlider = eventlistSlider;
+	}
+
+	public MainMenu getMainMenu() {
+		return mainMenu;
+	}
+
+	public void setMainMenu(MainMenu mainMenu) {
+		this.mainMenu = mainMenu;
+	}
+
+	public void setEventList(JTextPane eventList) {
+		this.eventList = eventList;
+	}
+
 	public View()
 	{
 		frame = new JFrame("Kalendarz");
@@ -144,7 +180,7 @@ public class View {
 		});
 		frame.setSize(1210, 700);
 		frame.setVisible(true);
-		MainMenu mainMenu = new MainMenu(this);
+		mainMenu = new MainMenu(this);
 		frame.setJMenuBar(mainMenu.getMenuBar());
 		frame.setResizable(false);
 
