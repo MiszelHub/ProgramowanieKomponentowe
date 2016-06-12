@@ -8,7 +8,11 @@ import javax.swing.JOptionPane;
 import controllers.SQLConnection.AlarmName;
 import model.AlarmSound;
 import view.View;
-
+/**
+ *Alarm Clock starts a timer that performs a task every minute
+ *task is to check if there is an alarm set for event
+ *
+ */
 public class AlarmClock {
 	private Timer alarmTimer;
 	private TimerTask task;

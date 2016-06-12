@@ -7,7 +7,10 @@ import java.time.Duration;
 
 
 
-
+/**
+* Base Event Class is a super class we use for aur events
+*
+*/
 public abstract class EventBase  implements Serializable{
 	/**
 	 *

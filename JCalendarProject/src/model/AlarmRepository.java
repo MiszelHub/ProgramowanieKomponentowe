@@ -3,11 +3,15 @@ package model;
 import java.util.ArrayList;
 
 import controllers.AlarmClock;
-
+/**
+* Repository class helps us with saving data to XML
+*
+*
+*/
 public class AlarmRepository {
-	
+
 	private ArrayList<AlarmClock> alarmclocks;
-	
+
 	public AlarmRepository() {
 		alarmclocks = new ArrayList<AlarmClock>();
 	}

@@ -13,14 +13,18 @@ import model.EventBase;
 import model.EventRepository;
 import program.*;
 import view.MainMenu;
-
+/**
+* this class provides us with with functionality of a top level static class
+* It lets us (de)serialize an object to xml file
+*
+*/
 public final class XMLActions {
 	private static XMLEncoder encoder;
 	private static XMLDecoder decoder;
-	
+
 	private static MainMenu menu;
 	private static EventRepository eventRepo;
-	
+
 	public static EventRepository getEventRepo() {
 		return eventRepo;
 	}
@@ -30,7 +34,7 @@ public final class XMLActions {
 	}
 
 	private XMLActions(){};
-	
+
 	public static void saveEventsToXML()
 	{
 		try {
@@ -51,6 +55,6 @@ public final class XMLActions {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 	}
 }

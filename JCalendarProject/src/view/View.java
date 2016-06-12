@@ -16,7 +16,11 @@ import com.toedter.calendar.JCalendar;
 
 import controllers.*;
 
-
+/**
+* this class represents a MainWindow of our Application
+*it shows all events and Jcallendar also provides buttos for adding filtering
+*and updating events
+*/
 public class View {
 
 	private JCalendar calendar;
@@ -112,28 +116,28 @@ public class View {
 	public void addUserEventActionListener(ActionListener listener){
 		userEventBtn.addActionListener(listener);
 	}
-	
+
 //	public void addEventListActionListener(AncestorListener listener){
 //		eventList.addAncestorListener(listener);
 //	}
-	
+
 	public void addEditEventActionListener(ActionListener listener){
 		editEventbtn.addActionListener(listener);
 	}
-	
+
 	public void addfilterEventsActionListener(ActionListener listener){
 		filterBtn.addActionListener(listener);
 	}
-	
+
 	public void showMessage(String message)
 	{
 		JOptionPane.showMessageDialog(new JFrame(), message, "Ups!", JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	public void showAlarmMessage(String message){
 		JOptionPane.showMessageDialog(new JFrame(), message, "Upcomig Event!", JOptionPane.WARNING_MESSAGE);
 	}
-	
+
 	public JButton getEditEventbtn() {
 		return editEventbtn;
 	}
@@ -197,7 +201,7 @@ public class View {
 		eventPanel.setBounds(500, -1, 700, 650);
 //		eventPanel.setBackground(Color.MAGENTA);
 		eventPanel.setBorder(new LineBorder(Color.gray, 1));
-		
+
 		contentPanel.add(eventPanel);
 
 
@@ -209,7 +213,7 @@ public class View {
 		eventList.setEditable(false);
 		eventlistSlider = new JScrollPane(eventList);
 		eventlistSlider.setBounds(800, 100, 700, 700);
-		
+
 //		eventPanel.add(eventList);
 		eventPanel.add(eventlistSlider);
 
@@ -231,11 +235,11 @@ public class View {
 
 			}
 		});
-	
+
 		buttonPanel.add(editEventbtn);
 		editEventbtn.setSize(editEventbtn.getPreferredSize());
 		editEventbtn.setLocation(160, 15);
-		
+
 		filterBtn = new JButton("Filtruj wydarzenia");
 		buttonPanel.add(filterBtn);
 		filterBtn.setSize(filterBtn.getPreferredSize());

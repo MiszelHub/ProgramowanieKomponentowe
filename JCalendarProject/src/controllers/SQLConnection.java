@@ -9,7 +9,11 @@ import com.mysql.jdbc.PreparedStatement;
 import model.BussinesMeeting;
 import model.EventBase;
 import model.EventRepository;
-
+/**
+* this class is responsible for conencting to database as well as
+* providing methods for extracting and inserting data to Database
+*
+*/
 public class SQLConnection {
 
 	private java.sql.Connection dbConnection;
@@ -428,16 +432,16 @@ public class SQLConnection {
 		String sqlQuerry = "SELECT alarm-NOW() as timeremaining, title FROM events.bussinesmeetings WHERE alarm is not null order by alarm ASC LIMIT 1";
 		Statement statement=null;
 		ResultSet rs= null;
-		
+
 		AlarmName alarm= new AlarmName();
 		try {
 			statement = dbConnection.createStatement();
 			rs = statement.executeQuery(sqlQuerry);
 			while(rs.next()){
-				
+
 				alarm.alarmt = rs.getLong("timeremaining");
 				alarm.namet = rs.getString("title");
-					
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -462,8 +466,8 @@ public class SQLConnection {
 
 			//statement = dbConnection.prepareStatement("DELETE FROM `events`.`bussinesmeetings` WHERE alarm is not null order by alarm ASC LIMIT 1");
 			statement = dbConnection.prepareStatement(sqlUpdate);
-			
-			
+
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

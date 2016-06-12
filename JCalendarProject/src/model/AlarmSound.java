@@ -7,7 +7,11 @@ import java.io.InputStream;
 
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
-
+/**
+* this class holds a reference to a sound file
+* used for alarm
+*
+*/
 public class AlarmSound {
 	private String filePath;
 	private InputStream in;
