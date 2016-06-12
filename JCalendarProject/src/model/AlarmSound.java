@@ -16,7 +16,7 @@ public class AlarmSound {
 	public AlarmSound(String path){
 		this.filePath = path;
 		try {
-			this.in = new FileInputStream(path);
+			this.in = new FileInputStream(filePath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -27,12 +27,33 @@ public class AlarmSound {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 	public void playAlarm()
 	{
+		try {
+			this.in = new FileInputStream(filePath);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.audioStream = new AudioStream(in);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		AudioPlayer.player.start(this.audioStream);
 	}
-	public void stopAlarm(){
+	public void stopAlarm() {
 		AudioPlayer.player.stop(this.audioStream);
+		try {
+			audioStream.close();
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }
