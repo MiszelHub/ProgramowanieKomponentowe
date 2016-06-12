@@ -23,9 +23,10 @@ public class FilterEvents {
 	GregorianCalendar calendar = new GregorianCalendar();
 	private JFrame frame;
 	private JPanel contentPanel ;
-	private JTextField yearPanel;
+	private JTextField localization;
 	private Button exitBtn, addBtn;
 	private JLabel label;
+	private JCheckBox datebox, localizationbox;
 	private JDateChooser date = new JDateChooser(calendar.getTime()), alarmDate = new JDateChooser(calendar.getTime());
 
 	private JSpinField hour, minutes, alarmHour, alarmMinutes, eventId;
@@ -46,15 +47,46 @@ public class FilterEvents {
 		
 		//labele z nazwami pól
 		
-		label = new JLabel("ID wydarzenia:");
-		label.setSize(label.getPreferredSize());
-		label.setLocation(20, 20);
-		contentPanel.add(label);
+//		label = new JLabel("Data:");
+//		label.setSize(label.getPreferredSize());
+//		label.setLocation(20, 20);
+//		contentPanel.add(label);
 		
-		label = new JLabel("Data:");
-		label.setSize(label.getPreferredSize());
-		label.setLocation(20, 60);
-		contentPanel.add(label);
+		datebox = new JCheckBox("Data:");
+		datebox.setSelected(false);
+		datebox.setSize(100, 30);
+		datebox.setLocation(20,20);
+		datebox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!datebox.isSelected())
+					date.setEnabled(false);
+				else {date.setEnabled(true);}
+			}
+		});
+		contentPanel.add(datebox);
+		
+		
+//		label = new JLabel("Lokalizacja:");
+//		label.setSize(label.getPreferredSize());
+//		label.setLocation(20, 60);
+//		contentPanel.add(label);
+		localizationbox = new JCheckBox("Lokalizacja:");
+		localizationbox.setSelected(false);
+		localizationbox.setSize(100, 30);
+		localizationbox.setLocation(20,60);
+		localizationbox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!localizationbox.isSelected())
+					localization.setEnabled(false);
+				else {localization.setEnabled(true);}
+				
+			}
+		});
+		contentPanel.add(localizationbox);
 		
 		label = new JLabel("Godzina:");
 		label.setSize(label.getPreferredSize());
@@ -64,15 +96,17 @@ public class FilterEvents {
 		//koniec labeli z nazwami pól
 		
 		//nazwa wydarzenia
-		eventId = new JSpinField();
-		eventId.setSize(200, 20); 
-		eventId.setLocation(150, 20);
-		contentPanel.add(eventId);
+		localization = new JTextField();
+		localization.setSize(200, 20); 
+		localization.setLocation(150, 60);
+		localization.setEnabled(false);
+		contentPanel.add(localization);
 		
 		//data
 		date.setDate(calendarDate.getTime());
 		date.setSize(200, 20);
-		date.setLocation(150, 60);
+		date.setLocation(150, 20);
+		date.setEnabled(false);
 		contentPanel.add(date);
 //		yearPanel = new JTextField();
 //		yearPanel.setSize(200,20);
@@ -96,7 +130,7 @@ public class FilterEvents {
 		minutes.setLocation(200, 100);
 		contentPanel.add(minutes);
 		
-		addBtn = new Button("Zapisz");
+		addBtn = new Button("Filtruj");
 		addBtn.setBounds(140, 150, 60, 30);
 		contentPanel.add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
@@ -130,5 +164,38 @@ public class FilterEvents {
 	    fmt.setCalendar(cal);
 	    String dateFormatted = fmt.format(cal.getTime());
 		return dateFormatted;
+	}
+	public void addLocalizationBoxListener(ActionListener listener){
+		this.localizationbox.addActionListener(listener);
+	}
+	public void addDateBoxListener(ActionListener listener){
+		this.datebox.addActionListener(listener);
+	}
+	public JTextField getLocalization() {
+		return localization;
+	}
+	public String getLocalizationContents(){
+		return this.localization.getText();
+	}
+	public void setLocalization(JTextField localization) {
+		this.localization = localization;
+	}
+	public JDateChooser getDateChooser(){
+		return this.date;
+	}
+	public void setDate(JDateChooser date) {
+		this.date = date;
+	}
+	public JCheckBox getDatebox() {
+		return datebox;
+	}
+	public void setDatebox(JCheckBox datebox) {
+		this.datebox = datebox;
+	}
+	public JCheckBox getLocalizationbox() {
+		return localizationbox;
+	}
+	public void setLocalizationbox(JCheckBox localizationbox) {
+		this.localizationbox = localizationbox;
 	}
 }

@@ -175,6 +175,7 @@ public class SQLConnection {
 			event.setTitle(rs.getString("title"));
 			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
 
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -191,13 +192,13 @@ public class SQLConnection {
 		return event;
 	}
 
-	public void getAllEvents(EventRepository repo)
+	public EventRepository getAllEvents()
 	{
 		connectToDataBase();
-		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith FROM events.bussinesmeetings;";
+		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith, alarm FROM events.bussinesmeetings;";
 		Statement statement=null;
 		ResultSet rs= null;
-
+		EventRepository repo = new EventRepository();
 		try {
 			statement = dbConnection.createStatement();
 			rs = statement.executeQuery(sqlQuerry);
@@ -210,6 +211,7 @@ public class SQLConnection {
 			event.setLocation(rs.getString("location"));
 			event.setTitle(rs.getString("title"));
 			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+			event.setAlarmDate(rs.getString("alarm"));
 
 			repo.addRecord(event);
 			}
@@ -224,7 +226,7 @@ public class SQLConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		return repo;
 
 	}
 	public String PrintEvents()
@@ -301,6 +303,47 @@ public class SQLConnection {
 
 		return stb.toString();
 
+	}
+	public EventRepository filterEventsByDate(String date)
+	{
+		connectToDataBase();
+		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) >= '"+date+"'";
+		Statement statement=null;
+		ResultSet rs= null;
+		EventRepository tmp = new EventRepository();
+		try {
+			statement = dbConnection.createStatement();
+			rs = statement.executeQuery(sqlQuerry);
+			while(rs.next()){
+
+			BussinesMeeting event= new BussinesMeeting();
+			event.setId(rs.getInt("id"));
+			event.setDate(rs.getString("date"));
+			event.setDescription(rs.getString("description"));
+			event.setLocation(rs.getString("location"));
+			event.setTitle(rs.getString("title"));
+			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+
+			tmp.addRecord(event);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs.close();
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return tmp;
+
+	}
+	public String filtereventsByLocation(EventRepository repository, String location)
+	{
+		return repository.filterByLocation(location);
 	}
 
 }
