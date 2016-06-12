@@ -4,18 +4,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.zip.DataFormatException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.UpdatableResultSet;
 import com.sun.corba.se.spi.orbutil.fsm.Action;
+import com.sun.xml.internal.fastinfoset.stax.events.EventBase;
 
 import view.AddEvent;
 import view.FilterEvents;
+import view.UpdateEvent;
 import view.View;
 import model.AlarmSound;
+import model.BussinesMeeting;
 import model.EventRepository;
 
 public class Controller {
@@ -157,7 +162,7 @@ class UserEventAction implements ActionListener {
 				}catch(DateFormatException e1){
 					view.showMessage(e1.getMessage());
 				}
-
+					
 			}
 		}
 
@@ -195,9 +200,10 @@ class UserEventAction implements ActionListener {
 
 class EditEventAction implements ActionListener {
 
-	AddEvent addEvent;
+	UpdateEvent upEvent;
 	View view;
 	SQLConnection sqlConnection;
+	int Id;
 
 	public EditEventAction(View view, SQLConnection sqlConnection) {
 		super();
@@ -207,81 +213,114 @@ class EditEventAction implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 
+		
+		class UpdateEventAction implements ActionListener{
+//
+			SQLConnection sqlConnection;
 
-//		class AddEventAction implements ActionListener{
-//
-//			SQLConnection sqlConnection;
-//
-//			public AddEventAction(SQLConnection sqlConnection) {
-//				super();
-//				this.sqlConnection = sqlConnection;
-//			}
-//
-//			public void chcekIfFieldsAreValid() throws ColumnOutOfRangeException
-//			{
-//
-//				if(addEvent.getNameField().length() > 45 || addEvent.getLocalizationField().length() > 45 || addEvent.getDescriptionTxt().length() > 45)
-//					throw new ColumnOutOfRangeException();
-//
-//			}
-//			public void checkDataFormat() throws DateFormatException
-//			{
-//
-//				 if (addEvent.getDate() == null || !addEvent.getDate().matches("\\d{4}-\\d{2}-\\d{2}"))
-//						throw new DateFormatException();
-//			}
-//			public void actionPerformed(ActionEvent arg0) {
-//
-//				try{
-//					chcekIfFieldsAreValid();
-//					checkDataFormat();
-//					sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
-//							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
-//							addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
-//
-//					System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
-//							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
-//							addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
-//
-//					view.getEventList().setText(sqlConnection.PrintEvents());
-//					addEvent.getFrame().dispose();
-//				}catch(ColumnOutOfRangeException e){
-//
-//					view.showMessage(e.getMessage());
-//
-//				}catch(DateFormatException e1){
-//					view.showMessage(e1.getMessage());
-//				}
-//			}
-//		}
+			public UpdateEventAction(SQLConnection sqlConnection) {
+				super();
+				this.sqlConnection = sqlConnection;
+			}
 
-//		class TurnOnTheAlarm implements ActionListener{
-//
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//
-//			if(addEvent.getAlarmbox().isSelected()){
-//				addEvent.getAlarmDate().setEnabled(true);
-//				addEvent.getAlarmHour().setEnabled(true);
-//				addEvent.getAlarmMinutes().setEnabled(true);
-//			}else{
-//				addEvent.getAlarmDate().setEnabled(false);
-//				addEvent.getAlarmHour().setEnabled(false);
-//				addEvent.getAlarmMinutes().setEnabled(false);
-//			}
-//			}
-//		}
+			public void chcekIfFieldsAreValid() throws ColumnOutOfRangeException
+			{
+
+				if(upEvent.getNameField().length() > 45 || upEvent.getLocalizationField().length() > 45 || upEvent.getDescriptionTxt().length() > 45)
+					throw new ColumnOutOfRangeException();
+
+			}
+			public void checkDataFormat() throws DateFormatException
+			{
+
+				 if (upEvent.getDate() == null || !upEvent.getDate().matches("\\d{4}-\\d{2}-\\d{2}"))
+						throw new DateFormatException();
+			}
+			
+			public void actionPerformed(ActionEvent arg0) { 
+				
+				System.out.println(upEvent.getDate());
+				
+				try{
+					chcekIfFieldsAreValid();
+					checkDataFormat();
+				}
+				catch(ColumnOutOfRangeException e){
+					view.showMessage(e.getMessage());
+				}
+				catch(DateFormatException e1){
+					view.showMessage(e1.getMessage());
+				}
+				
+				Id = upEvent.getChooseId().getValue();
+				BussinesMeeting event = (BussinesMeeting) sqlConnection.SelectEventWithId(Id);
+				try{
+					upEvent.getNameFieldObject().setText(event.getTitle());
+					
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					Date tmp = (Date)dateFormat.parseObject(event.getDate());
+					System.out.println("alarm" + event.getAlarmDate());
+					upEvent.getDateObject().setDate(tmp);
+					
+					upEvent.getLocalizationObject().setText(event.getLocation());
+					
+					upEvent.getDescriptionTxtObject().setText(event.getDescription());
+					
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+				
+
+			}
+		}
+		
+		class CommitUpdateAction implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				sqlConnection.updateRecordInTable("bussinesmeetings", Integer.toString(Id), upEvent.getNameField().toString(),
+						upEvent.getDate().toString()+" "+upEvent.getHour()+":"+upEvent.getMinutes()+":00",
+						upEvent.getLocalizationField().toString(), upEvent.getDescriptionTxt().toString(), null);
+				
+				String alarm = upEvent.getAlarmDate().toString()+" "+
+						upEvent.getAlarmHour()+":"+upEvent.getAlarmMinutes()+":00";
+				sqlConnection.addAllarmToDatabase(Id, alarm);
+				
+				view.getEventList().setText(sqlConnection.PrintEvents());
+				upEvent.getFrame().dispose();
+				
+			}
+			
+		}
+
+		class TurnOnTheAlarm implements ActionListener{
 
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
+				if(upEvent.getAlarmbox().isSelected()){
+					upEvent.getAlarmDateChooser().setEnabled(true);
+					upEvent.getAlarmHourBox().setEnabled(true);
+					upEvent.getAlarmMinutesBox().setEnabled(true);
+				}
+				else{
+					upEvent.getAlarmDateChooser().setEnabled(false);
+					upEvent.getAlarmHourBox().setEnabled(false);
+					upEvent.getAlarmMinutesBox().setEnabled(false);
+				}
+			}
+		}
 
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(view.getCalendar().getDate());
-		addEvent = new AddEvent(cal);
-		addEvent.getFrame().setTitle("Edytuj wydarzenie");
-//		addEvent.AddAlarmAcionListener(new TurnOnTheAlarm());
-//		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
+		upEvent = new UpdateEvent(cal);
+		upEvent.getFrame().setTitle("Edytuj wydarzenie");
+		upEvent.setFillEventDataBtn(new UpdateEventAction(sqlConnection));
+		upEvent.AddAlarmAcionListener(new TurnOnTheAlarm());
+		upEvent.addAddBtnListener(new CommitUpdateAction());
 
 
 	}
@@ -307,7 +346,7 @@ class FilterEventsAction implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				if(filterEvents.getDateChooser().isEnabled() && !filterEvents.getLocalization().isEnabled())
 				//view.getEventList().setText(sqlconnection.filterEventsByYear(filterEvents.getDate()));
 				view.getEventList().setText(sqlconnection.filterEventsByDate(filterEvents.getDate()).toString());
@@ -319,15 +358,15 @@ class FilterEventsAction implements ActionListener{
 				else if(filterEvents.getDateChooser().isEnabled() && filterEvents.getLocalization().isEnabled())
 						view.getEventList().setText(sqlconnection.filtereventsByLocationAndDate(filterEvents.getLocalizationContents(), filterEvents.getDate()));
 			}
-			
+
 
 		}
-
+		
 		this.filterEvents.addFilterButtonListener(new FilterButtonClicked());
 
 	}
-
-
+	
+	
 
 }
 

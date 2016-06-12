@@ -28,16 +28,16 @@ import com.toedter.components.JSpinField;
 
 public class AddEvent {
 	GregorianCalendar calendar = new GregorianCalendar();
-	private JFrame frame;
-	private JPanel contentPanel;
-	private Button exitBtn, addBtn;
-	private JTextField nameField, localizationField;
-	private JLabel label,alarmlabel;
-	private JTextArea descriptionTxt;
-	private JDateChooser date = new JDateChooser(calendar.getTime()), alarmDate = new JDateChooser(calendar.getTime());
-	private JSpinField hour, minutes, alarmHour,alarmMinutes;
-	private JCheckBox alarmbox;
-	private JScrollPane descriptionScroll;
+	protected JFrame frame;
+	protected JPanel contentPanel;
+	protected Button exitBtn, addBtn;
+	protected JTextField nameField, localizationField;
+	protected JLabel label,alarmlabel;
+	protected JTextArea descriptionTxt;
+	protected JDateChooser date = new JDateChooser(calendar.getTime()), alarmDate = new JDateChooser(calendar.getTime());
+	protected JSpinField hour, minutes, alarmHour,alarmMinutes;
+	protected JCheckBox alarmbox;
+	protected JScrollPane descriptionScroll;
 
 	public AddEvent(GregorianCalendar calendarDate){
 		frame = new JFrame("Dodaj wydarzenie");
@@ -220,6 +220,10 @@ public class AddEvent {
 	public void setAddBtn(Button addBtn) {
 		this.addBtn = addBtn;
 	}
+	
+	public JTextField getNameFieldObject(){
+		return nameField;
+	}
 
 	public String getNameField() {
 		return nameField.getText();
@@ -244,7 +248,11 @@ public class AddEvent {
 	public void setCalendar(GregorianCalendar calendar) {
 		this.calendar = calendar;
 	}
-
+	
+	public JDateChooser getDateObject() {
+		return date;
+	}
+	
 	public String getDate() {
 
 		GregorianCalendar cal = new GregorianCalendar();
@@ -318,6 +326,14 @@ public class AddEvent {
 		this.label = label;
 	}
 
+	public JTextArea getDescriptionTxtObject(){
+		return descriptionTxt;
+	}
+	
+	public JTextField getLocalizationObject(){
+		return localizationField;
+	}
+	
 	public void setDescriptionTxt(JTextArea descriptionTxt) {
 		this.descriptionTxt = descriptionTxt;
 	}
