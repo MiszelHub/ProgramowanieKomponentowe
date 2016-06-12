@@ -2,7 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-
+/**
+* Repository class helps us with saving data to XML
+*
+*
+*/
 public class EventRepository {
 
 

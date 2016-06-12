@@ -25,7 +25,12 @@ import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JSpinnerDateEditor;
 import com.toedter.components.JSpinField;
-
+/**
+* this class represents a window for adding
+* new events
+*
+*
+*/
 public class AddEvent {
 	GregorianCalendar calendar = new GregorianCalendar();
 	protected JFrame frame;

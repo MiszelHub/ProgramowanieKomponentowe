@@ -8,7 +8,11 @@ import controllers.*;
 
 import javax.swing.*;
 
-
+/**
+* this class represents a main menu 
+*
+*
+*/
 public class MainMenu extends JMenuBar{
 	private static final long serialVersionUID = -1252406631918788989L;
 

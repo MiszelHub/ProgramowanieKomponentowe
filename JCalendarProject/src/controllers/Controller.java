@@ -25,7 +25,11 @@ import model.AlarmSound;
 import model.BussinesMeeting;
 import model.EventBase;
 import model.EventRepository;
-
+/**
+* Controller is a class that connects all other components
+* of the application
+* 
+*/
 public class Controller {
 
 	EventRepository repo;

@@ -6,7 +6,11 @@ import java.util.GregorianCalendar;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import com.toedter.components.JSpinField;
-
+/**
+* this class represents a window for updating events
+*
+*
+*/
 public class UpdateEvent extends AddEvent {
 	
 	protected JSpinField chooseId;
