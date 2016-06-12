@@ -21,7 +21,8 @@ import com.toedter.components.JSpinField;
 public class FilterEvents {
 	GregorianCalendar calendar = new GregorianCalendar();
 	private JFrame frame;
-	private JPanel contentPanel;
+	private JPanel contentPanel ;
+	private JTextField yearPanel;
 	private Button exitBtn, addBtn;
 	private JLabel label;
 	private JDateChooser date = new JDateChooser(calendar.getTime()), alarmDate = new JDateChooser(calendar.getTime());
@@ -68,10 +69,14 @@ public class FilterEvents {
 		contentPanel.add(eventId);
 		
 		//data
-		date.setDate(calendarDate.getTime());
-		date.setSize(200, 20);
-		date.setLocation(150, 60);
-		contentPanel.add(date);
+//		date.setDate(calendarDate.getTime());
+//		date.setSize(200, 20);
+//		date.setLocation(150, 60);
+//		contentPanel.add(date);
+		yearPanel = new JTextField();
+		yearPanel.setSize(200,20);
+		yearPanel.setLocation(150, 60);
+		contentPanel.add(yearPanel);
 		
 		//godzina 
 		hour = new JSpinField();
@@ -116,8 +121,8 @@ public class FilterEvents {
 	{
 		this.addBtn.addActionListener(listener);
 	}
-	public int getDate(){
+	public String getDate(){
 		
-		return this.date.getDate().getYear();
+		return this.yearPanel.getText();
 	}
 }
