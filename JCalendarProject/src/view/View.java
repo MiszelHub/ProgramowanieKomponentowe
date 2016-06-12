@@ -129,6 +129,10 @@ public class View {
 		JOptionPane.showMessageDialog(new JFrame(), message, "Ups!", JOptionPane.ERROR_MESSAGE);
 	}
 	
+	public void showAlarmMessage(String message){
+		JOptionPane.showMessageDialog(new JFrame(), message, "Upcomig Event!", JOptionPane.WARNING_MESSAGE);
+	}
+	
 	
 	public View()
 	{
