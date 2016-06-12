@@ -10,6 +10,8 @@ import java.util.zip.DataFormatException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.sun.corba.se.spi.orbutil.fsm.Action;
+
 import view.AddEvent;
 import view.FilterEvents;
 import view.View;
@@ -34,8 +36,8 @@ public class Controller {
 
 		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
-		
-		this.view.addfilterEventsActionListener(new FilterEventsAction(view));
+
+		this.view.addfilterEventsActionListener(new FilterEventsAction(view,sqlConnection));
 	}
 
 	public EventRepository getRepo() {
@@ -129,30 +131,30 @@ class UserEventAction implements ActionListener {
 					sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
 							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
 							addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
-	
+
 					System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
 							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
 							addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
-	
+
 					view.getEventList().setText(sqlConnection.PrintEvents());
 					addEvent.getFrame().dispose();
 				}catch(ColumnOutOfRangeException e){
-	
+
 					view.showMessage(e.getMessage());
-	
+
 				}catch(DateFormatException e1){
 					view.showMessage(e1.getMessage());
 				}
 			}
 		}
-	
+
 		class TurnOnTheAlarm implements ActionListener{
 
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
-			if(addEvent.getAlarmbox().isSelected()){	
+
+			if(addEvent.getAlarmbox().isSelected()){
 				addEvent.getAlarmDate().setEnabled(true);
 				addEvent.getAlarmHour().setEnabled(true);
 				addEvent.getAlarmMinutes().setEnabled(true);
@@ -163,17 +165,17 @@ class UserEventAction implements ActionListener {
 			}
 			}
 		}
-				
-			
-		
-		
+
+
+
+
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(view.getCalendar().getDate());
 		addEvent = new AddEvent(cal);
 		addEvent.AddAlarmAcionListener(new TurnOnTheAlarm());
 		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
 
-	
+
 	}
 
 }
@@ -223,30 +225,30 @@ class EditEventAction implements ActionListener {
 //					sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
 //							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
 //							addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
-//	
+//
 //					System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
 //							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
 //							addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
-//	
+//
 //					view.getEventList().setText(sqlConnection.PrintEvents());
 //					addEvent.getFrame().dispose();
 //				}catch(ColumnOutOfRangeException e){
-//	
+//
 //					view.showMessage(e.getMessage());
-//	
+//
 //				}catch(DateFormatException e1){
 //					view.showMessage(e1.getMessage());
 //				}
 //			}
 //		}
-	
+
 //		class TurnOnTheAlarm implements ActionListener{
 //
-//			
+//
 //			@Override
 //			public void actionPerformed(ActionEvent e) {
-//			
-//			if(addEvent.getAlarmbox().isSelected()){	
+//
+//			if(addEvent.getAlarmbox().isSelected()){
 //				addEvent.getAlarmDate().setEnabled(true);
 //				addEvent.getAlarmHour().setEnabled(true);
 //				addEvent.getAlarmMinutes().setEnabled(true);
@@ -257,10 +259,10 @@ class EditEventAction implements ActionListener {
 //			}
 //			}
 //		}
-				
-			
-		
-		
+
+
+
+
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(view.getCalendar().getDate());
 		addEvent = new AddEvent(cal);
@@ -268,7 +270,7 @@ class EditEventAction implements ActionListener {
 //		addEvent.AddAlarmAcionListener(new TurnOnTheAlarm());
 //		addEvent.addAddBtnListener(new AddEventAction(sqlConnection));
 
-	
+
 	}
 
 }
@@ -276,19 +278,34 @@ class EditEventAction implements ActionListener {
 class FilterEventsAction implements ActionListener{
 	View view;
 	FilterEvents filterEvents;
-	
-	public FilterEventsAction(View view) {
+	SQLConnection sqlconnection;
+
+	public FilterEventsAction(View view, SQLConnection sqlconnection) {
 		super();
 		this.view = view;
+		this.sqlconnection = sqlconnection;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		filterEvents = new FilterEvents(new GregorianCalendar());
+
+		class FilterButtonClicked implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getEventList().setText(null);
+				//view.getEventList().setText(sqlconnection.filterEventsByYear(filterEvents.getDate()));
+
+			}
+
+		}
 		
+		this.filterEvents.addFilterButtonListener(new FilterButtonClicked());
 	}
 	
 	
+
 }
 
 

@@ -265,5 +265,42 @@ public class SQLConnection {
 		return stb.toString();
 
 	}
+	public String filterEventsByYear(int year)
+	{
+		connectToDataBase();
+		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Year(date) >= "+year+";";
+		Statement statement=null;
+		ResultSet rs= null;
+		StringBuilder stb = new StringBuilder();
+		try {
+			statement = dbConnection.createStatement();
+			rs = statement.executeQuery(sqlQuerry);
+			while(rs.next()){
+
+			BussinesMeeting event= new BussinesMeeting();
+			event.setId(rs.getInt("id"));
+			event.setDate(rs.getString("date"));
+			event.setDescription(rs.getString("description"));
+			event.setLocation(rs.getString("location"));
+			event.setTitle(rs.getString("title"));
+			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+
+			stb.append(event.toString()+"\n");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs.close();
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return stb.toString();
+
+	}
 
 }

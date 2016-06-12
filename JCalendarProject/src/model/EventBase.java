@@ -77,7 +77,7 @@ public abstract class EventBase  implements Serializable{
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName()+"[id="+id+" title=" + title + ", date=" + date + ", startTime="
-				+", location=" + location + ", description=" + description + "]";
+				+", location=" + location + ", description=" + description+",";
 	};
 
 

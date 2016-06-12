@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.sun.corba.se.spi.orbutil.fsm.Action;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.components.JSpinField;
 
@@ -24,6 +25,7 @@ public class FilterEvents {
 	private Button exitBtn, addBtn;
 	private JLabel label;
 	private JDateChooser date = new JDateChooser(calendar.getTime()), alarmDate = new JDateChooser(calendar.getTime());
+
 	private JSpinField hour, minutes, alarmHour, alarmMinutes, eventId;
 	
 	public FilterEvents(GregorianCalendar calendarDate){
@@ -109,5 +111,13 @@ public class FilterEvents {
 				frame.dispose();
 			}
 		});
+	}
+	public void addFilterButtonListener(ActionListener listener)
+	{
+		this.addBtn.addActionListener(listener);
+	}
+	public int getDate(){
+		
+		return this.date.getDate().getYear();
 	}
 }
