@@ -23,18 +23,18 @@ public class AlarmClock {
 		this.timeBeforeAlarm = timeBeforeAlarm;
 		this.connection = connection;
 		this.sound = sound;
-		
-		
+
+
 	}
-	
+
 	public void checkForAlarm(){
 		task = new TimerTask() {
-			
+
 			@Override
 			public void run() {
 				soundAlarm(connection.getNextAlarm());
-				
-				
+
+
 			}
 		};
 		alarmTimer.schedule(task, 60000, 60000);
@@ -43,12 +43,12 @@ public class AlarmClock {
 			view.showAlarmMessage("LOLz");
 			sound.stopAlarm();
 		}
-		
-			
-			
+
+
+
 	}
 	public void soundAlarm(AlarmName alarm){
-		if(alarm.alarmt <=0){
+		if(alarm.alarmt <0){
 			connection.setAlarmToNull();
 			sound.playAlarm();
 			view.showAlarmMessage(alarm.namet);
