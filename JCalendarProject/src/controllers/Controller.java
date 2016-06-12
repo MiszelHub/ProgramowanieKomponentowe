@@ -441,7 +441,7 @@ class ImportXmlAction implements ActionListener{
 		
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("przed=====================================");
+		System.out.println("przed====================================="); 
 		ArrayList<EventBase> list = sqlConnection.getAllEvents().getEventList();
 		for(EventBase ev : list){
 			System.out.println(ev.toString());
