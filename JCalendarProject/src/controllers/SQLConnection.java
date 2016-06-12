@@ -415,6 +415,56 @@ public class SQLConnection {
 
 		return stb.toString();
 	}
+	public long getNextAlarm(){
+		connectToDataBase();
+		String sqlQuerry = "SELECT alarm-NOW() as timeremaining FROM events.bussinesmeetings WHERE alarm is not null order by alarm ASC LIMIT 1";
+		Statement statement=null;
+		ResultSet rs= null;
+		long tmp=0;
+		try {
+			statement = dbConnection.createStatement();
+			rs = statement.executeQuery(sqlQuerry);
+			while(rs.next()){
+				
+				tmp = rs.getLong(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs.close();
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return tmp;
+	}
+	public void setAlarmToNull(int id){
+		//UPDATE `events`.`bussinesmeetings` SET `alarm`=NULL WHERE `id`='2';
+		connectToDataBase();
+		String sqlUpdate = "UPDATE `events`.`bussinesmeetings` SET `alarm`= NULL WHERE `id`="+id+";";
+		java.sql.PreparedStatement statement=null;
+		try {
+
+			statement = dbConnection.prepareStatement(sqlUpdate);
+			statement.executeUpdate();
+			statement.close();
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 }

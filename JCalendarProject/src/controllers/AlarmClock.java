@@ -11,22 +11,41 @@ import view.View;
 public class AlarmClock {
 	private Timer alarmTimer;
 	private TimerTask task;
-	private int hours;
-	private int minutes;
+	private long timeBeforeAlarm;
 	private View view;
-	
-	public AlarmClock(AlarmSound sound, View view){
+	private SQLConnection connection;
+	private AlarmSound sound;
+
+	public AlarmClock(AlarmSound sound, View view, long timeBeforeAlarm, SQLConnection connection){
 		alarmTimer = new Timer();
 		this.view = view;
+		this.timeBeforeAlarm = timeBeforeAlarm;
+		this.connection = connection;
+		this.sound = sound;
+		
+		
+	}
+	
+	public void checkForAlarm(){
 		task = new TimerTask() {
 			
 			@Override
 			public void run() {
+				timeBeforeAlarm = connection.getNextAlarm();
 				sound.playAlarm();
-				view.showAlarmMessage("eventName");
+				view.showAlarmMessage("LOLz");
 				sound.stopAlarm();
+				
 			}
 		};
-		alarmTimer.schedule(task, 1000);
+		alarmTimer.schedule(task, 60000, 60000);
+		if(timeBeforeAlarm <=0){
+			sound.playAlarm();
+			view.showAlarmMessage("LOLz");
+			sound.stopAlarm();
+		}
+		
+			
+			
 	}
 }

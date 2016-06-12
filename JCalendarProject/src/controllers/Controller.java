@@ -15,6 +15,7 @@ import com.sun.corba.se.spi.orbutil.fsm.Action;
 import view.AddEvent;
 import view.FilterEvents;
 import view.View;
+import model.AlarmSound;
 import model.EventRepository;
 
 public class Controller {
@@ -38,6 +39,9 @@ public class Controller {
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
 
 		this.view.addfilterEventsActionListener(new FilterEventsAction(view,sqlConnection));
+		AlarmSound a = new AlarmSound("02 Bestia.wav");
+		AlarmClock c = new AlarmClock(a,view,1000,sqlConnection);
+		c.checkForAlarm();
 	}
 
 	public EventRepository getRepo() {
