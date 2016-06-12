@@ -2,6 +2,7 @@ package program;
 
 
 import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.time.Duration;
@@ -16,7 +17,7 @@ import model.*;
 
 public class Program {
 
-	public static void main(String[] args)  {
+	public static void main(String[] args){
 
 		SQLConnection connection=null;
 

@@ -5,8 +5,6 @@ import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
-import com.sun.corba.se.spi.orbutil.fsm.Action;
 import com.toedter.components.JSpinField;
 
 public class UpdateEvent extends AddEvent {
