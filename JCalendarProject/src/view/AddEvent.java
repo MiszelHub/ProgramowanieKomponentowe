@@ -255,6 +255,15 @@ public class AddEvent {
 		return dateFormatted;
 //		return date.getDate().getYear()+"-"+date.getDate().getMonth()+"-"+date.getDate().getDay();
 	}
+	public String getAlarmDate(){
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(alarmDate.getDate());
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+	    fmt.setCalendar(cal);
+	    String dateFormatted = fmt.format(cal.getTime());
+		
+	    return dateFormatted;
+	}
 
 	public void setDate(Date date){
 		this.date.setDate(date);
@@ -263,35 +272,31 @@ public class AddEvent {
 	public int getHour() {
 		return hour.getValue();
 	}
+	public int getAlarmHour(){
+		return this.alarmHour.getValue();
+	}
 
 	public int getMinutes() {
 		return minutes.getValue();
 
 	}
-
-	public JDateChooser getAlarmDate() {
-		return alarmDate;
+	public int getAlarmMinutes(){
+		return this.alarmMinutes.getValue();
 	}
 
+	public JSpinField getAlarmHourBox(){
+		return this.alarmHour;
+	}
+	public JSpinField getAlarmMinutesBox(){
+		return this.alarmMinutes;
+	}
+	public JDateChooser getAlarmDateChooser(){
+		return this.alarmDate;
+	}
 	public void setAlarmDate(JDateChooser alarmDate) {
 		this.alarmDate = alarmDate;
 	}
 
-	public JSpinField getAlarmHour() {
-		return alarmHour;
-	}
-
-	public void setAlarmHour(JSpinField alarmHour) {
-		this.alarmHour = alarmHour;
-	}
-
-	public JSpinField getAlarmMinutes() {
-		return alarmMinutes;
-	}
-
-	public void setAlarmMinutes(JSpinField alarmMinutes) {
-		this.alarmMinutes = alarmMinutes;
-	}
 
 	public JCheckBox getAlarmbox() {
 		return alarmbox;

@@ -128,9 +128,17 @@ class UserEventAction implements ActionListener {
 				try{
 					chcekIfFieldsAreValid();
 					checkDataFormat();
+					if(!addEvent.getAlarmbox().isSelected())
+					{
 					sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
 							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
-							addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null);
+							addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null,null);
+					}else{
+						sqlConnection.addEventToDatabaseTable("bussinesmeetings", addEvent.getNameField().toString(),
+								addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00",
+								addEvent.getLocalizationField().toString(), addEvent.getDescriptionTxt().toString(), null,addEvent.getAlarmDate().toString()+" "+
+								addEvent.getAlarmHour()+":"+addEvent.getAlarmMinutes()+":00");
+					}
 
 					System.out.println(("bussinesmeetings" + addEvent.getNameField().toString() +
 							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
@@ -145,6 +153,7 @@ class UserEventAction implements ActionListener {
 				}catch(DateFormatException e1){
 					view.showMessage(e1.getMessage());
 				}
+					
 			}
 		}
 
@@ -155,13 +164,13 @@ class UserEventAction implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 
 			if(addEvent.getAlarmbox().isSelected()){
-				addEvent.getAlarmDate().setEnabled(true);
-				addEvent.getAlarmHour().setEnabled(true);
-				addEvent.getAlarmMinutes().setEnabled(true);
+				addEvent.getAlarmDateChooser().setEnabled(true);
+				addEvent.getAlarmHourBox().setEnabled(true);
+				addEvent.getAlarmMinutesBox().setEnabled(true);
 			}else{
-				addEvent.getAlarmDate().setEnabled(false);
-				addEvent.getAlarmHour().setEnabled(false);
-				addEvent.getAlarmMinutes().setEnabled(false);
+				addEvent.getAlarmDateChooser().setEnabled(false);
+				addEvent.getAlarmHourBox().setEnabled(false);
+				addEvent.getAlarmMinutesBox().setEnabled(false);
 			}
 			}
 		}
@@ -295,7 +304,7 @@ class FilterEventsAction implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				view.getEventList().setText(null);
-				//view.getEventList().setText(sqlconnection.filterEventsByYear(filterEvents.getDate()));
+				view.getEventList().setText(sqlconnection.filterEventsByYear(filterEvents.getDate()));
 
 			}
 

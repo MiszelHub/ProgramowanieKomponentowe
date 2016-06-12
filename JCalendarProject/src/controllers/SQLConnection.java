@@ -42,10 +42,10 @@ public class SQLConnection {
 		this.dbConnection = dbConnection;
 	}
 
-	public void addEventToDatabaseTable(String table, String title, String date, String location, String description, String personImeetWith)
+	public void addEventToDatabaseTable(String table, String title, String date, String location, String description, String personImeetWith, String alarm)
 	{
 		connectToDataBase();
-		String addQuerry = "INSERT INTO `events`.`"+table+"` (`title`, `date`, `location`, `description`, `personImeetwith`) VALUES (?,?,?,?,?);";
+		String addQuerry = "INSERT INTO `events`.`"+table+"` (`title`, `date`, `location`, `description`, `personImeetwith`,`alarm`) VALUES (?,?,?,?,?,?);";
 		java.sql.PreparedStatement statement=null;
 		try {
 			statement = dbConnection.prepareStatement(addQuerry);
@@ -59,6 +59,7 @@ public class SQLConnection {
 			statement.setString(3, location);
 			statement.setString(4, description);
 			statement.setString(5, personImeetWith);
+			statement.setString(6, alarm);
 			statement.addBatch();
 			statement.executeBatch();
 			statement.close();
@@ -98,6 +99,7 @@ public class SQLConnection {
 	{
 		connectToDataBase();
 		String sqlUpdate = "UPDATE `events`.`"+table+"` SET `title`=?, `date`=?, `location`=?, `description`=?, `personImeetwith`=? WHERE `id`=?;";
+
 		java.sql.PreparedStatement statement=null;
 		try {
 
@@ -125,20 +127,17 @@ public class SQLConnection {
 			e.printStackTrace();
 		}
 	}
-	public void addAllarmToDatabase(int id, String message, String datetime, int eventIDd)
+	public void addAllarmToDatabase(int id, String datetime)
 	{
 		//VALUES ('1', 'FuckYou', '2016-06-05 00:00:00', '1');";
 		connectToDataBase();
-		String sqlQuerry = "INSERT INTO `events`.`alarm` (`idAlarm`, `alarmMessage`, `alarmDate`, `evend_id`) VALUES (?, ?, ?, ?);";
+		//String sqlQuerry = "INSERT INTO `events`.`alarm` (`idAlarm`, `alarmMessage`, `alarmDate`, `evend_id`) VALUES (?, ?, ?, ?);";
+		String sqlUpdate = "UPDATE `events`.`bussinesmeetings` SET `alarm`= ? WHERE `id`="+id+";";
 		java.sql.PreparedStatement statement=null;
 		try {
 
-			statement = dbConnection.prepareStatement(sqlQuerry);
-
-			statement.setInt(1, id);
-			statement.setString(2, message);
-			statement.setString(3, datetime);
-			statement.setInt(4, eventIDd);
+			statement = dbConnection.prepareStatement(sqlUpdate);
+			statement.setString(1, datetime);
 			statement.addBatch();
 			statement.executeUpdate();
 			statement.close();
@@ -231,7 +230,7 @@ public class SQLConnection {
 	public String PrintEvents()
 	{
 		connectToDataBase();
-		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith FROM events.bussinesmeetings;";
+		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith, alarm FROM events.bussinesmeetings;";
 		Statement statement=null;
 		ResultSet rs= null;
 		StringBuilder stb = new StringBuilder();
@@ -247,6 +246,7 @@ public class SQLConnection {
 			event.setLocation(rs.getString("location"));
 			event.setTitle(rs.getString("title"));
 			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+			event.setAlarmDate(rs.getString("alarm"));
 
 			stb.append(event.toString()+"\n");
 			}

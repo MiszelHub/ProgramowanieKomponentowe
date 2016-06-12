@@ -8,7 +8,7 @@ import java.time.Duration;
 public class Birthday extends EventBase implements Serializable{
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private String whoseBirhday;
@@ -18,12 +18,12 @@ public class Birthday extends EventBase implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	public Birthday(int id,String title, String date, String location,
-			String description,String whoseBirthday, int howOld) {
-		super(id,title, date, location, description);
+			String description,String whoseBirthday, int howOld, String alarmDate) {
+		super(id,title, date, location, description, alarmDate);
 		this.whoseBirhday = whoseBirthday;
 		this.howOld = howOld;
 	}
-	
+
 	public String getWhoseBirhday() {
 		return whoseBirhday;
 	}
@@ -43,9 +43,9 @@ public class Birthday extends EventBase implements Serializable{
 				+ ", location="
 				+ location + ", description=" + description + "]";
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

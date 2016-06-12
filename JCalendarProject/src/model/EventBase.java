@@ -19,17 +19,19 @@ public abstract class EventBase  implements Serializable{
 	protected String date;
 	protected String location;
 	protected String description;
+	protected String alarmDate;
 
 	public EventBase(){}
 
 	public EventBase(int id,String title, String date, String location,
-			String description) {
+			String description, String alarmDate) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.date = date;
 		this.location = location;
 		this.description = description;
+		this.alarmDate = alarmDate;
 
 	}
 
@@ -76,8 +78,16 @@ public abstract class EventBase  implements Serializable{
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName()+"[id="+id+" title=" + title + ", date=" + date + ", startTime="
-				+", location=" + location + ", description=" + description+",";
+		return this.getClass().getSimpleName()+"[id="+id+" title=" + title + ", date=" + date + ", alarm="+
+				this.alarmDate+", location=" + location + ", description=" + description+",";
+	}
+
+	public String getAlarmDate() {
+		return alarmDate;
+	}
+
+	public void setAlarmDate(String alarmDate) {
+		this.alarmDate = alarmDate;
 	};
 
 
