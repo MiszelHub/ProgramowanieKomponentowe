@@ -78,8 +78,11 @@ public abstract class EventBase  implements Serializable{
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName()+"[id="+id+" title=" + title + ", date=" + date + ", alarm="+
-				this.alarmDate+", location=" + location + ", description=" + description+",";
+		String alarm = this.alarmDate;
+		if(alarm == null) alarm="brak";
+		return "id="+id+" Nazwa: " + title + ", Data: " + date + ", Alarm: "+
+				alarm+", Miejsce: " + location + ", Opis: " + description+"\n"+
+				"---------------------------------------------------------------------------------------------------------";
 	}
 
 	public String getAlarmDate() {

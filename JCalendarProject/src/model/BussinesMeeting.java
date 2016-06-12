@@ -30,7 +30,8 @@ public class BussinesMeeting extends EventBase{
 	@Override
 	public String toString() {
 
-		return super.toString() +" Person I meet= "+ this.nameOfThePersonYouSetUpMeetingWith+" ]";
+		return super.toString();
+//		return super.toString() +" Person I meet= "+ this.nameOfThePersonYouSetUpMeetingWith+" ]";
 	}
 
 
