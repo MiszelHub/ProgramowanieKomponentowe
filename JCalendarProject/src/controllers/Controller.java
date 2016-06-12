@@ -308,13 +308,12 @@ class FilterEventsAction implements ActionListener{
 				//view.getEventList().setText(sqlconnection.filterEventsByYear(filterEvents.getDate()));
 				view.getEventList().setText(sqlconnection.filterEventsByDate(filterEvents.getDate()).toString());
 				
-				else if((!filterEvents.getDateChooser().isEnabled()) && filterEvents.getLocalization().isEnabled()){
-					view.getEventList().setText(sqlconnection.filtereventsByLocation(sqlconnection.getAllEvents(),filterEvents.getLocalizationContents()+"\n"));
-					System.out.println(filterEvents.getLocalizationContents());
-					System.out.println(sqlconnection.getAllEvents().toString());}
+				else if((!filterEvents.getDateChooser().isEnabled()) && filterEvents.getLocalization().isEnabled())
+					view.getEventList().setText(sqlconnection.filtereventsByLocation(filterEvents.getLocalizationContents()));
+					
 				
 				else if(filterEvents.getDateChooser().isEnabled() && filterEvents.getLocalization().isEnabled())
-					view.getEventList().setText(sqlconnection.filtereventsByLocation(sqlconnection.filterEventsByDate(filterEvents.getDate()),filterEvents.getLocalizationContents()));
+						view.getEventList().setText(sqlconnection.filtereventsByLocationAndDate(filterEvents.getLocalizationContents(), filterEvents.getDate()));
 			}
 			
 

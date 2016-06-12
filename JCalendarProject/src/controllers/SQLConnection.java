@@ -341,9 +341,80 @@ public class SQLConnection {
 		return tmp;
 
 	}
-	public String filtereventsByLocation(EventRepository repository, String location)
+	public String filtereventsByLocation(String location)
 	{
-		return repository.filterByLocation(location);
+		connectToDataBase();
+		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE location = '"+location+"'";
+		Statement statement=null;
+		ResultSet rs= null;
+		StringBuilder stb = new StringBuilder();
+		try {
+			statement = dbConnection.createStatement();
+			rs = statement.executeQuery(sqlQuerry);
+			while(rs.next()){
+
+			BussinesMeeting event= new BussinesMeeting();
+			event.setId(rs.getInt("id"));
+			event.setDate(rs.getString("date"));
+			event.setDescription(rs.getString("description"));
+			event.setLocation(rs.getString("location"));
+			event.setTitle(rs.getString("title"));
+			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+
+			stb.append(event.toString()+"\n");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs.close();
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return stb.toString();
 	}
+
+	public String filtereventsByLocationAndDate(String location, String date)
+	{
+		connectToDataBase();
+		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE location >= '"+
+							location+"' AND Date(bussinesmeetings.date) >= '"+date+"'";
+		Statement statement=null;
+		ResultSet rs= null;
+		StringBuilder stb = new StringBuilder();
+		try {
+			statement = dbConnection.createStatement();
+			rs = statement.executeQuery(sqlQuerry);
+			while(rs.next()){
+
+			BussinesMeeting event= new BussinesMeeting();
+			event.setId(rs.getInt("id"));
+			event.setDate(rs.getString("date"));
+			event.setDescription(rs.getString("description"));
+			event.setLocation(rs.getString("location"));
+			event.setTitle(rs.getString("title"));
+			event.setNameOfThePersonYouSetUpMeetingWith(rs.getString("personImeetwith"));
+
+			stb.append(event.toString()+"\n");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs.close();
+			this.dbConnection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return stb.toString();
+	}
+
 
 }
