@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 import javax.swing.JCheckBox;
@@ -69,14 +70,14 @@ public class FilterEvents {
 		contentPanel.add(eventId);
 		
 		//data
-//		date.setDate(calendarDate.getTime());
-//		date.setSize(200, 20);
-//		date.setLocation(150, 60);
-//		contentPanel.add(date);
-		yearPanel = new JTextField();
-		yearPanel.setSize(200,20);
-		yearPanel.setLocation(150, 60);
-		contentPanel.add(yearPanel);
+		date.setDate(calendarDate.getTime());
+		date.setSize(200, 20);
+		date.setLocation(150, 60);
+		contentPanel.add(date);
+//		yearPanel = new JTextField();
+//		yearPanel.setSize(200,20);
+//		yearPanel.setLocation(150, 60);
+//		contentPanel.add(yearPanel);
 		
 		//godzina 
 		hour = new JSpinField();
@@ -123,6 +124,11 @@ public class FilterEvents {
 	}
 	public String getDate(){
 		
-		return this.yearPanel.getText();
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(date.getDate());
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+	    fmt.setCalendar(cal);
+	    String dateFormatted = fmt.format(cal.getTime());
+		return dateFormatted;
 	}
 }

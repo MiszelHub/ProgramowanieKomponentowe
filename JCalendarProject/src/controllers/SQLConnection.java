@@ -265,10 +265,10 @@ public class SQLConnection {
 		return stb.toString();
 
 	}
-	public String filterEventsByYear(String year)
+	public String filterEventsByYear(String date)
 	{
 		connectToDataBase();
-		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Year(date) >= "+year+";";
+		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) >= '"+date+"'";
 		Statement statement=null;
 		ResultSet rs= null;
 		StringBuilder stb = new StringBuilder();
