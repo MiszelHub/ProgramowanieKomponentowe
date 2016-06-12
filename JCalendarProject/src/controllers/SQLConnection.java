@@ -415,18 +415,29 @@ public class SQLConnection {
 
 		return stb.toString();
 	}
-	public long getNextAlarm(){
+	public class AlarmName{
+		public long alarmt;
+		public String namet;
+		public AlarmName(){
+//			alarmt=a;
+//			namet = n;
+		}
+	}
+	public AlarmName getNextAlarm(){
 		connectToDataBase();
-		String sqlQuerry = "SELECT alarm-NOW() as timeremaining FROM events.bussinesmeetings WHERE alarm is not null order by alarm ASC LIMIT 1";
+		String sqlQuerry = "SELECT alarm-NOW() as timeremaining, title FROM events.bussinesmeetings WHERE alarm is not null order by alarm ASC LIMIT 1";
 		Statement statement=null;
 		ResultSet rs= null;
-		long tmp=0;
+		
+		AlarmName alarm= new AlarmName();
 		try {
 			statement = dbConnection.createStatement();
 			rs = statement.executeQuery(sqlQuerry);
 			while(rs.next()){
 				
-				tmp = rs.getLong(1);
+				alarm.alarmt = rs.getLong("timeremaining");
+				alarm.namet = rs.getString("title");
+					
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -440,31 +451,31 @@ public class SQLConnection {
 			e.printStackTrace();
 		}
 
-		return tmp;
+		return alarm;
 	}
-	public void setAlarmToNull(int id){
+	public void setAlarmToNull(){
 		//UPDATE `events`.`bussinesmeetings` SET `alarm`=NULL WHERE `id`='2';
 		connectToDataBase();
-		String sqlUpdate = "UPDATE `events`.`bussinesmeetings` SET `alarm`= NULL WHERE `id`="+id+";";
+		String sqlUpdate = "UPDATE `events`.`bussinesmeetings` SET `alarm`=NULL WHERE alarm is not null order by alarm ASC LIMIT 1;";
 		java.sql.PreparedStatement statement=null;
 		try {
 
+			//statement = dbConnection.prepareStatement("DELETE FROM `events`.`bussinesmeetings` WHERE alarm is not null order by alarm ASC LIMIT 1");
 			statement = dbConnection.prepareStatement(sqlUpdate);
-			statement.executeUpdate();
-			statement.close();
-
-
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
+			statement.executeUpdate();
 			this.dbConnection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 	}
-
-
 }

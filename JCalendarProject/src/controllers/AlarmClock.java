@@ -5,6 +5,7 @@ import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import controllers.SQLConnection.AlarmName;
 import model.AlarmSound;
 import view.View;
 
@@ -31,10 +32,8 @@ public class AlarmClock {
 			
 			@Override
 			public void run() {
-				timeBeforeAlarm = connection.getNextAlarm();
-				sound.playAlarm();
-				view.showAlarmMessage("LOLz");
-				sound.stopAlarm();
+				soundAlarm(connection.getNextAlarm());
+				
 				
 			}
 		};
@@ -47,5 +46,13 @@ public class AlarmClock {
 		
 			
 			
+	}
+	public void soundAlarm(AlarmName alarm){
+		if(alarm.alarmt <=0){
+			connection.setAlarmToNull();
+			sound.playAlarm();
+			view.showAlarmMessage(alarm.namet);
+			sound.stopAlarm();
+		}
 	}
 }
