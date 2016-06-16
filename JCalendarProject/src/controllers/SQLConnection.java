@@ -382,10 +382,15 @@ public class SQLConnection {
 	 * @return EventRepository
 	 * @see EventRepository
 	 */
-	public EventRepository filterEventsByDate(String date)
+	public EventRepository filterEventsByDate(String date, boolean older)
 	{
 		connectToDataBase();
-		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) >= '"+date+"'";
+		String sqlQuerry;
+		if(older)
+			sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) < '"+date+"'";
+		else
+			sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) >= '"+date+"'";
+		
 		Statement statement=null;
 		ResultSet rs= null;
 		EventRepository tmp = new EventRepository();

@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import model.BussinesMeeting;
+import model.EventRepository;
 import view.UpdateEvent;
 import view.View;
 import exceptions.ColumnOutOfRangeException;
@@ -120,7 +122,11 @@ class EditEventAction implements ActionListener {
 						upEvent.getAlarmHour()+":"+upEvent.getAlarmMinutes()+":00";
 				sqlConnection.addAllarmToDatabase(Id, alarm);
 
-				view.getEventList().setText(sqlConnection.PrintEvents());
+//				view.getEventList().setText(sqlConnection.PrintEvents());
+				java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+				EventRepository repo = sqlConnection.filterEventsByDate(date.toString(), false);
+				view.setEventList(repo.toString());
+				
 				upEvent.getFrame().dispose();
 
 			}

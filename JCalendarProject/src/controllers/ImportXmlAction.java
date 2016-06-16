@@ -3,6 +3,7 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import model.EventBase;
 import model.EventRepository;
@@ -51,7 +52,12 @@ class ImportXmlAction implements ActionListener{
 					ev.getDate().toString(),//+" "+ev.getHour()+":"+ev.getMinutes()+":00",
 					ev.getLocation().toString(), ev.getDescription().toString(), null,null);
 		}
-		view.getEventList().setText(sqlConnection.PrintEvents());
+//		view.getEventList().setText(sqlConnection.PrintEvents());
+		
+		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		EventRepository repo = sqlConnection.filterEventsByDate(date.toString(), false);
+		view.setEventList(repo.toString());
+		
 //		list = sqlConnection.getAllEvents().getEventList();
 //		for(EventBase ev : list){
 //			System.out.println(ev.toString());

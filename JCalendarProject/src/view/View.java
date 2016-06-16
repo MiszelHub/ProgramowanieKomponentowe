@@ -90,16 +90,6 @@ public class View {
 
 
 		editEventbtn = new JButton("Edytuj wydarzenie");
-		editEventbtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(calendar.getLocale().toString());
-				calendar.getDayChooser().setForeground(Color.BLUE);
-				calendar.getDayChooser().setMonth(0); //zaczyna sie styczen od 0
-				calendar.getMonthChooser().setMonth(0);
-
-			}
-		});
-
 		buttonPanel.add(editEventbtn);
 		editEventbtn.setSize(editEventbtn.getPreferredSize());
 		editEventbtn.setLocation(160, 15);

@@ -47,4 +47,14 @@ public class ArchivedEvents {
 		});
 		
 	}
+
+	public JTextPane getEventList() {
+		return eventList;
+	}
+
+	public void setEventList(JTextPane eventList) {
+		this.eventList = eventList;
+	}
+	
+	
 }

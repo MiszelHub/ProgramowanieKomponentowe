@@ -1,6 +1,9 @@
 package controllers;
 import view.AddEvent;
 import view.View;
+
+import java.util.Calendar;
+
 import model.AlarmSound;
 import model.EventRepository;
 /**
@@ -33,9 +36,13 @@ public class Controller {
 
 		this.view.addDeleteBtnActionListener(new DeleteEventAction(sqlConnection, view));
 		
-		this.view.addArchiveBtnActionListener(new ArchivedEventsAction());
+		this.view.addArchiveBtnActionListener(new ArchivedEventsAction(sqlConnection));
 
-		this.view.getEventList().setText(sqlConnection.PrintEvents());
+		
+		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		EventRepository repo = sqlConnection.filterEventsByDate(date.toString(), false);
+		this.view.setEventList(repo.toString());
+//		this.view.getEventList().setText(sqlConnection.PrintEvents());
 
 		this.view.getMainMenu().setExportXmlBtn(new ExportXmlAction(view, sqlConnection));
 		this.view.getMainMenu().setImportXmlBtn(new ImportXmlAction(view, sqlConnection));

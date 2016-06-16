@@ -2,10 +2,12 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import exceptions.ColumnOutOfRangeException;
 import exceptions.DateFormatException;
+import model.EventRepository;
 import view.AddEvent;
 import view.View;
 /**
@@ -80,7 +82,11 @@ class UserEventAction implements ActionListener {
 							addEvent.getDate().toString()+" "+addEvent.getHour()+":"+addEvent.getMinutes()+":00" +
 							addEvent.getLocalizationField().toString() + addEvent.getDescriptionTxt().toString()));
 
-					view.getEventList().setText(sqlConnection.PrintEvents());
+//					view.getEventList().setText(sqlConnection.PrintEvents());
+					java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+					EventRepository repo = sqlConnection.filterEventsByDate(date.toString(), false);
+					view.setEventList(repo.toString());
+					
 					addEvent.getFrame().dispose();
 				}catch(ColumnOutOfRangeException e){
 
