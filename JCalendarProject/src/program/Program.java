@@ -27,17 +27,16 @@ public class Program {
 		SQLConnection connection=null;
 
 		try {
-			connection = new SQLConnection("jdbc:mysql://127.0.0.1:3306/?user=Michal?autoReconnect=true&useSSL=false","Michal","kl4mk4123");
-//			connection = new SQLConnection("jdbc:mysql://127.0.0.1:3306/?user=Konrad?autoReconnect=true&useSSL=false","Konrad","sYmbi0za0ms");
+//			connection = new SQLConnection("jdbc:mysql://127.0.0.1:3306/?user=Michal?autoReconnect=true&useSSL=false","Michal","kl4mk4123");
+			connection = new SQLConnection("jdbc:mysql://127.0.0.1:3306/?user=Konrad?autoReconnect=true&useSSL=false","Konrad","sYmbi0za0ms");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		connection.connectToDataBase();
 
-		EventRepository model = new EventRepository();
 		View view = new View();
-		Controller controller = new Controller(model, view, connection);
+		Controller controller = new Controller(view, connection);
 
 
 		System.out.println(connection.getNextAlarm());

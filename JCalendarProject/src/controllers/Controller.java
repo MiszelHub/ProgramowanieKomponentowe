@@ -10,7 +10,6 @@ import model.EventRepository;
 */
 public class Controller {
 
-	EventRepository repo;
 	View view;
 	AddEvent addEventView = null;
 	SQLConnection sqlConnection;
@@ -24,9 +23,8 @@ public class Controller {
 	* @see View
 	* @see SQLConnection
 	*/
-	public Controller(EventRepository repo, View view, SQLConnection sqlConnection) {
+	public Controller(View view, SQLConnection sqlConnection) {
 		super();
-		this.repo = repo;
 		this.view = view;
 		this.sqlConnection = sqlConnection;
 		UserEventAction usrEvtAction = new UserEventAction(view, sqlConnection);
@@ -35,24 +33,15 @@ public class Controller {
 
 		this.view.addDeleteBtnActionListener(new DeleteEventAction(sqlConnection, view));
 
-		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
 
 		this.view.getMainMenu().setExportXmlBtn(new ExportXmlAction(view, sqlConnection));
-		this.view.getMainMenu().setImportXmlBtn(new ImportXmlAction(view, sqlConnection, repo));
+		this.view.getMainMenu().setImportXmlBtn(new ImportXmlAction(view, sqlConnection));
 
 		this.view.addfilterEventsActionListener(new FilterEventsAction(view,sqlConnection));
 		AlarmSound a = new AlarmSound("ohayou.wav");
 		AlarmClock c = new AlarmClock(a, view, sqlConnection);
 		c.checkForAlarm();
-	}
-
-	public EventRepository getRepo() {
-		return repo;
-	}
-
-	public void setRepo(EventRepository repo) {
-		this.repo = repo;
 	}
 
 	public View getView() {
