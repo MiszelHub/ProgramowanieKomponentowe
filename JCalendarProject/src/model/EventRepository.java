@@ -25,10 +25,19 @@ public class EventRepository {
 	public void setEventList(ArrayList<EventBase> eventList) {
 		this.eventList = eventList;
 	}
-
+	/**
+	 * method for adding new events to local repository
+	 * @param obj
+	 */
 	public void addRecord(EventBase obj){
 		eventList.add(obj);
 	}
+	/**
+	 * method filters repository by location
+	 * @deprecated we found not much usage for it yet
+	 * @param location
+	 * @return
+	 */
 	public String filterByLocation(String location){
 		StringBuilder stb = new StringBuilder();
 		for(EventBase event : eventList)
