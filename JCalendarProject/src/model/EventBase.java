@@ -8,7 +8,7 @@ import java.time.Duration;
 
 
 /**
-* Base Event Class is a super class we use for aur events
+* Base Event Class is a super class we use for our events
 *
 */
 public abstract class EventBase  implements Serializable{
@@ -24,8 +24,20 @@ public abstract class EventBase  implements Serializable{
 	protected String description;
 	protected String alarmDate;
 
+	/**
+	 * constructor without parameters is needed for xml serialization
+	 */
 	public EventBase(){}
 
+	/**
+	 * Constructor of base event class
+	 * @param id
+	 * @param title
+	 * @param date
+	 * @param location
+	 * @param description
+	 * @param alarmDate
+	 */
 	public EventBase(int id,String title, String date, String location,
 			String description, String alarmDate) {
 		super();

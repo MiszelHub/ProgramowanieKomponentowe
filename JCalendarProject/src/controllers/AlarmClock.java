@@ -30,10 +30,9 @@ public class AlarmClock {
 	 *@see SQLConnection
 	 *
 	 */
-	public AlarmClock(AlarmSound sound, View view, long timeBeforeAlarm, SQLConnection connection){
+	public AlarmClock(AlarmSound sound, View view, SQLConnection connection){
 		alarmTimer = new Timer();
 		this.view = view;
-		this.timeBeforeAlarm = timeBeforeAlarm;
 		this.connection = connection;
 		this.sound = sound;
 

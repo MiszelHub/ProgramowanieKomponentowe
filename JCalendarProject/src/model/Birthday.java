@@ -4,7 +4,12 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-
+/**
+ * This class is plainly for extension purposes
+ * we don't use it in the current version of the application
+ *
+ *
+ */
 public class Birthday extends EventBase implements Serializable{
 
 	/**

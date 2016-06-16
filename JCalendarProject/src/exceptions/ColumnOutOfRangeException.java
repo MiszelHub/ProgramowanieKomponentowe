@@ -1,5 +1,11 @@
 package exceptions;
 
+
+/**
+ * This Class represents custom exception. 
+ * This Exception is thrown when user exceeds number of characters in text box
+ * usually it's handled by popping JOptionPane message
+ */
 public class ColumnOutOfRangeException extends Exception{
 
 
