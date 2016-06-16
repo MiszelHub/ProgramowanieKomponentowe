@@ -258,7 +258,7 @@ public class SQLConnection {
 	public EventRepository getAllEvents()
 	{
 		connectToDataBase();
-		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith, alarm FROM events.bussinesmeetings;";
+		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith, alarm FROM events.bussinesmeetings ORDER BY date ASC;";
 		Statement statement=null;
 		ResultSet rs= null;
 		EventRepository repo = new EventRepository();
@@ -299,7 +299,7 @@ public class SQLConnection {
 	public String PrintEvents()
 	{
 		connectToDataBase();
-		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith, alarm FROM events.bussinesmeetings;";
+		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith, alarm FROM events.bussinesmeetings ORDER BY date ASC;";
 		Statement statement=null;
 		ResultSet rs= null;
 		StringBuilder stb = new StringBuilder();
@@ -342,7 +342,7 @@ public class SQLConnection {
 	public String filterEventsByYear(String date)
 	{
 		connectToDataBase();
-		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) >= '"+date+"'";
+		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) >= '"+date+"' ORDER BY date ASC";
 		Statement statement=null;
 		ResultSet rs= null;
 		StringBuilder stb = new StringBuilder();
@@ -387,9 +387,9 @@ public class SQLConnection {
 		connectToDataBase();
 		String sqlQuerry;
 		if(older)
-			sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) < '"+date+"'";
+			sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) < '"+date+"' ORDER BY date ASC";
 		else
-			sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) >= '"+date+"'";
+			sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE Date(bussinesmeetings.date) >= '"+date+"' ORDER BY date ASC";
 		
 		Statement statement=null;
 		ResultSet rs= null;
@@ -432,7 +432,7 @@ public class SQLConnection {
 	public String filtereventsByLocation(String location)
 	{
 		connectToDataBase();
-		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE location = '"+location+"'";
+		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE location = '"+location+" ORDER BY date ASC'";
 		Statement statement=null;
 		ResultSet rs= null;
 		StringBuilder stb = new StringBuilder();
@@ -476,7 +476,7 @@ public class SQLConnection {
 	{
 		connectToDataBase();
 		String sqlQuerry = "SELECT id, title, bussinesmeetings.date, location, description, personImeetwith FROM events.bussinesmeetings WHERE location >= '"+
-							location+"' AND Date(bussinesmeetings.date) >= '"+date+"'";
+							location+"' AND Date(bussinesmeetings.date) >= '"+date+" ORDER BY date ASC'";
 		Statement statement=null;
 		ResultSet rs= null;
 		StringBuilder stb = new StringBuilder();
