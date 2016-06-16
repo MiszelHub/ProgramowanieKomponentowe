@@ -33,8 +33,13 @@ public final class XMLActions {
 		XMLActions.eventRepo = eventRepo;
 	}
 
+	/**
+	 * constructor is private so this class works like a top level static class
+	 */
 	private XMLActions(){};
-
+	/**
+	 * this method is responsible for saving events from the event repo to the xml file
+	 */
 	public static void saveEventsToXML()
 	{
 		try {
@@ -46,6 +51,9 @@ public final class XMLActions {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * this method is responsible for importing events form xml file
+	 */
 	public static void loadEventsFromXML()
 	{
 		try {
