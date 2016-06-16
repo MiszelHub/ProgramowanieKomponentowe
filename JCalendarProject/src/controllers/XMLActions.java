@@ -23,7 +23,7 @@ public final class XMLActions {
 	private static XMLDecoder decoder;
 
 	private static MainMenu menu;
-	private static EventRepository eventRepo;
+	private static EventRepository eventRepo = new EventRepository();
 
 	public static EventRepository getEventRepo() {
 		return eventRepo;

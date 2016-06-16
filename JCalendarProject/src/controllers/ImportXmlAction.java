@@ -16,7 +16,6 @@ class ImportXmlAction implements ActionListener{
 
 	View view;
 	SQLConnection sqlConnection;
-	EventRepository repo;
 	/**
 	 *constructor requires reference {@link View} {@link SQLConnection} and {@link EventRepository}
 	 * @param view
@@ -26,35 +25,37 @@ class ImportXmlAction implements ActionListener{
 	 * @see sqlConnection
 	 * @see repo
 	 */
-	public ImportXmlAction(View view, SQLConnection sqlConnection, EventRepository repo) {
+	public ImportXmlAction(View view, SQLConnection sqlConnection) {
 		super();
 		this.sqlConnection = sqlConnection;
-		this.repo = repo;
 		this.view = view;
 	}
-
+		
 
 	/**
 	 * event handling for xml import/export
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("przed=====================================");
+//		System.out.println("przed====================================="); 
 		ArrayList<EventBase> list = sqlConnection.getAllEvents().getEventList();
-		for(EventBase ev : list){
-			System.out.println(ev.toString());
-		}
+//		for(EventBase ev : list){
+//			System.out.println(ev.toString());
+//		}
 		XMLActions.loadEventsFromXML();
-
-		list = repo.getEventList();
-		System.out.println("po====================================");
+		
+		list = XMLActions.getEventRepo().getEventList();
+//		System.out.println("po====================================");
 		for(EventBase ev : list){
 			sqlConnection.addEventToDatabaseTable("bussinesmeetings", ev.getTitle().toString(),
 					ev.getDate().toString(),//+" "+ev.getHour()+":"+ev.getMinutes()+":00",
 					ev.getLocation().toString(), ev.getDescription().toString(), null,null);
 		}
 		view.getEventList().setText(sqlConnection.PrintEvents());
-
+//		list = sqlConnection.getAllEvents().getEventList();
+//		for(EventBase ev : list){
+//			System.out.println(ev.toString());
+//		}
 	}
-
+	
 }
