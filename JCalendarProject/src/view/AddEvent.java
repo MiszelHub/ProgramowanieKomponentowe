@@ -44,6 +44,11 @@ public class AddEvent {
 	protected JCheckBox alarmbox;
 	protected JScrollPane descriptionScroll;
 
+	/**
+	 * Constructor uses {@link GregorianCalendar} for date setting
+	 * @param calendarDate
+	 *
+	 */
 	public AddEvent(GregorianCalendar calendarDate){
 		frame = new JFrame("Dodaj wydarzenie");
 		frame.addWindowListener(new WindowAdapter() {
@@ -189,6 +194,10 @@ public class AddEvent {
 		});
 	}
 
+	/**
+	 * this method sets action listener for add event button
+	 * @param listener
+	 */
 	public void addAddBtnListener(ActionListener listener){
 		addBtn.addActionListener(listener);
 	}
@@ -225,7 +234,7 @@ public class AddEvent {
 	public void setAddBtn(Button addBtn) {
 		this.addBtn = addBtn;
 	}
-	
+
 	public JTextField getNameFieldObject(){
 		return nameField;
 	}
@@ -253,11 +262,11 @@ public class AddEvent {
 	public void setCalendar(GregorianCalendar calendar) {
 		this.calendar = calendar;
 	}
-	
+
 	public JDateChooser getDateObject() {
 		return date;
 	}
-	
+
 	public String getDate() {
 
 		GregorianCalendar cal = new GregorianCalendar();
@@ -274,7 +283,7 @@ public class AddEvent {
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 	    fmt.setCalendar(cal);
 	    String dateFormatted = fmt.format(cal.getTime());
-		
+
 	    return dateFormatted;
 	}
 
@@ -334,11 +343,11 @@ public class AddEvent {
 	public JTextArea getDescriptionTxtObject(){
 		return descriptionTxt;
 	}
-	
+
 	public JTextField getLocalizationObject(){
 		return localizationField;
 	}
-	
+
 	public void setDescriptionTxt(JTextArea descriptionTxt) {
 		this.descriptionTxt = descriptionTxt;
 	}
@@ -354,7 +363,10 @@ public class AddEvent {
 	public void setMinutes(JSpinField minutes) {
 		this.minutes = minutes;
 	}
-
+	/**
+	 * this Method sets action listener for alarm checkbox
+	 * @param turnOnTheAlarm
+	 */
 	public void AddAlarmAcionListener(ActionListener turnOnTheAlarm) {
 		this.alarmbox.addActionListener(turnOnTheAlarm);
 
