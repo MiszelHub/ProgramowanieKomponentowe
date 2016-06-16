@@ -35,6 +35,10 @@ public class FilterEvents {
 
 	private JSpinField hour, minutes, alarmHour, alarmMinutes, eventId;
 
+	/**
+	 * Constructor uses {@link GregorianCalendar} for date setting
+	 * @param calendarDate
+	 */
 	public FilterEvents(GregorianCalendar calendarDate){
 		frame = new JFrame("Filtruj wydarzenia");
 		frame.addWindowListener(new WindowAdapter() {

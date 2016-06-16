@@ -8,19 +8,32 @@ import exceptions.ColumnOutOfRangeException;
 import exceptions.DateFormatException;
 import view.AddEvent;
 import view.View;
-
+/**
+ * 
+ * This Class is an event handler for {@link AddEvent} window
+ *@see AddEvent
+ */
 class UserEventAction implements ActionListener {
 
 	AddEvent addEvent;
 	View view;
 	SQLConnection sqlConnection;
 
+	/**
+	 * constructor requires a reference to view and sql connection
+	 * @param view
+	 * @param sqlConnection
+	 */
 	public UserEventAction(View view, SQLConnection sqlConnection) {
 		super();
 		this.view = view;
 		this.sqlConnection = sqlConnection;
 	}
 
+	/**
+	 * This method contains two local classes responsible which are implementation of action listener
+	 * These two listeners are responsible for adding event and and alarm if user chooses to set one
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 
 

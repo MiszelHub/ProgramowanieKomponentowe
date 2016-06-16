@@ -1,0 +1,45 @@
+CREATE SCHEMA `events` ;
+
+
+CREATE TABLE `events`.`bussinesmeetings` (
+  `id` INT NOT NULL DEFAULT 1,
+  `title` VARCHAR(50) NULL,
+  `date` DATETIME NULL,
+  `location` VARCHAR(45) NULL,
+  `description` VARCHAR(45) NULL,
+  `personImeetwith` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+  ALTER TABLE `events`.`bussinesmeetings` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+
+CREATE TABLE `events`.`birhday` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(50) NULL,
+  `date` DATETIME NULL,
+  `location` VARCHAR(45) NULL,
+  `description` VARCHAR(45) NULL,
+  `whoseBirhday` VARCHAR(45) NULL,
+  `howOld` int NOT NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `events`.`alarm` (
+  `idAlarm` INT NOT NULL AUTO_INCREMENT,
+  `alarmMessage` VARCHAR(45) NULL,
+  `alarmDate` DATETIME NULL,
+  `evend_id` INT NULL,
+  PRIMARY KEY (`idAlarm`),
+  INDEX `bsmeeting_id_idx` (`evend_id` ASC),
+  CONSTRAINT `bsmeeting_id`
+    FOREIGN KEY (`evend_id`)
+    REFERENCES `events`.`bussinesmeetings` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE NO ACTION);
+
+	
+	ALTER TABLE `events`.`bussinesmeetings` 
+ADD COLUMN `alarm` DATETIME NULL AFTER `personImeetwith`;
+
+
+ALTER TABLE `events`.`bussinesmeetings` 
+ADD COLUMN `delay` DATETIME NULL DEFAULT alarm-date AFTER `alarm`;

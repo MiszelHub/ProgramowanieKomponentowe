@@ -16,7 +16,11 @@ public class UpdateEvent extends AddEvent {
 	protected JSpinField chooseId;
 	protected JLabel chooseIdLabel;
 	protected JButton fillData;
-
+	/**
+	 * Constructor uses {@link GregorianCalendar} for date setting
+	 * @param calendarDate
+	 *
+	 */
 	public UpdateEvent(GregorianCalendar calendarDate) {
 		super(calendarDate);
 		
