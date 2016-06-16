@@ -32,6 +32,8 @@ public class Controller {
 		this.view.addEditEventActionListener(new EditEventAction(view, sqlConnection));
 
 		this.view.addDeleteBtnActionListener(new DeleteEventAction(sqlConnection, view));
+		
+		this.view.addArchiveBtnActionListener(new ArchivedEventsAction());
 
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
 
