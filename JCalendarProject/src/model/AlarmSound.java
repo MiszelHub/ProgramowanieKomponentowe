@@ -16,7 +16,10 @@ public class AlarmSound {
 	private String filePath;
 	private InputStream in;
 	private AudioStream audioStream;
-
+	/**
+	 * Constructor requires path to a audio file used as an alarm sound
+	 * @param path
+	 */
 	public AlarmSound(String path){
 		this.filePath = path;
 		try {
@@ -33,6 +36,9 @@ public class AlarmSound {
 		}
 
 	}
+	/*
+	 * this method is responsible for playing alarm sound
+	 */
 	public void playAlarm()
 	{
 		try {
@@ -49,6 +55,9 @@ public class AlarmSound {
 		}
 		AudioPlayer.player.start(this.audioStream);
 	}
+	/*
+	 * this method is responsible for stopping alarm sound
+	 */
 	public void stopAlarm() {
 		AudioPlayer.player.stop(this.audioStream);
 		try {
