@@ -20,6 +20,15 @@ public class SQLConnection {
 	private String jdbcConnectionString;
 	private String user;
 	private String password;
+	/**
+	 * Constructor takes parameters responsible for user credential information
+	 * necessary to connect to database server
+	 *
+	 * @param jdbcConnectionString connection string for database server
+	 * @param user User name
+	 * @param password User password
+	 * @throws ClassNotFoundException
+	 */
 	public SQLConnection(String jdbcConnectionString, String user, String password) throws ClassNotFoundException{
 
 		Class.forName("com.mysql.jdbc.Driver");
@@ -28,7 +37,10 @@ public class SQLConnection {
 		this.password = password;
 
 	}
-
+	/**
+	 * This Method Performs a connection to database it has to be invoked
+	 * before attempting to query database
+	 */
 	public void connectToDataBase()
 	{
 		try {
@@ -45,7 +57,17 @@ public class SQLConnection {
 	public void setDbConnection(Connection dbConnection) {
 		this.dbConnection = dbConnection;
 	}
-
+	/**
+	 * This method is responsible for adding a new record to event database
+	 *
+	 * @param table name of the database table
+	 * @param title title of the event
+	 * @param date date of the event
+	 * @param location
+	 * @param description
+	 * @param personImeetWith
+	 * @param alarm date of the alarm
+	 */
 	public void addEventToDatabaseTable(String table, String title, String date, String location, String description, String personImeetWith, String alarm)
 	{
 		connectToDataBase();
@@ -81,6 +103,11 @@ public class SQLConnection {
 		}
 
 	}
+	/**
+	 * this mehtod is used to remove record for the database
+	 * @param id event id in database
+	 * @param table name of a table in database
+	 */
 	public void removeEventFromTableWithID(int id, String table)
 	{
 		java.sql.PreparedStatement statement=null;
@@ -99,6 +126,17 @@ public class SQLConnection {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * this method is used for updating  existing event in database
+	 *
+	 * @param table name of the table in databse
+	 * @param id  event id in database
+	 * @param title
+	 * @param date
+	 * @param location
+	 * @param description
+	 * @param personImeetWith
+	 */
 	public void updateRecordInTable(String table,String id, String title, String date, String location, String description, String personImeetWith)
 	{
 		connectToDataBase();
@@ -131,6 +169,12 @@ public class SQLConnection {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * this mathod is responsible for adding alarm to data base event record
+	 *
+	 * @param id event id
+	 * @param datetime date of the alarm
+	 */
 	public void addAllarmToDatabase(int id, String datetime)
 	{
 		//VALUES ('1', 'FuckYou', '2016-06-05 00:00:00', '1');";
@@ -159,6 +203,13 @@ public class SQLConnection {
 		}
 
 	}
+	/**
+	 * This method performs a select query and returns the event with matching id
+	 *
+	 * @param id event id
+	 * @return EventBase
+	 * @see EventBase
+	 */
 	public EventBase SelectEventWithId(int id)
 	{
 		connectToDataBase();
@@ -196,6 +247,11 @@ public class SQLConnection {
 		return event;
 	}
 
+	/**
+	 * This Method return all existing events form the database
+	 * @return EventRepository
+	 * @see EventRepository
+	 */
 	public EventRepository getAllEvents()
 	{
 		connectToDataBase();
@@ -233,6 +289,10 @@ public class SQLConnection {
 		return repo;
 
 	}
+	/**
+	 * This method return string representation of events in database
+	 * @return String
+	 */
 	public String PrintEvents()
 	{
 		connectToDataBase();
@@ -271,6 +331,11 @@ public class SQLConnection {
 		return stb.toString();
 
 	}
+	/**
+	 * This method filters events in database by date
+	 * @param date
+	 * @return String
+	 */
 	public String filterEventsByYear(String date)
 	{
 		connectToDataBase();
@@ -308,6 +373,12 @@ public class SQLConnection {
 		return stb.toString();
 
 	}
+	/**
+	 * This method filters events in database by date
+	 * @param date
+	 * @return EventRepository
+	 * @see EventRepository
+	 */
 	public EventRepository filterEventsByDate(String date)
 	{
 		connectToDataBase();
@@ -345,6 +416,11 @@ public class SQLConnection {
 		return tmp;
 
 	}
+	/**
+	 * This method filters events in database by Location
+	 * @param location
+	 * @return String
+	 */
 	public String filtereventsByLocation(String location)
 	{
 		connectToDataBase();
@@ -382,6 +458,12 @@ public class SQLConnection {
 		return stb.toString();
 	}
 
+	/**
+	 * This method filters events in database by date and location
+	 * @param location
+	 * @param date date of the event
+	 * @return String
+	 */
 	public String filtereventsByLocationAndDate(String location, String date)
 	{
 		connectToDataBase();
@@ -419,6 +501,11 @@ public class SQLConnection {
 
 		return stb.toString();
 	}
+	/**
+	 * this inner class holds necessary information about alarm - name and date
+	 * @author user
+	 *
+	 */
 	public class AlarmName{
 		public long alarmt;
 		public String namet;
@@ -427,6 +514,11 @@ public class SQLConnection {
 //			namet = n;
 		}
 	}
+	/**
+	 * this Method queries database for the next alarm and returns Alarm name and date
+	 * @return {@link AlarmName}
+	 * @see AlarmName
+	 */
 	public AlarmName getNextAlarm(){
 		connectToDataBase();
 		String sqlQuerry = "SELECT alarm-NOW() as timeremaining, title FROM events.bussinesmeetings WHERE alarm is not null order by alarm ASC LIMIT 1";
@@ -457,6 +549,9 @@ public class SQLConnection {
 
 		return alarm;
 	}
+	/**
+	 * this method is used to set alarm date to null so it won't ring more then once
+	 */
 	public void setAlarmToNull(){
 		//UPDATE `events`.`bussinesmeetings` SET `alarm`=NULL WHERE `id`='2';
 		connectToDataBase();
