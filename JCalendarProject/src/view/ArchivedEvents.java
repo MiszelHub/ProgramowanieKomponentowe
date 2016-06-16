@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
 public class ArchivedEvents {
@@ -16,6 +17,7 @@ public class ArchivedEvents {
 	private JPanel contentPanel;
 	private JTextPane eventList;
 	private Button exitBtn;
+	private JScrollPane scroll;
 	
 	public ArchivedEvents(){
 		frame = new JFrame("Wydarzenia Archiwalne");
@@ -32,9 +34,12 @@ public class ArchivedEvents {
 		frame.add(contentPanel);
 		
 		eventList = new JTextPane();
-		eventList.setBounds(0, 0, 700, 400);
+		eventList.setBounds(0, 0, 680, 400);
 		eventList.setText("wydarzenia archiwalne");
-		contentPanel.add(eventList);
+		
+		scroll = new JScrollPane(eventList);
+		scroll.setBounds(0, 0, 680, 400);
+		contentPanel.add(scroll);
 		
 		exitBtn = new Button("Zamknij");
 		exitBtn.setBounds(contentPanel.getWidth()/2-30, 420, 60, 30);

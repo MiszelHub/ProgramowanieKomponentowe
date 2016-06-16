@@ -46,23 +46,23 @@ public class View {
 				System.exit(0);
 			}
 		});
-		frame.setSize(1210, 750);
+		frame.setSize(1200, 720);
 		frame.setVisible(true);
 		mainMenu = new MainMenu(this);
 		frame.setJMenuBar(mainMenu.getMenuBar());
-		frame.setResizable(true);
+		frame.setResizable(false);
 
 		contentPanel = new JPanel(null);
 		contentPanel.setBounds(0, 0, 500, 700);
 		frame.add(contentPanel);
 
 		buttonPanel = new JPanel(null);
-		buttonPanel.setBounds(0, 0, 500, 100);
+		buttonPanel.setBounds(0, 0, 490, 100);
 //		buttonPanel.setBackground(Color.cyan);
 		contentPanel.add(buttonPanel);
 
 		eventPanel = new JPanel(new BorderLayout());
-		eventPanel.setBounds(550, -1, 700, 650);
+		eventPanel.setBounds(490, -1, 700, 650);
 //		eventPanel.setBackground(Color.MAGENTA);
 		eventPanel.setBorder(new LineBorder(Color.gray, 1));
 
