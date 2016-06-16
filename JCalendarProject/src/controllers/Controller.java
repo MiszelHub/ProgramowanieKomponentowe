@@ -28,7 +28,7 @@ import model.EventRepository;
 /**
 * Controller is a class that connects all other components
 * of the application
-* 
+*
 */
 public class Controller {
 
@@ -37,7 +37,15 @@ public class Controller {
 	AddEvent addEventView = null;
 	SQLConnection sqlConnection;
 
-
+	/**
+	* Constructor need a refference to Event Repository View and SQLConnention
+	* @param repo holdsa reference to EventRepository
+	* @param view providesarefference to View Class
+	* @param sqlConnection provides reference to database using {@link SQLConnection}
+	* @see EventRepository
+	* @see View
+	* @see SQLConnection
+	*/
 	public Controller(EventRepository repo, View view, SQLConnection sqlConnection) {
 		super();
 		this.repo = repo;
@@ -46,12 +54,12 @@ public class Controller {
 		UserEventAction usrEvtAction = new UserEventAction(view, sqlConnection);
 		this.view.addUserEventActionListener(usrEvtAction);
 		this.view.addEditEventActionListener(new EditEventAction(view, sqlConnection));
-		
-		
+
+
 
 		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());
-		
+
 		this.view.getMainMenu().setExportXmlBtn(new ExportXmlAction(view, sqlConnection));
 		this.view.getMainMenu().setImportXmlBtn(new ImportXmlAction(view, sqlConnection, repo));
 
@@ -174,7 +182,7 @@ class UserEventAction implements ActionListener {
 				}catch(DateFormatException e1){
 					view.showMessage(e1.getMessage());
 				}
-					
+
 			}
 		}
 
@@ -225,7 +233,7 @@ class EditEventAction implements ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 
-		
+
 		class UpdateEventAction implements ActionListener{
 //
 			SQLConnection sqlConnection;
@@ -248,11 +256,11 @@ class EditEventAction implements ActionListener {
 				 if (upEvent.getDate() == null || !upEvent.getDate().matches("\\d{4}-\\d{2}-\\d{2}"))
 						throw new DateFormatException();
 			}
-			
-			public void actionPerformed(ActionEvent arg0) { 
-				
+
+			public void actionPerformed(ActionEvent arg0) {
+
 				System.out.println(upEvent.getDate());
-				
+
 				try{
 					chcekIfFieldsAreValid();
 					checkDataFormat();
@@ -263,48 +271,48 @@ class EditEventAction implements ActionListener {
 				catch(DateFormatException e1){
 					view.showMessage(e1.getMessage());
 				}
-				
+
 				Id = upEvent.getChooseId().getValue();
 				BussinesMeeting event = (BussinesMeeting) sqlConnection.SelectEventWithId(Id);
 				try{
 					upEvent.getNameFieldObject().setText(event.getTitle());
-					
+
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					Date tmp = (Date)dateFormat.parseObject(event.getDate());
 					System.out.println("alarm" + event.getAlarmDate());
 					upEvent.getDateObject().setDate(tmp);
-					
+
 					upEvent.getLocalizationObject().setText(event.getLocation());
-					
+
 					upEvent.getDescriptionTxtObject().setText(event.getDescription());
-					
+
 				}
 				catch(Exception e){
 					e.printStackTrace();
 				}
-				
+
 
 			}
 		}
-		
+
 		class CommitUpdateAction implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				sqlConnection.updateRecordInTable("bussinesmeetings", Integer.toString(Id), upEvent.getNameField().toString(),
 						upEvent.getDate().toString()+" "+upEvent.getHour()+":"+upEvent.getMinutes()+":00",
 						upEvent.getLocalizationField().toString(), upEvent.getDescriptionTxt().toString(), null);
-				
+
 				String alarm = upEvent.getAlarmDate().toString()+" "+
 						upEvent.getAlarmHour()+":"+upEvent.getAlarmMinutes()+":00";
 				sqlConnection.addAllarmToDatabase(Id, alarm);
-				
+
 				view.getEventList().setText(sqlConnection.PrintEvents());
 				upEvent.getFrame().dispose();
-				
+
 			}
-			
+
 		}
 
 		class TurnOnTheAlarm implements ActionListener{
@@ -362,17 +370,17 @@ class FilterEventsAction implements ActionListener{
 				if(filterEvents.getDateChooser().isEnabled() && !filterEvents.getLocalization().isEnabled())
 				//view.getEventList().setText(sqlconnection.filterEventsByYear(filterEvents.getDate()));
 				view.getEventList().setText(sqlconnection.filterEventsByDate(filterEvents.getDate()).toString());
-				
+
 				else if((!filterEvents.getDateChooser().isEnabled()) && filterEvents.getLocalization().isEnabled())
 					view.getEventList().setText(sqlconnection.filtereventsByLocation(filterEvents.getLocalizationContents()));
-					
-				
+
+
 				else if(filterEvents.getDateChooser().isEnabled() && filterEvents.getLocalization().isEnabled())
 						view.getEventList().setText(sqlconnection.filtereventsByLocationAndDate(filterEvents.getLocalizationContents(), filterEvents.getDate()));
 			}
 
 		}
-		
+
 		this.filterEvents.addFilterButtonListener(new FilterButtonClicked());
 
 	}
@@ -397,12 +405,12 @@ class ExportXmlAction implements ActionListener{
 //	    int returnVal = chooser.showSaveDialog(view.getFrame());
 //	    if(returnVal == JFileChooser.APPROVE_OPTION) {
 //	    	if(!chooser.getSelectedFile().exists()){
-//	    		
+//
 //	    		File fileToSave = chooser.getSelectedFile();
-//	    		
+//
 //
 //		    	try{
-//		    		
+//
 //		    		BufferedWriter writer = new BufferedWriter(new FileWriter(fileToSave));
 //		    		ArrayList<EventBase> list = sqlConnection.getAllEvents().getEventList();
 //		    		for(EventBase ev : list){
@@ -411,23 +419,23 @@ class ExportXmlAction implements ActionListener{
 //		    		}
 //		    		fileToSave.createNewFile();
 //		    		writer.close();
-//		    		
+//
 //		    	}
 //		    	catch(IOException ee){
 //		    		ee.printStackTrace();
 //		    	}
 //	    	}
-//	    	
-//	    	
-//	    	
+//
+//
+//
 //	       System.out.println("You chose to save this file: " +
 //	            chooser.getSelectedFile().getAbsolutePath());
 //	    }
 		XMLActions.setEventRepo(sqlConnection.getAllEvents());
 		XMLActions.saveEventsToXML();
-		
+
 	}
-	
+
 }
 
 class ImportXmlAction implements ActionListener{
@@ -442,16 +450,16 @@ class ImportXmlAction implements ActionListener{
 		this.repo = repo;
 		this.view = view;
 	}
-		
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("przed====================================="); 
+		System.out.println("przed=====================================");
 		ArrayList<EventBase> list = sqlConnection.getAllEvents().getEventList();
 		for(EventBase ev : list){
 			System.out.println(ev.toString());
 		}
 		XMLActions.loadEventsFromXML();
-		
+
 		list = repo.getEventList();
 		System.out.println("po====================================");
 		for(EventBase ev : list){
@@ -460,9 +468,9 @@ class ImportXmlAction implements ActionListener{
 					ev.getLocation().toString(), ev.getDescription().toString(), null,null);
 		}
 		view.getEventList().setText(sqlConnection.PrintEvents());
-		
+
 	}
-	
+
 }
 
 

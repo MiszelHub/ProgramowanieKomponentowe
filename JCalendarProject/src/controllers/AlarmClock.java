@@ -20,7 +20,16 @@ public class AlarmClock {
 	private View view;
 	private SQLConnection connection;
 	private AlarmSound sound;
-
+	/**
+	 *Constructor requires reference to AlarmSound class View and SQLConnection
+	 *@param sound provides an audio stream
+	 *@see AlarmSound
+	 *@param view reference to a View Class
+	 *@see View
+	 *@param connection  reference to database connection
+	 *@see SQLConnection
+	 *
+	 */
 	public AlarmClock(AlarmSound sound, View view, long timeBeforeAlarm, SQLConnection connection){
 		alarmTimer = new Timer();
 		this.view = view;
@@ -30,7 +39,10 @@ public class AlarmClock {
 
 
 	}
-
+	/**
+	 *method performs a TimerTask.It checks database for next allarm
+	 *
+	 */
 	public void checkForAlarm(){
 		task = new TimerTask() {
 
@@ -51,6 +63,12 @@ public class AlarmClock {
 
 
 	}
+	/**
+	 *Method starts and alarm using AlarmName class which hold a reference
+	 *to name and alarm date
+	 *@param alarm return alarm name and alarm date
+	 *@see AlarmName
+	 */
 	public void soundAlarm(AlarmName alarm){
 		if(alarm.alarmt <0){
 			connection.setAlarmToNull();
