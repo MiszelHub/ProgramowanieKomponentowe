@@ -33,7 +33,7 @@ public class Controller {
 		this.view.addUserEventActionListener(usrEvtAction);
 		this.view.addEditEventActionListener(new EditEventAction(view, sqlConnection));
 
-
+		this.view.addDeleteBtnActionListener(new DeleteEventAction(sqlConnection, view));
 
 		XMLActions.setEventRepo(this.repo);
 		this.view.getEventList().setText(sqlConnection.PrintEvents());

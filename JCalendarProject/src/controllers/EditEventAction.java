@@ -2,6 +2,7 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -70,24 +71,30 @@ class EditEventAction implements ActionListener {
 				}
 				
 				Id = upEvent.getChooseId().getValue();
-				BussinesMeeting event = (BussinesMeeting) sqlConnection.SelectEventWithId(Id);
-				try{
-					upEvent.getNameFieldObject().setText(event.getTitle());
-					
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-					Date tmp = (Date)dateFormat.parseObject(event.getDate());
-					System.out.println("alarm" + event.getAlarmDate());
-					upEvent.getDateObject().setDate(tmp);
-					
-					upEvent.getLocalizationObject().setText(event.getLocation());
-					
-					upEvent.getDescriptionTxtObject().setText(event.getDescription());
-					
-				}
-				catch(Exception e){
-					e.printStackTrace();
-				}
+				BussinesMeeting event;
+				try {
+					event = (BussinesMeeting) sqlConnection.SelectEventWithId(Id);
 				
+					try{
+						upEvent.getNameFieldObject().setText(event.getTitle());
+						
+						SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+						Date tmp = (Date)dateFormat.parseObject(event.getDate());
+						System.out.println("alarm" + event.getAlarmDate());
+						upEvent.getDateObject().setDate(tmp);
+						
+						upEvent.getLocalizationObject().setText(event.getLocation());
+						
+						upEvent.getDescriptionTxtObject().setText(event.getDescription());
+						
+					}
+					catch(Exception e){
+						e.printStackTrace();
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		}

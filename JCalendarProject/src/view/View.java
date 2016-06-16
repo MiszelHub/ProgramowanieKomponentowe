@@ -34,7 +34,7 @@ public class View {
 	private boolean todayBtnVisible = true;
 	MainMenu mainMenu;
 
-
+	
 	/**
 	 * constructor of the view class
 	 */
@@ -108,7 +108,7 @@ public class View {
 		buttonPanel.add(filterBtn);
 		filterBtn.setSize(filterBtn.getPreferredSize());
 		filterBtn.setLocation(315, 15);
-
+		
 		archEventsBtn = new JButton("Archiwum Wydarzeñ");
 		archEventsBtn.setSize(archEventsBtn.getPreferredSize());
 		archEventsBtn.setLocation(20, 60);
@@ -118,7 +118,7 @@ public class View {
 		deleteEventBtn.setSize(deleteEventBtn.getPreferredSize());
 		deleteEventBtn.setLocation(200, 60);
 		buttonPanel.add(deleteEventBtn);
-
+		
 		deleteEventId = new JSpinField();
 		deleteEventId.setSize(60, deleteEventBtn.getHeight());
 		deleteEventId.setLocation((int)deleteEventBtn.getLocation().getX()+deleteEventBtn.getWidth(), 60);
@@ -137,9 +137,9 @@ public class View {
 		calendar.setWeekOfYearVisible(true);
 
 	}
-
+	
 	//getters and setters + assign events methods
-
+	
 	public JCalendar getCalendar() {
 		return calendar;
 	}
@@ -293,6 +293,18 @@ public class View {
 	public void setEventList(JTextPane eventList) {
 		this.eventList = eventList;
 	}
-
-
+	
+	public void addDeleteBtnActionListener(ActionListener listener){
+		this.deleteEventBtn.addActionListener(listener);
+	}
+	
+	public int getDeleteEventId(){
+		return this.deleteEventId.getValue();
+	}
+	
+	public void addArchiveBtnActionListener(ActionListener listener){
+		this.archEventsBtn.addActionListener(listener);
+	}
+	
+	
 }

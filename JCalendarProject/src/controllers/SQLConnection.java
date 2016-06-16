@@ -110,6 +110,7 @@ public class SQLConnection {
 	 */
 	public void removeEventFromTableWithID(int id, String table)
 	{
+		connectToDataBase();
 		java.sql.PreparedStatement statement=null;
 		try {
 
@@ -210,7 +211,7 @@ public class SQLConnection {
 	 * @return EventBase
 	 * @see EventBase
 	 */
-	public EventBase SelectEventWithId(int id)
+	public EventBase SelectEventWithId(int id) throws SQLException
 	{
 		connectToDataBase();
 		String sqlQuerry = "SELECT id, title, date, location, description, personImeetwith FROM events.bussinesmeetings where bussinesmeetings.id = "+id+";";
@@ -218,9 +219,10 @@ public class SQLConnection {
 		ResultSet rs= null;
 		BussinesMeeting event= new BussinesMeeting();
 
-		try {
+//		try {
 			statement = dbConnection.createStatement();
 			rs = statement.executeQuery(sqlQuerry);
+			if (!rs.isBeforeFirst()) throw new SQLException("Nie ma takiego id");
 			while(rs.next()){
 
 			event.setId(rs.getInt("id"));
@@ -232,15 +234,16 @@ public class SQLConnection {
 
 
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		try {
 			rs.close();
 			this.dbConnection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Problem z zamkniêciem po³¹czenia z baz¹ danych");
 			e.printStackTrace();
 		}
 
