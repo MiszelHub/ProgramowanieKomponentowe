@@ -28,7 +28,7 @@ public class AboutProgram {
 		frame = new JFrame("O programie");
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+				frame.dispose();
 			}
 		});
 		frame.setSize(300, 400);

@@ -53,14 +53,6 @@ public class AlarmClock {
 			}
 		};
 		alarmTimer.schedule(task, 60000, 60000);
-		if(timeBeforeAlarm <=0){
-			sound.playAlarm();
-			view.showAlarmMessage("LOLz");
-			sound.stopAlarm();
-		}
-
-
-
 	}
 	/**
 	 *Method starts and alarm using AlarmName class which hold a reference

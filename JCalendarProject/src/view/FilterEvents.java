@@ -46,7 +46,7 @@ public class FilterEvents {
 				frame.dispose();
 			}
 		});
-		frame.setSize(450, 250);
+		frame.setSize(450, 200);
 		frame.setVisible(true);
 
 		contentPanel = new JPanel(null);
@@ -96,10 +96,10 @@ public class FilterEvents {
 		});
 		contentPanel.add(localizationbox);
 
-		label = new JLabel("Godzina:");
-		label.setSize(label.getPreferredSize());
-		label.setLocation(20, 100);
-		contentPanel.add(label);
+//		label = new JLabel("Godzina:");
+//		label.setSize(label.getPreferredSize());
+//		label.setLocation(20, 100);
+//		contentPanel.add(label);
 
 		//koniec labeli z nazwami pól
 
@@ -122,24 +122,24 @@ public class FilterEvents {
 //		contentPanel.add(yearPanel);
 
 		//godzina
-		hour = new JSpinField();
-		hour.setMinimum(0);
-		hour.setMaximum(23);
-		hour.setValue(calendarDate.getTime().getHours());
-		hour.setSize(40, 20);
-		hour.setLocation(150, 100);
-		contentPanel.add(hour);
-
-		minutes = new JSpinField();
-		minutes.setMinimum(0);
-		minutes.setMaximum(59);
-		minutes.setValue(calendarDate.getTime().getMinutes());
-		minutes.setSize(40, 20);
-		minutes.setLocation(200, 100);
-		contentPanel.add(minutes);
+//		hour = new JSpinField();
+//		hour.setMinimum(0);
+//		hour.setMaximum(23);
+//		hour.setValue(calendarDate.getTime().getHours());
+//		hour.setSize(40, 20);
+//		hour.setLocation(150, 100);
+//		contentPanel.add(hour);
+//
+//		minutes = new JSpinField();
+//		minutes.setMinimum(0);
+//		minutes.setMaximum(59);
+//		minutes.setValue(calendarDate.getTime().getMinutes());
+//		minutes.setSize(40, 20);
+//		minutes.setLocation(200, 100);
+//		contentPanel.add(minutes);
 
 		addBtn = new Button("Filtruj");
-		addBtn.setBounds(140, 150, 60, 30);
+		addBtn.setBounds(140, 100, 60, 30);
 		contentPanel.add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
 
@@ -151,7 +151,7 @@ public class FilterEvents {
 		});
 
 		exitBtn = new Button("Anuluj");
-		exitBtn.setBounds(280, 150, 60, 30);
+		exitBtn.setBounds(280, 100, 60, 30);
 		contentPanel.add(exitBtn);
 		exitBtn.addActionListener(new ActionListener() {
 

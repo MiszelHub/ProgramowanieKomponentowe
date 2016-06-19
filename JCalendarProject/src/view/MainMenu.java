@@ -36,8 +36,8 @@ public class MainMenu extends JMenuBar{
 		menuBar = new JMenuBar();
 
 		//Build the first menu.
-		menu = new JMenu("A Menu");
-		menu.setMnemonic(KeyEvent.VK_A);
+		menu = new JMenu("Menu");
+		menu.setMnemonic(KeyEvent.VK_M);
 		menu.getAccessibleContext().setAccessibleDescription(
 		        "The only menu in this program that has menu items");
 		menuBar.add(menu);
