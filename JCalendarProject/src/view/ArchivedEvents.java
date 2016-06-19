@@ -28,6 +28,7 @@ public class ArchivedEvents {
 		});
 		frame.setSize(700, 500);
 		frame.setVisible(true);
+		frame.setResizable(false);
 	
 		contentPanel = new JPanel(null);
 		contentPanel.setBounds(0, 0, 700, 400);
@@ -36,6 +37,7 @@ public class ArchivedEvents {
 		eventList = new JTextPane();
 		eventList.setBounds(0, 0, 680, 400);
 		eventList.setText("wydarzenia archiwalne");
+		eventList.setEditable(false);
 		
 		scroll = new JScrollPane(eventList);
 		scroll.setBounds(0, 0, 680, 400);
